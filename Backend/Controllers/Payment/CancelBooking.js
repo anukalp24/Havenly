@@ -23,6 +23,8 @@ const payment = async (req , res)=>{
             message: "Booking deleted successfully"
         }
         )
+
+        
     } catch (error) {
         return res.status(500).json({
             message: "Internal sever error"

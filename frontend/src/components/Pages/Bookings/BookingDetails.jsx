@@ -1,59 +1,27 @@
 import React from 'react'
 import { useState , useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import "./BookingDetails.css"
+import { useNavigate} from 'react-router-dom'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
+import { useParams } from 'react-router-dom'
 import Navbar from '../../Navbar/Navbar'
-import { useNavigate } from 'react-router-dom'
 import Footer from '../../Footer/Footer'
-
-
-import "./ReservationDetails.css"
-
+const BookingDetails = () => {
 
 
 
 
 
-
-
-const ReservationDetails = () => {
-const [reservationDetails, setreservationDetails] = useState({})
 const {_id} = useParams()
-const [message, setmessage] = useState(null)
-
-const navigate = useNavigate()
-useEffect(() => {
-  const reservationfunc =  async ()=>{
-    const reservationDetails = await fetchWithRefresh(`http://localhost:4090/reservationDetails/${_id}` , {
-      method: "GET",
-      headers:{
-    authorization: localStorage.getItem("accessToken")
-  },
-  credentials: "include"
-})
 
 
-const result =  await reservationDetails.json()
-setreservationDetails(result)
-}
-reservationfunc()
-} , [])
-const HandleCancel =  async (id)=>{
-  const req = await fetchWithRefresh(`http://localhost:4090/cancel-reservations/${id}` , {
-  method: "PUT",
-  headers: {
-    authorization: localStorage.getItem("accessToken")
-  } ,
-  credentials: "include"
-})
+const [bookingDetail, setbookingDetail] = useState()
 
 
-const res = await req.json()
-  setmessage(res.message)
 
 
-}
 
+    const navigate = useNavigate()
   const handleshare = async () => {
     try {
       await navigator.share({
@@ -67,10 +35,40 @@ const res = await req.json()
   };
 
 
+
+useEffect(() => {
+
+    const bookingFunction =  async ()=>{
+
+        const request =  await fetchWithRefresh(`http://localhost:4090/bookingDetails/${_id}` , {
+            method: "GET",
+            headers:{
+                authorization: localStorage.getItem("accessToken")
+            },
+            credentials: "include"
+        })
+        
+        let result = await request.json()
+        setbookingDetail(result)
+
+    }
+bookingFunction()
+}, [])
+
+ 
+
+
+
+
+
+
+
+
+
   return (
-    <>
-    <Navbar/>
-   {reservationDetails ? (
+    <div>
+      <Navbar/>
+      {bookingDetail ? (
      <div className="hd-wrapper">
        
          <div className="hd-gallery-wrapper">
@@ -79,7 +77,7 @@ const res = await req.json()
        
              <div className="hd-gallery-left">
                <img
-                 src={reservationDetails?.home?.files?.[0]}
+                 src={bookingDetail?.home?.files?.[0]}
                  alt=""
                />
              </div>
@@ -87,15 +85,14 @@ const res = await req.json()
              <div className="hd-gallery-right">
        
                <img
-                 src={reservationDetails?.home?.files?.[1] || reservationDetails?.home?.files?.[0]}
+                 src={bookingDetail?.home?.files?.[1] || bookingDetail?.home?.files?.[0]}
                  alt=""
                />
        
                <img
-                 src={reservationDetails?.home?.files?.[2] || reservationDetails?.home?.files?.[0]}
+                 src={bookingDetail?.home?.files?.[2] || bookingDetail?.home?.files?.[0]}
                  alt=""
                />
-       
              </div>
        
            </div>
@@ -138,11 +135,11 @@ const res = await req.json()
          <div className="hd-left">
        
            <h1 className="hd-title">
-             {reservationDetails?.home?.propertyName}
+             {bookingDetail?.home?.propertyName}
            </h1>
        
            <p className="hd-location">
-             📍 {reservationDetails?.home?.cityname}
+             📍 {bookingDetail?.home?.cityname}
            </p>
        
        
@@ -154,7 +151,7 @@ const res = await req.json()
              <h2>About this Place</h2>
        
              <p>
-               {reservationDetails?.home?.desc}
+               {bookingDetail?.home?.desc}
              </p>
        
            </div>
@@ -170,13 +167,13 @@ const res = await req.json()
        
          <div className="booking-price">
 
-  <h2>₹{reservationDetails?.home?.totalPrice}</h2>
+  <h2>₹{bookingDetail?.home?.totalPrice}</h2>
 
   <span>/ Night</span>
        
 </div>
   <p className="guest-name">
-    Booked by <strong>{reservationDetails?.home?.guest?.name}</strong>
+    Owner name: <strong>{bookingDetail?.home?.owner?.name}</strong>
   </p>
 
 
@@ -208,20 +205,20 @@ const res = await req.json()
                <strong>Total</strong>
        
                <strong>
-                 ₹{Number(reservationDetails?.home?.totalPrice || 0) + 800}
+                 ₹{Number(bookingDetail?.home?.totalPrice || 0) + 800}
                </strong>
              </div>
-           <button
+           {/* <button
              className="book-btn"
-             onClick={()=>HandleCancel(reservationDetails?.home?._id)}
+             onClick={()=>HandleCancel(bookingDetail?.home?._id)}
            >
              Cancel the reservation
-           </button>
+           </button> */}
            
            </div>
     
 
-<div className={message === "Refund initiated successfully" ? "message-successful" : "message-error"}>{message}</div>
+{/* <div className={message === "Refund initiated successfully" ? "message-successful" : "message-error"}>{message}</div> */}
 
          </div>
        
@@ -250,8 +247,12 @@ const res = await req.json()
   </div>
 </div>
       )}
-      <Footer/>
-      </>
+
+
+
+<Footer/>
+    </div>
   )
 }
-export default ReservationDetails
+
+export default BookingDetails

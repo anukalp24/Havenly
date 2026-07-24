@@ -54,6 +54,14 @@ return (
   
   
   <Navbar/>
+
+
+  {dashboard.length > 1 ? (
+
+
+<>
+
+
 <div className="dashboard-all-page">
 
   <div className="dashboard-all-header">
@@ -115,9 +123,30 @@ return (
 
 </div>
 </>
+  ) : (
+    <div className="dashboard-empty">
+  <div className="dashboard-empty-icon">
+    🏡
+  </div>
+
+  <h2>No Properties Yet</h2>
+
+  <p>
+    Add your first property to start receiving bookings
+  </p>
+
+  <button
+    className="dashboard-add-btn"
+    onClick={() => navigate("/host")}
+  >
+    Add Property
+  </button>
+</div>
+  )}
+</>
     )}
     <Footer/>
-      </>
+    </>
    
   )
 }

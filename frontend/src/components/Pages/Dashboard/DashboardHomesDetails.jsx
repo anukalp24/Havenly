@@ -53,7 +53,7 @@ headers: {
     let api = await  fetchWithRefresh(`http://localhost:4090/deletehome/${id}`, {
       method: "DELETE",
       headers: {
-        authorization: localStorage.getItem("token"),
+        authorization: localStorage.getItem("accessToken"),
       },
       credentials: "include"
     });
@@ -85,7 +85,7 @@ headers: {
     <>
       <Navbar />
       {dashboardHomeDetails ? (
-       <div className="hd-wrapper">
+       <div onClick={()=> navigate("booking-details")} className="hd-wrapper">
        
          <div className="hd-gallery-wrapper">
        

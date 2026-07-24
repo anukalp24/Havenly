@@ -64,51 +64,65 @@ useEffect(() => {
                 </svg>
               </div>
               <h2>No Reservations Yet</h2>
-              <p>Bookings will appear here once someone reserves your property.</p>
+              <button onClick={()=>navigate("/host")} id='book-now'>Book your first Stay</button>
             </div>
           ) : (
+
+            
             <div className="reservation-list">
               {reservedHomes.map((home) => (
-                <div className="reservation-card" key={home._id}>
+                <div
+  className="reservation-grid-card"
+  key={home._id}
+>
 
-                  <div className="reservation-card-image">
-                    <img src={home.files[0]} alt={home.propertyName} />
-                    <span className={`reservation-badge ${home.paymentStatus === "Paid" ? "badge-paid" : "badge-pending"}`}>
-                      {home.paymentStatus}
-                    </span>
-                  </div>
+  <div className="reservation-grid-image">
 
-                  <div className="reservation-card-body">
-                    <div className="reservation-card-top">
-                      <div>
-                        <h2 className="reservation-property-name">{home.propertyName}</h2>
-                        <h2 className="reservation-property-name">Booked by: {home.guest.name}</h2>
-                        <p className="reservation-location">{home.cityname}</p>
-                      </div>
-                    </div>
+    <img src={home.files[0]} alt={home.propertyName} />
 
-                    <p className="reservation-desc">{home.desc}</p>
+    <span
+      className={`reservation-status ${
+        home.paymentStatus === "Paid"
+          ? "status-paid"
+          : "status-refund"
+      }`}
+    >
+      {home.paymentStatus}
+    </span>
 
-                    <div className="reservation-details">
-                      <div className="reservation-detail">
-                        <span className="detail-label">Check In</span>
-                        <span className="detail-value">{new Date(home.checkIn).toLocaleDateString()}</span>
-                      </div>
-                      <div className="reservation-detail">
-                        <span className="detail-label">Check Out</span>
-                        <span className="detail-value">{new Date(home.checkOut).toLocaleDateString()}</span>
-                      </div>
-                      <div className="reservation-detail">
-                        <span className="detail-label">Total</span>
-                        <span className="detail-value detail-price">₹{home.totalPrice}</span>
-                      </div>
-                    </div>
-                    <button onClick={()=>navigate(`/reservationDetails/${home._id}`)}>View Details</button>
-                
+  </div>
 
-                  </div>
+  <div className="reservation-grid-content">
 
-                </div>
+    <h2>{home.propertyName}</h2>
+
+    <p className="reservation-city">
+      📍 {home.cityname}
+    </p>
+
+    <p className="reservation-guest">
+      Booked by <strong>{home.guest.name}</strong>
+    </p>
+
+    <div className="reservation-bottom">
+
+      <span className="reservation-price">
+        ₹{home.totalPrice}
+      </span>
+
+      <button
+        onClick={() =>
+          navigate(`/reservationDetails/${home._id}`)
+        }
+      >
+        View Details
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
               ))}
             </div>
           )}

@@ -5,10 +5,9 @@ const reservationDetails = async(req ,res)=>{
     try {
         const reservationDetails =  await Payment.findOne({
         _id: req.params.id,
-        })
+        }).populate("guest")
 
-console.log(reservationDetails)
-
+        
 
         if(!reservationDetails){
             return res.status(404).json({

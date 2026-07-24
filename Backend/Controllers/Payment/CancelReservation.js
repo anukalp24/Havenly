@@ -22,29 +22,32 @@ const reservation = async(req , res)=>{
             }
 
 
-            if(PaymentDocument.paymentStatus === "refund"){
-                console.log("alredy refunded")
+
+
+            if(PaymentDocument.paymentStatus === "refunded"){
                 return res.status(400).json({
-                    message: "Reservation has already been refunded"
+                    message: "You have already canceled this booking"
                 })
             }
         
+
+
         await stripe.refunds.create({
             payment_intent: PaymentDocument.paymentIntentId
         })
         
-        PaymentDocument.paymentStatus = "refund"
+
+        PaymentDocument.paymentStatus = "refunded"
         await PaymentDocument.save()
         
+
+
         
-        console.log("canceldd successfully")
        return res.status(200).json({
     message: "Refund initiated successfully",
 });
         
-    } 
-    
-    
+    }
     catch (error) {
         console.log(error)
         return res.status(500).json({

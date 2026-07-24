@@ -30,6 +30,8 @@ const createCheckoutSession =  async (req, res)=>{
 
 
     })
+
+    if(existingBooking.owner)
     if(existingBooking){
         console.log("this propety is nto avaibalbe in these dates")
         return res.status(409).json({

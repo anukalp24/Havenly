@@ -1,280 +1,157 @@
-import React from 'react'
-import "./Bookings.css"
-import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Navbar from '../../Navbar/Navbar'
-import Footer from '../../Footer/Footer'
-import { CalendarDays, MapPin, CreditCard, Loader2 } from 'lucide-react'
+import React from "react";
+import "./Bookings.css";
+import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
+import { CalendarDays, MapPin, CreditCard, Loader2 } from "lucide-react";
 
 const Bookings = () => {
-  const [bookings, setbookings] = useState([])
-  const [loading, setLoading] = useState(true)
-  const Navigate = useNavigate()
+
+
+
+
+
+
+
+
+  const navigate = useNavigate();
+  const [bookings, setbookings] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const bookingFunc = async () => {
-    try {
-      
-      const bookedHomes = await fetchWithRefresh(`http://localhost:4090/bookings`, {
-        method: "GET",
-          headers: {
-            authorization: localStorage.getItem("accessToken")
+      try {
+        const bookedHomes = await fetchWithRefresh(
+          `http://localhost:4090/bookings`,
+          {
+            method: "GET",
+            headers: {
+              authorization: localStorage.getItem("accessToken"),
+            },
+            credentials: "include",
           },
-          credentials: "include"
-        })
+        );
         if (!bookedHomes || !bookedHomes.ok) {
-          setbookings([])
+          setbookings([]);
         } else {
-          const homes = await bookedHomes.json()
-          setbookings(homes)
-          setLoading(false)
+          const homes = await bookedHomes.json();
+          setbookings(homes);
+          setLoading(false);
         }
-        
-        
+      } catch (error) {
+        setbookings([]);
+      } finally {
+        setLoading(false);
       }
-      
-      catch (error) {
-         setbookings([]);
+    };
+    bookingFunc();
+  }, []);
 
-      }
+  const handleDelete = async (id) => {
+    const req = await fetchWithRefresh(
+      `http://localhost:4090/cancel-booking/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("accessToken"),
+        },
+        credentials: "include",
+      },
+    );
 
-      finally{
-        setLoading(false)
-      }
-      
+    if (req.ok) {
+      const deleted = bookings.filter((booking) => booking._id !== id);
+      setbookings(deleted);
     }
-    bookingFunc()
-  }, [])
+  };
 
 
 
-const handleDelete = async(id)=>{
-const req = await fetchWithRefresh(`http://localhost:4090/cancel-booking/${id}` , {
-  method: "DELETE",
-  headers: {
-    authorization: localStorage.getItem("accessToken")
-  } ,
-  credentials: "include"
-})
 
 
-if(req.ok){
- const deleted =  bookings.filter((booking)=>(
-  booking._id !== id
-))
-setbookings(deleted)
-}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
       <Navbar />
-     <div className="bookings-page">
+      <main className="booking-page">
+        <div className="booking-container">
+          <div className="booking-header">
+            <h1>Your Bookings</h1>
+            <p className="booking-subtitle">Trips you've booked</p>
+          </div>
 
+          {bookings.length === 0 ? (
+            <div className="booking-empty">
+              <div className="booking-empty-icon">{/* SVG */}</div>
 
+              <h2>No Bookings Yet</h2>
 
-    <div className="bookings-header">
+              <button  id="booking-now" onClick={() => navigate("/stays")}>
+                Explore Stays
+              </button>
+            </div>
+          ) : (
+            <div className="booking-list">
+              {bookings.map((booking) => (
+                <div  onClick={()=>navigate(`/bookingDetails/${booking._id}`)} className="booking-grid-card" key={booking._id}>
+                  <div className="booking-grid-image">
+                    <img src={booking.files[0]} alt={booking.propertyName} />
 
-        <div>
+                    <span
+                      className={`booking-status ${
+                        booking.paymentStatus === "Paid"
+                          ? "booking-status-paid"
+                          : "booking-status-refund"
+                      }`}
+                    >
+                      {booking.paymentStatus}
+                    </span>
+                  </div>
 
-            <h1>My Trips</h1>
+                  <div className="booking-grid-content">
+                    <h2>{booking.propertyName}</h2>
 
-            <p>
-                Manage your upcoming and previous bookings.
-            </p>
+                    <p className="booking-city">📍 {booking.cityname}</p>
 
-        </div>
+                    <p className="booking-host">
+                      Hosted by <strong>{booking.owner.name}</strong>
+                    </p>
 
-    </div>
+                    <div className="booking-bottom">
+                      <span className="booking-price">
+                        ₹{booking.totalPrice}
+                      </span>
 
-   
-
-    <div className="booking-stats">
-
-        <div className="stat-card">
-
-            <h2>{bookings.length}</h2>
-
-            <span>Total Trips</span>
-
-        </div>
-
-        <div className="stat-card">
-
-            <h2>₹{
-                bookings.reduce(
-                    (sum, booking) => sum + booking.totalPrice,
-                    0
-                )
-            }</h2>
-
-            <span>Total Spent</span>
-
-        </div>
-
-        <div className="stat-card">
-
-            <h2>
-                {
-                    bookings.filter(
-                        booking =>
-                            booking.paymentStatus === "Paid"
-                    ).length
-                }
-            </h2>
-
-            <span>Confirmed</span>
-
-        </div>
-
-    </div>
-
-
-
-    <div className="booking-list">
-
-        {
-
-            bookings.map((booking) => (
-
-                <div
-                    className="booking-card"
-                    key={booking._id}
-                >
-
-
-                    <div className="booking-image">
-
-                        <img
-                            src={booking.files[0]}
-                            alt={booking.propertyName}
-                        />
-
+                      <button
+                      >
+                        View Details
+                      </button>
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
 
-               
-
-                    <div className="booking-right">
-
-                    
-
-                        <div className="booking-top">
-
-                            <div>
-
-                                <h2>
-
-                                    {booking.propertyName}
-
-                                </h2>
-
-                                <div className="location">
-
-                                    <MapPin size={16} />
-
-                                    <span>
-
-                                        {booking.cityname}
-
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                            <span className="status paid">
-
-                                {booking.paymentStatus}
-
-                            </span>
-
-                        </div>
-
-                   
-
-                        <p className="booking-description">
-
-                            {booking.desc}
-
-                        </p>
-
-                    
-
-                        <div className="booking-info">
-
-                            <div>
-
-                                <CalendarDays size={18}/>
-
-                                <div>
-
-                                    <small>Check In</small>
-
-                                    <p>
-
-                                       {new Date(booking.checkIn).toLocaleDateString()}
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div>
-
-                                <CalendarDays size={18}/>
-
-                                <div>
-
-                                    <small>Check Out</small>
-
-                                    <p>
-
-                                        {new Date(booking.checkOut).toLocaleDateString()}
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div>
-
-                                <CreditCard size={18}/>
-
-                                <div>
-
-                                    <small>Total Paid</small>
-
-                                    <p>
-
-                                        ₹{booking.totalPrice}
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div> 
-
-                </div> 
-
-            ))
-
-        }
-
-    </div> 
-</div> 
-
-<Footer />
-
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Bookings
+export default Bookings;
