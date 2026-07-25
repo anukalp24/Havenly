@@ -105,13 +105,13 @@ formData.append(
 
 
 
-   console.log("this is update request")
+
   let updateRequest = await fetchWithRefresh(`http://localhost:4090/edithome/${form._id}`,{
     method: "PUT",
     headers: {
-
     authorization: localStorage.getItem("accessToken")
 },
+credentials: "include",
          body: formData
         })
   
@@ -149,15 +149,11 @@ formData.append(
   let request2 = await fetchWithRefresh("http://localhost:4090/addhome" , {
     method: "post",
     headers: {
-      Authorization: localStorage.getItem("accessToken")
-      // sending authorization token aswell.
+      authorization: localStorage.getItem("accessToken")
     },
+    credentials: "include",
     body: formData
   })
-  // let result =  await request2.json()
-  // setresponse([...response ,result])
-
-  navigate("/dashboard")
 }
 setform({
    propertyName:"",
@@ -208,7 +204,7 @@ setform({
 
      <div className="form-group">
       <label className="form-label">Price Per Night</label>
-      <input value={form.price} name='price'  onChange={handlechange}  placeholder='e.g. ₹5000' id='price' type="text" />
+      <input value={form.price} name='price'  onChange={handlechange}  placeholder='e.g. ₹5000' id='price' type="number" />
       {error.price && <p className="field-error">{error.price}</p> }
      </div>
 

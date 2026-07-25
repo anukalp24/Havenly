@@ -18,7 +18,7 @@ const Home = require("../../Models/Home")
      
      
 
-     const limit = 8
+     const limit = 10
   const skip = (page - 1) * limit
   
 

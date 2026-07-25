@@ -3,10 +3,25 @@ const mongoose = require("mongoose")
 
 const PaymentSchema = new mongoose.Schema({
 
-
     
+    status:{
+        type: String,
+        required: true,
+        default: "confirmed"
+    } ,
 
 
+    guestMessage:{
+        type: String,
+        default: ""
+    },
+    
+    ownerMessage:{
+        type: String,
+        default: ""
+    } ,
+    
+    
     owner: {
         required: true,
         type:  mongoose.Schema.Types.ObjectId,

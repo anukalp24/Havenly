@@ -64,7 +64,7 @@ useEffect(() => {
                 </svg>
               </div>
               <h2>No Reservations Yet</h2>
-              <button onClick={()=>navigate("/host")} id='book-now'>Book your first Stay</button>
+              <button onClick={()=>navigate("/")} id='book-now'>Back to home</button>
             </div>
           ) : (
 

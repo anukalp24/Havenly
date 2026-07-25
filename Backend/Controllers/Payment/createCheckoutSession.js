@@ -16,10 +16,16 @@ const createCheckoutSession =  async (req, res)=>{
             })
         }
         
+        if(home.owner.toString() === req.user.id){
+            return res.status(400).json({
+                message: "You cannot book your own property. "
+            })
 
+        }
 
         const existingBooking = await Payment.findOne({
         home: req.params.id, 
+        status: "confirmed",
         checkIn: {
             $lte: checkOut
         } ,
@@ -27,13 +33,11 @@ const createCheckoutSession =  async (req, res)=>{
         checkOut: {
             $gte: checkIn
         }
+    })     
 
 
-    })
 
-    if(existingBooking.owner)
     if(existingBooking){
-        console.log("this propety is nto avaibalbe in these dates")
         return res.status(409).json({
             message: "This property is unavailable for the selected dates."
         })
@@ -109,6 +113,7 @@ const createCheckoutSession =  async (req, res)=>{
               url: session.url
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: "Internal server error"
         })

@@ -5,13 +5,14 @@ const Home = require("../../Models/Home")
 const addhome = async(req , res)=>{
  const {email} = req.body
     try {
-
+console.log("hitted baby")
    const files = req.files.map(file =>(
 `http://localhost:4090/uploads/${file.filename}`
    ))
    
 
         const result = await Home.create({
+
              ...req.body,
              files: files,
              owner: req.user.id,
@@ -19,9 +20,12 @@ const addhome = async(req , res)=>{
         })
         await result.populate("owner")
         
-        res.status(201).json(result)
+
+     return   res.status(201).json(result)
+
+
     } catch (error) {
-        res.status(500).json({
+     return  res.status(500).json({
             message: "Something went wrong"
         })
     }

@@ -8,7 +8,7 @@ const Home = require("../../Models/Home")
     })
 
 
-    res.status(200).json(homes)
+   return res.status(200).json(homes)
 
   } catch (error) {
     return res.status(500).json({

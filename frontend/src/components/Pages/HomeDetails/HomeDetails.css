@@ -50,7 +50,19 @@
     cursor:pointer;
 }
 
+#img{
+      transition: transform 0.9s ease-in-out;
+}
 
+#checker{
+    /* border: 1px solid black; */
+    width: 100%;
+    text-align: center;
+    color: rgb(236, 27, 27);
+}
+#img:hover{
+    transform: scale(1.01);
+}
 
 .hd-gallery-actions{
     position:absolute;
@@ -71,11 +83,11 @@
     align-items:center;
     cursor:pointer;
     box-shadow:0 8px 22px rgba(0,0,0,.18);
-    transition:.3s;
+    transition: transform 0.5s ease;
 }
 
 .gallery-icon:hover{
-    transform:translateY(-2px);
+    transform: scale(1.05);
     background:#f7f7f7;
 }
 
@@ -98,8 +110,9 @@
 
 .gallery-swipe-hint{
     position:absolute;
-    bottom:18px;
-    right:18px;
+     /* bottom:40px; */
+     top: 100px;
+    right:18px; 
 
     background:rgba(0,0,0,.65);
     color:#fff;
@@ -123,7 +136,7 @@
     width:18px;
     height:18px;
 }
-
+/*  */
 }
 
 @keyframes swipeHint{
@@ -391,6 +404,17 @@
     font-size:1rem;
 }
 
+
+.booking-msg-error{
+    color: red;
+     text-align:center;
+     margin:16px 0;
+}
+.booking-msg{
+    text-align:center;
+    color:#16a34a;
+    margin:16px 0;
+}
 .booking-box p{
     margin:0;
     font-size:1rem;
@@ -415,11 +439,6 @@
     background:#2d2d2d;
 }
 
-.booking-msg{
-    text-align:center;
-    color:#16a34a;
-    margin:16px 0;
-}
 
 .price-breakdown{
     margin-top:20px;

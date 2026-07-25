@@ -48,38 +48,6 @@ const Bookings = () => {
     bookingFunc();
   }, []);
 
-  const handleDelete = async (id) => {
-    const req = await fetchWithRefresh(
-      `http://localhost:4090/cancel-booking/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          authorization: localStorage.getItem("accessToken"),
-        },
-        credentials: "include",
-      },
-    );
-
-    if (req.ok) {
-      const deleted = bookings.filter((booking) => booking._id !== id);
-      setbookings(deleted);
-    }
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -101,7 +69,7 @@ const Bookings = () => {
               <h2>No Bookings Yet</h2>
 
               <button  id="booking-now" onClick={() => navigate("/stays")}>
-                Explore Stays
+                Book your first stay
               </button>
             </div>
           ) : (

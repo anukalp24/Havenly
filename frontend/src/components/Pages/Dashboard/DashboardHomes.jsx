@@ -56,7 +56,7 @@ return (
   <Navbar/>
 
 
-  {dashboard.length > 1 ? (
+  {dashboard.length > 0 ? (
 
 
 <>

@@ -80,7 +80,7 @@ method: "GET",
                 alt={val?.home?.propertyName}
               />
 
-              <div className="card-body">
+              <div className="card-body"> 
 
                 <div className="sec-1">
                   <h3 className="card-title">{val?.home?.propertyName}</h3>

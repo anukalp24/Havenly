@@ -17,9 +17,10 @@ const Home = () => {
   const [checkIn, setcheckIn] = useState(null);
   const [checkOut, setcheckOut] = useState(null);
   const [message, setmessage] = useState("");
+  const [IsSuccess, setIsSuccess] = useState(null)
 const [loader, setloader] = useState(false)
 
-
+const [checker, setchecker] = useState("")
 
 
 
@@ -45,13 +46,16 @@ const [loader, setloader] = useState(false)
   
   const handleadd = async (id) => {
     setloader(true)
-
+  setmessage("")
+setchecker("")
+setIsSuccess(null);
 
     try {
       if (!checkIn || !checkOut) {
-        return setmessage("Please select check-in and check-out dates.");
+        return setchecker("Please select check-in and check-out dates.");
       }
-  
+
+     
       const createCheckoutSession = await fetchWithRefresh(
         `http://localhost:4090/create-checkout-session/${id}`,
         {
@@ -73,15 +77,21 @@ const [loader, setloader] = useState(false)
       console.log(data);
   
       if (createCheckoutSession.ok) {
+        setIsSuccess(true)
         setmessage(data.message);
         window.location.href = data.url;
       }
-  
-      setmessage(data.message);
-    }
+
+      else{
+
+        
+        setIsSuccess(false)
+        setmessage(data.message);
+      }
       
+    }
      catch (error) {
-      return setmessage(error)
+      return setmessage(error.message)
     }
 
 
@@ -119,7 +129,7 @@ const [loader, setloader] = useState(false)
     <div className="hd-gallery">
 
       <div className="hd-gallery-left">
-        <img
+        <img id="img"
           src={home?.home?.files?.[0]}
           alt=""
         />
@@ -127,12 +137,12 @@ const [loader, setloader] = useState(false)
 
       <div className="hd-gallery-right">
 
-        <img
+        <img id="img"
           src={home?.home?.files?.[1] || home?.home?.files?.[0]}
           alt=""
         />
 
-        <img
+        <img id="img"
           src={home?.home?.files?.[2] || home?.home?.files?.[0]}
           alt=""
         />
@@ -245,27 +255,9 @@ const [loader, setloader] = useState(false)
 
       </div>
 
-     
+     <p id="checker">{checker}</p>
 
     </div>
-
-    <button
-      className="book-btn"
-      onClick={() => handleadd(home?.home?._id)}
-      >
-        {loader ? (
-          <>
-    <div className="loader-2"></div>
-          </>
-        ) : (
-          <>
-          Reserve Now
-          </>
-        )}
-      
-    </button>
-
-    <p className="booking-msg">{message}</p>
 
     <div className="price-breakdown">
 
@@ -290,6 +282,24 @@ const [loader, setloader] = useState(false)
           ₹{Number(home?.home?.price || 0) + 800}
         </strong>
       </div>
+
+    <button
+      className="book-btn"
+      onClick={() => handleadd(home?.home?._id)}
+      >
+        {loader ? (
+          <>
+    <div className="loader-2"></div>
+          </>
+        ) : (
+          <>
+          Reserve Now
+          </>
+        )}
+      
+    </button>
+
+    <p className={ IsSuccess === true ?  "booking-msg" : "booking-msg-error"}>{message}</p>
 
     </div>
 

@@ -32,11 +32,11 @@ const DashboardHomesDetails = () => {
   useEffect(() => {
   
     async function dashbaordDetails() {
-      const req = await   fetchWithRefresh(`http://localhost:4090/dashboardHomeDetails/${_id}` , {
+      const req = await fetchWithRefresh(`http://localhost:4090/dashboardHomeDetails/${_id}` , {
 headers: {
   authorization: localStorage.getItem("accessToken"),
-  credentials: "include"
-}
+},
+credentials: "include"
       }) 
        
       
@@ -73,11 +73,6 @@ headers: {
 
   const HandleEdit = (home) => {
     setform(home);
-    const newItem = dashboard.filter((val) => {
-      return val._id !== home._id;
-    });
-    // filter removes
-    setdashboard(newItem);
     navigate("/Host");
   };
 
@@ -85,14 +80,14 @@ headers: {
     <>
       <Navbar />
       {dashboardHomeDetails ? (
-       <div onClick={()=> navigate("booking-details")} className="hd-wrapper">
+       <div  className="hd-wrapper">
        
          <div className="hd-gallery-wrapper">
        
            <div className="hd-gallery">
        
              <div className="hd-gallery-left">
-               <img
+               <img id="img"
                  src={dashboardHomeDetails?.home?.files?.[0]}
                  alt=""
                />
@@ -100,12 +95,12 @@ headers: {
        
              <div className="hd-gallery-right">
        
-               <img
+               <img id="img"
                  src={dashboardHomeDetails?.home?.files?.[1] || dashboardHomeDetails?.home?.files?.[0]}
                  alt=""
                />
        
-               <img
+               <img id="img"
                  src={dashboardHomeDetails?.home?.files?.[2] || dashboardHomeDetails?.home?.files?.[0]}
                  alt=""
                />
@@ -223,13 +218,13 @@ headers: {
              </div>
            <button
              className="book-btn"
-             onClick={() => HandleDelete(dashboardHomeDetails?.home?._id)}
+             onClick={(e) =>  {e.stopPropagation()  ;  HandleDelete(dashboardHomeDetails?.home?._id)}}
            >
              Delete
            </button>
            <button
              className="book-btn"
-             onClick={() => HandleEdit(dashboardHomeDetails?.home)}
+             onClick={(e) => {e.stopPropagation() ;  HandleEdit(dashboardHomeDetails?.home) }}
            >
              Edit
            </button>
