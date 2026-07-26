@@ -191,7 +191,7 @@ const ReservationDetails = () => {
 
                         <h3>Booking Cancelled</h3>
 
-                        <p>{reservationDetails?.home?.ownerMessage}</p>
+                        <p id="backend-msg">{reservationDetails?.home?.ownerMessage}</p>
                         
 
                         <div className="refund-info">

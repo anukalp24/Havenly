@@ -29,7 +29,7 @@ const reservation = async (req, res) => {
     PaymentDocument.status = "cancelled";
     PaymentDocument.paymentStatus = "refunded";
     PaymentDocument.guestMessage =
-      "Your reservation has been cancelled by the property owner.";
+      "Your Booking has been cancelled by the owner.";
     PaymentDocument.ownerMessage =
       "You have successfully cancelled this booking.";
     await PaymentDocument.save();

@@ -123,6 +123,17 @@
   transition: 0.2s ease;
 }
 
+
+
+.wishlist-button:active {
+  transform: scale(0.96);
+  box-shadow: none;
+}
+
+.wishlist-button:focus {
+  outline: none;
+}
+
 .wishlist-btn:hover {
   background: #e31c5f;
 }

@@ -76,6 +76,15 @@ const Bookings = () => {
             <div className="booking-list">
               {bookings.map((booking) => (
                 <div  onClick={()=>navigate(`/bookingDetails/${booking._id}`)} className="booking-grid-card" key={booking._id}>
+
+                  
+  {booking.status === "cancelled" &&(
+<div className='cancelled'>
+    <div className="cancelled-banner">
+      {booking?.guestMessage}
+    </div>
+</div>
+)}
                   <div className="booking-grid-image">
                     <img src={booking.files[0]} alt={booking.propertyName} />
 
@@ -86,7 +95,7 @@ const Bookings = () => {
                           : "booking-status-refund"
                       }`}
                     >
-                      {booking.paymentStatus}
+                      {booking.status}
                     </span>
                   </div>
 

@@ -20,7 +20,6 @@ import {
 
 
 
-
 const Card = () => {
 
   const navigate = useNavigate()
@@ -60,24 +59,6 @@ const handleFilter =  async ()=>{
 }
 
 
-
-
-
-// const handlePrev = ()=>{
-//   if(page <= 1){
-//     return
-//   }
-//   setPage(page - 1)
-
-// }
-
-
-// const handleNext = ()=>{
-//   if(page >= 2){
-//     return
-//   }
-//   setPage(page+1)
-// }
   return (
     <>
 <Navbar/>
@@ -194,23 +175,23 @@ const handleFilter =  async ()=>{
           </span>
 
           <h2>₹{home.price}</h2>
-
           <p>/ Night</p>
 
-          <button>
+<div className="button-parent">
+
+          <button className='stay-btn'>
             View Property
           </button>
+          <button onClick={(e)=> {e.stopPropagation() ; handlewishlist(home._id)}}  className='stay-btn' id='wishlist-btn'>
+           Add to Wishlist
+          </button>
+</div>
 
         </div>
 </>
 
       </div>
 ))}
-
-
-
-
-
 
 
 

@@ -75,10 +75,23 @@
     width:50px;
     height:50px;
     border-radius:50%;
-   /* background-color:#1E1E1E ; */
+    box-shadow:0 16px 35px rgba(0,0,0,.22);
     color:#050505;
     padding:12px;
     cursor:pointer;
+    transition: 0.3s ease-in;
+}
+
+
+
+
+.search-icon:hover{
+    transform: translateY(-3px) scale(1.06);
+   
+}
+
+.search-icon:active{
+    transform:scale(.92);
 }
 
 

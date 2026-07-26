@@ -33,7 +33,7 @@ await stripe.refunds.create({
 paymentDocument.paymentStatus = "refunded"
 paymentDocument.status = "cancelled"
 paymentDocument.guestMessage = "You have successfully cancelled this booking."
-paymentDocument.ownerMessage = "Your reservation has been cancelled by the user."
+paymentDocument.ownerMessage = "Your reservation has been cancelled by the guest."
 
 await paymentDocument.save()
 

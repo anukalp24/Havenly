@@ -26,6 +26,7 @@ import BookingDetails from '../Pages/Bookings/BookingDetails'
 import NotFound from '../Pages/404/NotFound'
 import { useNavigate } from 'react-router-dom'
 import Terms from '../Pages/FooterPages/termsCondition.jsx/terms'
+import fetchWithRefresh from '../../Utils/fetchWithRefresh'
 import Faq from '../Pages/FooterPages/Faq/Faq'
 import { info } from '..'
 function App() {
@@ -47,8 +48,7 @@ desc: "",
 const [dashboard, setdashboard] = useState([]) 
 
 
-
-const handlewishlist  = async (val)=>{
+const handlewishlist  = async (id)=>{
 let accessToken = localStorage.getItem("accessToken")
 if(!accessToken){
   navigate("/auth")
@@ -56,13 +56,13 @@ if(!accessToken){
 }
 
 
-let WishlistRequest =   await fetch(`http://localhost:4090/wishlist/${val._id}` , {
+let WishlistRequest =   await fetchWithRefresh(`http://localhost:4090/wishlist/${id}` , {
     method: "PUT",
          headers:{
             "Content-Type":"application/json",
             authorization: localStorage.getItem("accessToken")
          },
-         body: JSON.stringify(val)
+         credentials: "include",
 
   })
   if(!WishlistRequest.ok){

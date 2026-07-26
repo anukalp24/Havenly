@@ -66,25 +66,7 @@
 
 /* ===================== HEART ===================== */
 
-.home-heart-icon,
-.home-heart-added-icon{
-    position:absolute;
-    top:14px;
-    right:14px;
-    width:26px;
-    height:26px;
-    cursor:pointer;
-    transition:.3s;
-    z-index:5;
-}
 
-.home-heart-added-icon{
-    background:red;
-}
-
-.home-heart-icon:hover{
-    transform:scale(1.15);
-}
 
 /* ===================== CONTENT ===================== */
 
@@ -580,7 +562,6 @@ margin:50px auto 70px;
 
 
 
-
 .category-header h2{
 font-size: 20px;
  margin-left: 9px;
@@ -698,6 +679,8 @@ font-size: 20px;
         font-size:20px;
     }
 
+
+    
     .feature{
         gap:12px;
         margin-bottom:22px;
@@ -712,7 +695,7 @@ font-size: 20px;
     }
 
     .partner-btn{
-        width:100%;
+        width:80%;
         text-align:center;
     }
 }

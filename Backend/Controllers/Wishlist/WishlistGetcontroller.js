@@ -11,8 +11,8 @@ const getwishlist = async(req , res)=>{
 
 
     
-        res.status(200).json({
-        wishlist,
+      return  res.status(200).json({
+        wishlist: wishlist
         }
         )
 

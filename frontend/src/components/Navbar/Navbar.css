@@ -12,7 +12,9 @@ body{
     background:#fafafa;
 }
 
-
+html {
+    scrollbar-gutter: stable;
+}
 
 .navbar{
     position:fixed;
@@ -89,7 +91,7 @@ body{
     display: block;
 }
 .darkLogo{
-    height: 95px;
+    height: 82px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -396,9 +398,12 @@ body{
     font-weight:600;
 }
 
-navbar,
-.navbar-scrolled{
-    padding:0 18px;
+.navbar,
+.navbar-scrolled {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: auto;
 }
 
 .navbar-center,

@@ -2,19 +2,19 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import mountainHouse from "../../../../dist/assets2/images/mountain.png";
-import modernHouse from "../../../../dist/assets2/images/modernhouse.png";
+import loginImg from "../../../../dist/assets2/images/loginpage.png";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import Navbar from "../../Navbar/Navbar";
 const Login = () => {
   const navigate = useNavigate();
 
-  const [message, setmessage] = useState("");
+  const [message, setmessage] = useState({});
+const [backendError, setbackendError] = useState("")
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    islogin: true,
+    islogin: false,
   });
 
   const handleChange = (e) => {
@@ -22,52 +22,49 @@ const Login = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
+
+
+    setmessage({
+      ...message , [e.target.name] : ""
+    })
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (form.email === "") {
-      return setmessage("Email is required");
-    }
-    if (form.password === "") {
-      return setmessage("Password is required");
-    }
-    const strongPassword =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-    if (form.islogin === true) {
-      const request = await fetch("http://localhost:4090/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(form),
-      });
-      const result = await request.json();
+     
+    if (form.islogin === false) {
+      let newErrors = {};
 
-      if (request.status === 429) {
-        setmessage(result.message);
-        return;
-      }
-      if (request.ok) {
-        localStorage.setItem("accessToken", result.accessToken);
+if (!form.name.trim()) {
+  newErrors.name = "Name is required";
+}
 
-        navigate("/dashboard");
-      } else {
-        setmessage(result.message);
-      }
-    } else {
-      if (form.name === "") {
-        return setmessage("Name is required");
-      }
+if (!form.email.trim()) {
+  newErrors.email = "Email is required";
+}
 
-      if (!strongPassword.test(form.password)) {
-        return setmessage(
-          "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.",
-        );
-      }
+if (!form.password.trim()) {
+  newErrors.password = "Password is required";
+}
+
+else if (!strongPassword.test(form.password)) {
+  newErrors.password =
+    "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character.";
+}
+
+setmessage(newErrors);
+
+
+if ( newErrors.name || newErrors.email || newErrors.password) {
+  return;
+}
+
+
+
+
 
 
       const response = await fetch("http://localhost:4090/signin", {
@@ -86,27 +83,69 @@ const Login = () => {
 
         localStorage.setItem("email", form.email);
       } else {
-        setmessage(result.message);
+        setbackendError(result.message)
+      }
+    } 
+    
+    
+    else {
+      const newErrors = {}
+
+if (!form.email.trim()) {
+  newErrors.email = "Email is required";
+}
+
+if (!form.password.trim()) {
+  newErrors.password = "Password is required";
+}
+
+else if (!strongPassword.test(form.password)) {
+  newErrors.password =
+    "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character.";
+}
+
+setmessage(newErrors);
+
+if (newErrors.email || newErrors.password) {
+  return;
+}
+
+
+
+
+      const request = await fetch("http://localhost:4090/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(form),
+      });
+      const result = await request.json();
+
+      if (request.status === 429) {
+        setbackendError(result.message);
+        return;
+      }
+      if (request.ok) {
+        localStorage.setItem("accessToken", result.accessToken);
+
+        navigate("/dashboard");
+      } else {
+        setbackendError(result.message)
       }
     }
   };
   return (
     <div>
       <div>
-      
-
         <div className="login-container">
-          <img src={modernHouse} alt="" />
+          <img src={loginImg} alt="" />
           <div className="login-left">
-        
-
-            <h1>
-              Stay Somewhere 
-              You'll Never Forget.
-            </h1>
+            <h1>Your Next Escape Awaits</h1>
             <p>
-              Discover luxury villas, premium apartments and unique stays across
-              the world with UrbanStay.
+              Sign in to discover handpicked stays and unforgettable
+              experiences.
             </p>
           </div>
 
@@ -114,11 +153,14 @@ const Login = () => {
             <div className="auth-box">
               {form.islogin ? (
                 <>
-                       <HiOutlineArrowLeft onClick={()=>navigate("/")} className="back-btn"/>
+                  <HiOutlineArrowLeft
+                    onClick={() => navigate("/")}
+                    className="back-btn"
+                  />
                   <h2>Welcome Back</h2>
 
                   <p className="auth-subtitle">
-                    Login to continue your journey with UrbanStay.
+                    Login to continue your journey with Havenly.
                   </p>
 
                   <form onSubmit={handleLogin}>
@@ -132,6 +174,9 @@ const Login = () => {
                         value={form.email}
                         onChange={handleChange}
                       />
+                     {message?.email && (
+  <p className="auth-field-error">{message.email}</p>
+)}
                     </div>
 
                     <div className="input-group">
@@ -144,6 +189,11 @@ const Login = () => {
                         value={form.password}
                         onChange={handleChange}
                       />
+
+                      {message?.password && (
+  <p className="auth-field-error">{message.password}</p>
+)}
+                   
                     </div>
 
                     <p
@@ -157,7 +207,7 @@ const Login = () => {
                       Login
                     </button>
 
-                    <p className="error-message">{message}</p>
+                  
                   </form>
 
                   <div className="switch-auth">
@@ -165,26 +215,30 @@ const Login = () => {
 
                     <button
                       type="button"
-                      onClick={() =>
-                      {
+                      onClick={() => {
                         setForm({
                           ...form,
                           islogin: false,
-                        })
-; setmessage("")
-                      }
-                      }
+                        });
+                        setmessage({}); setbackendError("");
+                      }}
                     >
                       Sign Up
                     </button>
                   </div>
+
+{backendError && (
+  <p id="backend-error">{backendError}</p>
+)}
                 </>
               ) : (
                 <>
-                <HiOutlineArrowLeft onClick={()=>navigate("/")} className="back-btn"/>
+                  <HiOutlineArrowLeft
+                    onClick={() => navigate("/")}
+                    className="back-btn"
+                  />
 
-
-                  <h2>Stay Casa</h2>
+                  <h2>Havenly</h2>
 
                   <p className="auth-subtitle">Create Your Account.</p>
 
@@ -199,6 +253,10 @@ const Login = () => {
                         value={form.name}
                         onChange={handleChange}
                       />
+{message?.name && (
+  <p className="auth-field-error">{message.name}</p>
+)}
+                      
                     </div>
 
                     <div className="input-group">
@@ -211,6 +269,9 @@ const Login = () => {
                         value={form.email}
                         onChange={handleChange}
                       />
+                    {message?.email && (
+  <p className="auth-field-error">{message.email}</p>
+)}
                     </div>
 
                     <div className="input-group">
@@ -223,9 +284,13 @@ const Login = () => {
                         value={form.password}
                         onChange={handleChange}
                       />
+                     
+                        {message?.password && (
+  <p className="auth-field-error">{message.password}</p>
+)}  
                     </div>
 
-                    <p className="error-message">{message}</p>
+                    
 
                     <button type="submit" className="login-btn">
                       Create Account
@@ -237,16 +302,22 @@ const Login = () => {
 
                     <button
                       type="button"
-                      onClick={() =>
+                      onClick={() => {
                         setForm({
                           ...form,
                           islogin: true,
                         })
+                        ; setmessage({}) ; setbackendError("");
+                      }
                       }
                     >
                       Login
                     </button>
                   </div>
+
+                  {backendError && (
+  <p id="backend-error">{backendError}</p>
+ )}
                 </>
               )}
             </div>

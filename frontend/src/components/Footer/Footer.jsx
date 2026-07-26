@@ -37,10 +37,11 @@ const Footer = () => {
 
 <div className="footer-sec-1">
     <h2>Address</h2>
-  <p>10, Vatika City Market, Sector 49, Sohna-Gurgaon Road, Gurgaon: 122018, INDIA</p>
-  <span>9630048178</span>
-  <span>anukalpagarwal@gmail.com</span>
-  <span>7:00 - 18:00, Mon - Sun</span>
+  <p>10, Vatika City Market, Sector 49, Sohna-Gurgaon Road, Gurgaon</p>
+  <p> Contact: anukalpagarwal24@gmail.com</p>
+  <p>Timing: 7:00 - 18:00, Mon - Sun</p>
+  
+  
 </div>
 
 </div> {/* footer-section-div */}

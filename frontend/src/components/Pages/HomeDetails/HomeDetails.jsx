@@ -1,17 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext } from "react";
 import "./HomeDetails.css";
 import Footer from "../../Footer/Footer";
 import Navbar from "../../Navbar/Navbar";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
+import { FiHeart } from "react-icons/fi";
+import { info } from "../..";
 
 const Home = () => {
 
-
-
+const {handlewishlist} = useContext(info)
   const { id } = useParams();
   const [home, sethome] = useState(null);
   const [checkIn, setcheckIn] = useState(null);
@@ -28,6 +29,11 @@ const [checker, setchecker] = useState("")
   useEffect(() => {
     const homefunc = async () => {
       const request = await fetch(`http://localhost:4090/home/${id}`, {
+        method: "GET",
+        headers:{
+          authorization: localStorage.getItem("accessToken")
+        } ,
+
         credentials: "include",
       });
       const result = await request.json();
@@ -35,12 +41,6 @@ const [checker, setchecker] = useState("")
     };
     homefunc();
   }, []);
-
-
-
-
-
-
 
 
   
@@ -83,8 +83,6 @@ setIsSuccess(null);
       }
 
       else{
-
-        
         setIsSuccess(false)
         setmessage(data.message);
       }
@@ -165,6 +163,28 @@ setIsSuccess(null);
         </svg>
 
       </button>
+
+
+
+<button
+  className="wishlist-icon"
+  onClick={(e) => {
+    e.stopPropagation();
+    handlewishlist(home?.home?._id);
+  }}
+>
+  <FiHeart />
+</button>
+
+
+
+
+
+
+
+
+
+
 <div className="gallery-swipe-hint">
 
   <svg viewBox="0 0 24 24" fill="none">
@@ -196,10 +216,6 @@ setIsSuccess(null);
       📍 {home?.home?.cityname}
     </p>
 
-
-  
-
-    
     <div className="hd-about">
 
       <h2>About this Place</h2>

@@ -1,28 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 :root {
-  --color-primary: #D4775B;
-  --color-primary-light: #E08B6F;
-  --color-primary-dark: #B85D3F;
-  --color-secondary: #4A8B7A;
-  --color-secondary-light: #5DA08D;
-  --color-accent: #E8A87C;
-  --color-accent-light: #F0BF9B;
-  --color-gradient: linear-gradient(135deg, #D4775B, #E8A87C);
-  --color-gradient-hover: linear-gradient(135deg, #B85D3F, #D4775B);
-  --color-gradient-reverse: linear-gradient(135deg, #E8A87C, #D4775B);
-  --color-bg: #FDFBF9;
-  --color-bg-alt: #F7F3F0;
-  --color-surface: #FFFFFF;
-  --color-border: #E8E0DA;
-  --color-border-light: #F0EAE4;
-  --color-text-primary: #1C160E;
-  --color-text-secondary: #6B6258;
-  --color-text-tertiary: #A0988C;
-  --color-text-inverse: #FFFFFF;
-  --color-success: #4A8B7A;
-  --color-error: #D4775B;
-  --color-warning: #E8A87C;
+
   --shadow-sm: 0 1px 3px rgba(28, 22, 14, 0.06);
   --shadow-md: 0 4px 6px rgba(28, 22, 14, 0.06), 0 2px 4px rgba(28, 22, 14, 0.04);
   --shadow-lg: 0 10px 25px rgba(28, 22, 14, 0.08), 0 4px 10px rgba(28, 22, 14, 0.05);

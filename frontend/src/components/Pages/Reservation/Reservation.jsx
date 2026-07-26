@@ -12,7 +12,6 @@ const Reservation = () => {
 const [reservedHomes, setreservedHomes] = useState([])
 const navigate = useNavigate()
 
-
 useEffect(() => {
     const  reservation = async ()=>{
 
@@ -31,8 +30,12 @@ useEffect(() => {
 
     }
 
+if(reservedHomes?.home?.status === "cancelled"){
+setIsCancel(true)
  
 }
+
+    }
  reservation()
 }, [])
 
@@ -69,13 +72,29 @@ useEffect(() => {
           ) : (
 
             
-            <div className="reservation-list">
+
+
+
+            <div  className="reservation-list">
               {reservedHomes.map((home) => (
-                <div
+                <div  onClick={() =>
+          navigate(`/reservationDetails/${home._id}`)
+        }
   className="reservation-grid-card"
   key={home._id}
 >
 
+  {home.status === "cancelled" &&(
+<div className='cancelled'>
+    <div className="cancelled-banner">
+      {home?.ownerMessage}
+    </div>
+</div>
+)}
+
+  
+  
+  
   <div className="reservation-grid-image">
 
     <img src={home.files[0]} alt={home.propertyName} />
@@ -87,7 +106,7 @@ useEffect(() => {
           : "status-refund"
       }`}
     >
-      {home.paymentStatus}
+      {home.status}
     </span>
 
   </div>
@@ -111,9 +130,6 @@ useEffect(() => {
       </span>
 
       <button
-        onClick={() =>
-          navigate(`/reservationDetails/${home._id}`)
-        }
       >
         View Details
       </button>
@@ -121,6 +137,7 @@ useEffect(() => {
     </div>
 
   </div>
+
 
 </div>
               ))}

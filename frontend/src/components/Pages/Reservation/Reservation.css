@@ -32,6 +32,7 @@
 /* GRID */
 
 .reservation-list{
+    cursor: pointer;
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
     gap:24px;
@@ -44,6 +45,7 @@
     border:1px solid #eee;
     border-radius:16px;
     overflow:hidden;
+    position: relative;
     transition:.25s ease;
 }
 
@@ -193,9 +195,34 @@
     background:#000;
 }
 
-/* MOBILE */
 
-@media(max-width:700px){
+.cancelled-banner{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+
+    transform: translateY(-50%);
+
+    background: #dc2626;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+
+    padding: 10px 0;
+
+    z-index: 100;
+}
+@media
+(max-width:700px){
+
+
+.cancelled-banner{
+top: 40%;
+font-size: 13px;
+
+}
 
 
 .reservation-empty h2{
@@ -214,10 +241,6 @@
     align-items:center;
     text-align:center;
 }
-
-
-
-
     .reservation-page{
         padding:20px 16px 60px;
     }

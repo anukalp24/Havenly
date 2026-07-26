@@ -26,18 +26,18 @@ const wishlistfunc  =  async (req , res)=>{
             wishlist,
             message: "Wishlist added successfully"
           })
-    
 
 
+
+
+
+          
    } catch (error) {
     console.log(error)
     res.status(500).json({
         message: "some error occured"
     })
    }
-
-
-   
 }
 
     module.exports = wishlistfunc

@@ -51,7 +51,6 @@ const categories = [
   {name: "Villa" , icon: <Home size={24}/>},
   { name: "Cabin", icon: <Trees size={24} /> },
   { name: "Flat", icon: <Building2 size={24} /> },
-  { name: "Bungalow", icon: <House size={24} /> },
   { name: "Entire Home", icon: <KeyRound size={24} /> },
 ]
 

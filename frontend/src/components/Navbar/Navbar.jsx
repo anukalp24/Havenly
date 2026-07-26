@@ -48,6 +48,10 @@ useEffect(() => {
 setscrolled(window.scrollY > 100)
  }
  window.addEventListener("scroll" , handleScroll)
+
+
+
+
 }, [])
 
 

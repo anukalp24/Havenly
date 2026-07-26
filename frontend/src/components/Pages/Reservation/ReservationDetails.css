@@ -33,3 +33,18 @@
     color:#222;
     font-weight:600;
 }
+
+#backend-msg{
+  font-size: 17px;
+  text-decoration: underline;
+}
+
+
+@media
+(max-width:700px){
+
+#backend-msg{
+  font-size: 12px;
+}
+
+}
