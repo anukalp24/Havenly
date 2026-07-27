@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../../../Navbar/Navbar'
 import Footer from '../../../Footer/Footer'
-import image from "../../../../../dist/assets2/images/About.png"
+import image from "../../../../assets/photos/About.png"
 import "./About.css"
 import { useNavigate } from 'react-router-dom'
 const About = () => {

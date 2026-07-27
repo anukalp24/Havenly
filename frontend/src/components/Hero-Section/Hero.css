@@ -267,7 +267,7 @@
     }
 
     .hero-left h1{
-        font-size:2.6rem;      /* ~35px */
+        font-size:2.6rem;     
         font-weight:700;
         line-height:1.2;
         letter-spacing:-1px;
@@ -282,16 +282,9 @@
 
     
 }
-/* Large laptops (15"-17") */
-@media (min-width:1440px){
-/* 
-    .hero{
-        height:720px;
-    } */
 
-}
 
-/* Full HD monitors (24", 27", etc.) */
+
 @media (min-width:1920px){
 
     .hero{
@@ -300,7 +293,7 @@
 
 }
 
-/* 2K / QHD monitors */
+
 @media (min-width:2560px){
 
     .hero{

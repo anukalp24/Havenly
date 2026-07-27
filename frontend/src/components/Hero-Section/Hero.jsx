@@ -2,10 +2,7 @@ import "./Hero.css";
 import { useContext , useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { info } from "..";
-import poolHouse from "../../../dist/assets2/images/herosection.png"
-import modernhouse from "../../../dist/assets2/images/modernhouse.png"
-import mountainHome from "../../../dist/assets2/images/mountain.png"
-import hero from "../../assets/photos/hero-photo.png"
+
 import hero2 from "../../assets/photos/hero.png"
 
 

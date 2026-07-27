@@ -2,9 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import loginImg from "../../../../dist/assets2/images/loginpage.png";
+import loginImg from "../../../assets/photos/loginpage.png";
 import { HiOutlineArrowLeft } from "react-icons/hi";
-import Navbar from "../../Navbar/Navbar";
 const Login = () => {
   const navigate = useNavigate();
 
