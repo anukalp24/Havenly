@@ -11,7 +11,10 @@ app.use(helmet({
 
 console.log(__filename);
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://havenlyy.vercel.app"
+    ],
     credentials: true
 }));
 
