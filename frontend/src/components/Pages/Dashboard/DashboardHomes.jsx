@@ -20,7 +20,7 @@ useEffect(() => {
   
 const getdashboardhomes =  async ()=>{
 
-  const api = await fetchWithRefresh("${import.meta.env.VITE_API_URL}/dashboard" , {
+  const api = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/dashboard` , {
     method: "GET",
     headers:{
       authorization: localStorage.getItem("accessToken")
