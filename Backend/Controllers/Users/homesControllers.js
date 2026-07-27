@@ -12,7 +12,7 @@ const Home = require("../../Models/Home")
      }
 
      if(!page){
-      const Homes = await Home.find().limit(12)
+      const Homes = await Home.find().limit(8)
     return  res.status(200).json(Homes)
      }
      
@@ -30,7 +30,7 @@ const Home = require("../../Models/Home")
   }).skip(skip).limit(limit)
 
  
-     res.status(200).json(Homes)
+    return  res.status(200).json(Homes)
 
 
   } catch (error) {

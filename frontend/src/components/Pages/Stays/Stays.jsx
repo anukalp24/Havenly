@@ -6,12 +6,16 @@ import "rc-slider/assets/index.css";
 import { info } from '../..'
 import Navbar from 'components/Navbar/Navbar'
 import Footer from 'components/Footer/Footer'
+import SkeletonCard from '../../../Utils/Skeleton';
+import "../../../Utils/Skeleton.css"
 import { useNavigate } from 'react-router-dom';
 import {
   FaHeart,
   FaMapMarkerAlt,
 
 } from "react-icons/fa";
+
+import { FiHeart } from "react-icons/fi";
 
 import {
   MdSearch,
@@ -21,7 +25,7 @@ import {
 
 
 const Card = () => {
-
+const [loader, setloader] = useState(true)
   const navigate = useNavigate()
   const { handleStay , handlewishlist} = useContext(info)
 const [price, setprice] = useState([0 , 100000]) // slider state
@@ -29,6 +33,8 @@ const [price, setprice] = useState([0 , 100000]) // slider state
 const [page, setPage] = useState(1)
 const [allHomes, setallHomes] = useState([])
 const [search, setsearch] = useState("")
+
+
 
 const handleClick  = ()=>{
   if(search === ""){
@@ -42,9 +48,11 @@ const handleClick  = ()=>{
 
 useEffect(() => {
 const FetchHomes = async ()=>{
+  setloader(true)
     const api =   await fetch(`http://localhost:4090/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
     const result  = await api.json()
     setallHomes(result)
+    setloader(false)
 }
 FetchHomes()
 }, [page])
@@ -89,7 +97,7 @@ const handleFilter =  async ()=>{
     <aside className="filters">
 
       <div className="filter-section">
-
+<h3>Search by price</h3>
         <h4>Price Range</h4>
 
   <Slider
@@ -98,6 +106,7 @@ const handleFilter =  async ()=>{
   max={100000}
   value={price}
   onChange={setprice}
+  allowCross={false}
 />
 <div className="price-range-box">
   <div className="price-inputs">
@@ -135,22 +144,55 @@ const handleFilter =  async ()=>{
       </div>
 
 
+{loader ? (
 
-    
-
-{allHomes.map((home , index)=>(
-      <div onClick={()=>handleStay(home._id)} className="property-card">
 
 <>
-  <div className="property-image">
+ <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+</>
+) : (
+  <>
+  
+  
 
-          <img src={home.files[0]} alt="" />
+{allHomes.map((home , index)=>(
+      <div key={home._id} onClick={()=>handleStay(home._id)} className="property-card">
 
-          <button className="wishlist-btn">
-            <FaHeart />
-          </button>
-        </div>
+<>
+<div className="property-image">
 
+  <img src={home.files[0]} alt="" />
+
+
+
+<button
+  className="mobile-wishlist-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    e.currentTarget.classList.remove("burst");
+    void e.currentTarget.offsetWidth; // restart animation
+    e.currentTarget.classList.add("burst");
+
+    handlewishlist(home._id);
+  }}
+>
+  <FiHeart />
+  <span className="particle p1"></span>
+  <span className="particle p2"></span>
+  <span className="particle p3"></span>
+  <span className="particle p4"></span>
+  <span className="particle p5"></span>
+  <span className="particle p6"></span>
+</button>
+
+
+</div>
 
         <div className="property-content">
 
@@ -174,7 +216,7 @@ const handleFilter =  async ()=>{
             Starting From
           </span>
 
-          <h2>₹{home.price}</h2>
+          <h2>₹{Number(home.price).toLocaleString("en-IN")}</h2>
           <p>/ Night</p>
 
 <div className="button-parent">
@@ -182,9 +224,7 @@ const handleFilter =  async ()=>{
           <button className='stay-btn'>
             View Property
           </button>
-          <button onClick={(e)=> {e.stopPropagation() ; handlewishlist(home._id)}}  className='stay-btn' id='wishlist-btn'>
-           Add to Wishlist
-          </button>
+         
 </div>
 
         </div>
@@ -209,14 +249,17 @@ const handleFilter =  async ()=>{
 
       </div>
 
+
+  </>
+)}
+    
+
+
     </section>
 
   </div>
 
 </div>
-
-
-
 
 <Footer/>
 

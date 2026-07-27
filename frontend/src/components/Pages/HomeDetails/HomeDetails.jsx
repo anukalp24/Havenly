@@ -140,7 +140,7 @@ setIsSuccess(null);
           alt=""
         />
 
-        <img id="img"
+        <img className="special-img" id="img"
           src={home?.home?.files?.[2] || home?.home?.files?.[0]}
           alt=""
         />
@@ -166,17 +166,27 @@ setIsSuccess(null);
 
 
 
+
 <button
   className="wishlist-icon"
   onClick={(e) => {
     e.stopPropagation();
-    handlewishlist(home?.home?._id);
+
+    e.currentTarget.classList.remove("burst");
+    void e.currentTarget.offsetWidth; 
+    e.currentTarget.classList.add("burst");
+
+    handlewishlist(home.home._id);
   }}
 >
   <FiHeart />
+  <span className="particle p1"></span>
+  <span className="particle p2"></span>
+  <span className="particle p3"></span>
+  <span className="particle p4"></span>
+  <span className="particle p5"></span>
+  <span className="particle p6"></span>
 </button>
-
-
 
 
 
@@ -220,7 +230,7 @@ setIsSuccess(null);
 
       <h2>About this Place</h2>
 
-      <p>
+      <p id="description">
         {home?.home?.desc}
       </p>
 
@@ -237,8 +247,7 @@ setIsSuccess(null);
 
     <div className="booking-price">
 
-      <h2>₹{home?.home?.price}</h2>
-
+      <h2>₹{Number(home?.home?.price).toLocaleString("en-IN")}</h2>
       <span>/ Night</span>
 
     </div>
@@ -300,7 +309,7 @@ setIsSuccess(null);
       </div>
 
     <button
-      className="book-btn"
+      className="book-btn"  disabled={loader}
       onClick={() => handleadd(home?.home?._id)}
       >
         {loader ? (

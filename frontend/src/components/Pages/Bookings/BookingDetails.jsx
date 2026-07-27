@@ -171,10 +171,9 @@ seterror(response.message)
                     <strong>Total</strong>
 
                     <strong>
-                      ₹{Number(bookingDetail?.home?.totalPrice || 0) + 800}
+                      ₹{Number((bookingDetail?.home?.totalPrice || 0) + 800).toLocaleString("en-IN")}
                     </strong>
                   </div>
-
                   {bookingDetail?.home?.status === "cancelled" ? (
                     <>
                       <div className="reservation-cancelled">

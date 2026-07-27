@@ -184,7 +184,7 @@ if(first.message === ""){
 
  <button id="btn" type="submit">
 {loader ? (
-   <div className="loader"></div>
+   <div className="loader-2"></div>
 ) : (
   <>
   <FiSend />

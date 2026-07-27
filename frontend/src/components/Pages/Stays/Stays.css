@@ -21,6 +21,91 @@
     overflow:hidden;
 }
 
+
+
+.mobile-wishlist-btn{
+     top:12px;
+     
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+        right:12px;
+
+        width:42px;
+        height:42px;
+
+        border:none;
+        border-radius:50%;
+        background:#fff;
+        box-shadow:0 4px 12px rgba(0,0,0,.15);
+        cursor:pointer;
+        z-index:5;
+    position:absolute;
+    overflow:visible;
+}
+
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#ff385c;
+
+    opacity:0;
+    pointer-events:none;
+}
+
+.mobile-wishlist-btn.burst svg{
+    color:#ff385c;
+    animation:heartPop .35s ease;
+}
+
+.mobile-wishlist-btn.burst .particle{
+    animation:particleBurst .6s ease forwards;
+}
+
+.p1{ --x:-22px; --y:-18px; }
+.p2{ --x:22px;  --y:-16px; }
+.p3{ --x:-24px; --y:8px; }
+.p4{ --x:24px;  --y:10px; }
+.p5{ --x:0px;   --y:-28px; }
+.p6{ --x:0px;   --y:28px; }
+
+@keyframes heartPop{
+
+    0%{
+        transform:scale(1);
+    }
+
+    40%{
+        transform:scale(1.35);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+@keyframes particleBurst{
+
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(var(--x),var(--y)) scale(0);
+    }
+
+}
+
+
+
+
+
 .search-bar input{
     flex:1;
     border:none;
@@ -223,7 +308,8 @@
     height:280px;
     flex-shrink:0;
     position:relative;
-    overflow:hidden;
+     overflow:hidden; 
+
 }
 
 .property-image img{
@@ -282,10 +368,10 @@
     overflow:hidden;
 }
 
-/* PRICE */
+
 
 .price-section{
-    width:220px;
+    width:240px;
     flex-shrink:0;
 
     border-left:1px solid #ececec;
@@ -296,7 +382,7 @@
     align-items:center;
 
     padding:24px;
-}
+} 
 
 .starting{
     font-size:13px;
@@ -382,28 +468,7 @@ background-color: white;
     gap: 10px; 
 }
 
-#wishlist-btn {
-  background: #ff385c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-#wishlist-btn:hover {
-  background: #e31c5f;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 56, 92, 0.25);
-}
-
-#wishlist-btn:active {
-  transform: scale(0.96);
-  box-shadow: none;
-}
-
-#wishlist-btn:focus {
-  outline: none;
-}
 
 
 
@@ -462,7 +527,9 @@ background-color: white;
 
 }
 
-.price-range-box{
+
+
+ .price-range-box{
     width:100%;
 }
 
@@ -504,4 +571,99 @@ background-color: white;
 .apply-btn:hover{
     color: white;
     background:#1f1f1f;
+} 
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+
+
+
+    #wishlist-btn{
+        display:none;
+    }
+
+    .property-image{
+        position:relative;
+    }
+
+    
+
+
+  .stays-page{
+    padding:90px 12px 30px;
+  }
+
+  .property-card{
+    flex-direction:column;
+    border-radius:16px;
+  }
+
+  .property-image{
+    width:100%;
+    height:200px;
+  }
+
+  .property-content{
+    padding:20px;
+  }
+
+  .property-header h2{
+    font-size:1.4rem;
+    line-height:1.3;
+    margin-bottom:10px;
+  }
+
+  .property-header p{
+    font-size:1.1rem;
+  }
+
+  .property-description{
+    margin-top:18px;
+    font-size:1rem;
+    line-height:1.7;
+    -webkit-line-clamp:3;
+  }
+
+  .price-section{
+    width:100%;
+    border-left:none;
+    padding:22px 20px;
+    align-items:flex-start;
+  }
+
+  .price-section h2{
+    font-size:2.2rem;
+  }
+
+  .price-section p{
+    margin-bottom:18px;
+  }
+
+  .button-parent{
+    width:100%;
+  }
+
+
+
+  .stay-btn{
+  
+     width:100%;
+    height:52px;
+    font-size:1rem;
+  }
 }
+
+
+
+
+

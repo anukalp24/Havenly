@@ -94,8 +94,8 @@ method: "GET",
                 <div className="card-divider"></div>
 
                 <div className="sec-2">
-                  <span className="card-price">₹{val?.home?.price}/night</span>
-                
+                  <span className="card-price">₹{Number(val?.home?.price).toLocaleString("en-IN")}/night</span>
+              
                <button
   
   className="wishlist-button"

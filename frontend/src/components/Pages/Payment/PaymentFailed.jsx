@@ -1,42 +1,66 @@
 import { Link } from "react-router-dom";
 import "./PaymentFailed.css";
+import {
+  HiXCircle,
+  HiOutlineHome,
+  HiOutlineRefresh,
+} from "react-icons/hi";
+
+
 
 function PaymentFailed() {
   return (
-    <div className="payment-failed">
-      <div className="pf-container">
-        <div className="pf-icon">
-          <span className="pf-cross">&times;</span>
+    <div className="payment-failed-page">
+
+      <div className="payment-failed-card">
+
+        <div className="payment-failed-icon">
+          <HiXCircle />
         </div>
 
-        <h1 className="pf-heading">Payment Cancelled</h1>
-        <p className="pf-message">
-          Your payment was not completed. No amount has been charged.
+        <h1>Payment Failed</h1>
+
+        <p className="payment-failed-text">
+          We couldn't process your payment.
+          No booking has been confirmed.
+          Please try again or use another payment method.
         </p>
 
-        <div className="pf-card">
-          <div className="pf-card-row">
-            <span className="pf-card-label">Payment Status</span>
-            <span className="pf-card-value pf-status-cancelled">Cancelled</span>
+        <div className="payment-failed-info">
+
+          <div className="failed-info-row">
+            <span>Status</span>
+            <span className="failed-status">Failed</span>
           </div>
-          <div className="pf-card-divider"></div>
-          <div className="pf-card-row">
-            <span className="pf-card-label">Booking Status</span>
-            <span className="pf-card-value pf-status-unconfirmed">
-              Not Confirmed
-            </span>
+
+          <div className="failed-info-row">
+            <span>Payment</span>
+            <span>Not Completed</span>
           </div>
+
+          <div className="failed-info-row">
+            <span>Booking</span>
+            <span>Not Reserved</span>
+          </div>
+
         </div>
 
-        <div className="pf-actions">
-          <Link to="/" className="pf-btn pf-btn-home">
-            Back to Home
-          </Link>
-          <Link to="/stays" className="pf-btn pf-btn-retry">
+        <div className="payment-failed-buttons">
+
+          <Link to="/stays" className="retry-btn">
+            <HiOutlineRefresh />
             Try Again
           </Link>
+
+          <Link to="/" className="home-btn">
+            <HiOutlineHome />
+            Back to Home
+          </Link>
+
         </div>
+
       </div>
+
     </div>
   );
 }

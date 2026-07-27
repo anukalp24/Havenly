@@ -110,7 +110,9 @@ const Bookings = () => {
 
                     <div className="booking-bottom">
                       <span className="booking-price">
-                        ₹{booking.totalPrice}
+                        ₹{Number(booking.totalPrice).toLocaleString("en-IN")}
+
+
                       </span>
 
                       <button

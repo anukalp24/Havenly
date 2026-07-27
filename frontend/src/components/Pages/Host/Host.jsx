@@ -114,7 +114,8 @@ formData.append(
 credentials: "include",
          body: formData
         })
-  
+          navigate("/")
+        
 
 }
 else{
@@ -163,6 +164,7 @@ setform({
    price:"",
    desc:"",
 })
+navigate("/")
 
 }
 

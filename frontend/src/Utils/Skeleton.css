@@ -1,0 +1,92 @@
+.skeleton-property-card {
+  display: flex;
+  gap: 24px;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  border: 1px solid #ececec;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.75),
+    transparent
+  );
+  animation: shimmer 1.3s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-property-image {
+  width: 340px;
+  height: 240px;
+  flex-shrink: 0;
+  border-radius: 16px;
+}
+
+.skeleton-property-content {
+  flex: 1;
+}
+
+.skeleton-title {
+  width: 65%;
+  height: 26px;
+  margin-bottom: 18px;
+}
+
+.skeleton-location {
+  width: 42%;
+  height: 16px;
+  margin-bottom: 24px;
+}
+
+.skeleton-desc {
+  width: 95%;
+  height: 14px;
+  margin-bottom: 12px;
+}
+
+.skeleton-short {
+  width: 72%;
+}
+
+.skeleton-price-section {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.skeleton-price {
+  width: 90px;
+  height: 32px;
+  margin-bottom: 35px;
+}
+
+.skeleton-button {
+  width: 150px;
+  height: 44px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}

@@ -33,6 +33,63 @@ transition: 0.3s ease;
 
 
 
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#ff385c;
+    opacity:0;
+    pointer-events:none;
+}
+
+.wishlist-icon.burst svg{
+     color:#ff385c; 
+    animation:heartPop .35s ease;
+}
+
+.wishlist-icon.burst .particle{
+    animation:particleBurst .6s ease forwards;
+}
+
+.p1{ --x:-22px; --y:-18px; }
+.p2{ --x:22px;  --y:-16px; }
+.p3{ --x:-24px; --y:8px; }
+.p4{ --x:24px;  --y:10px; }
+.p5{ --x:0px;   --y:-28px; }
+.p6{ --x:0px;   --y:28px; }
+
+@keyframes heartPop{
+
+    0%{
+        transform:scale(1);
+    }
+
+    40%{
+        transform:scale(1.35);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+@keyframes particleBurst{
+
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(var(--x),var(--y)) scale(0);
+    }
+
+}
+
+
 
 
 .gallery-icon{
@@ -130,8 +187,11 @@ transition: 0.3s ease;
       transition: transform 0.9s ease-in-out;
 }
 
+.special-img{
+    transform: none;
+}
+
 #checker{
-    /* border: 1px solid black; */
     width: 100%;
     text-align: center;
     color: rgb(236, 27, 27);
@@ -167,9 +227,20 @@ transition: 0.3s ease;
 
 @media (max-width:768px){
 
+
+
+
+
+
+.hd-about{
+    width: 100%;
+}
+
+    #description{
+        line-height: 1.8;
+    }
 .gallery-swipe-hint{
     position:absolute;
-     /* bottom:40px; */
      top: 100px;
     right:18px; 
 
@@ -195,7 +266,7 @@ transition: 0.3s ease;
     width:18px;
     height:18px;
 }
-/*  */
+
 }
 
 @keyframes swipeHint{
@@ -280,7 +351,6 @@ transition: 0.3s ease;
     display:flex;
     gap:60px;
     align-items:flex-start;
-    /* padding:0 30px; */
 }
 
 .hd-left{
@@ -494,6 +564,11 @@ transition: 0.3s ease;
     transition:.3s;
 }
 
+.book-btn:disabled{
+        opacity:.7;
+    cursor:not-allowed;
+
+}
 .book-btn:hover{
     background:#2d2d2d;
 }

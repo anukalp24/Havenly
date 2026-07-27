@@ -30,10 +30,6 @@ useEffect(() => {
 
     }
 
-if(reservedHomes?.home?.status === "cancelled"){
-setIsCancel(true)
- 
-}
 
     }
  reservation()
@@ -93,8 +89,6 @@ setIsCancel(true)
 )}
 
   
-  
-  
   <div className="reservation-grid-image">
 
     <img src={home.files[0]} alt={home.propertyName} />
@@ -108,7 +102,6 @@ setIsCancel(true)
     >
       {home.status}
     </span>
-
   </div>
 
   <div className="reservation-grid-content">

@@ -179,8 +179,8 @@ credentials: "include"
        
            <div className="booking-price">
        
-             <h2>₹{dashboardHomeDetails?.home?.price}</h2>
-       
+             <h2>₹{Number(dashboardHomeDetails?.home?.price).toLocaleString("en-IN")}</h2>
+      
              <span>/ Night</span>
        
            </div>
@@ -213,8 +213,10 @@ credentials: "include"
                <strong>Total</strong>
        
                <strong>
-                 ₹{Number(dashboardHomeDetails?.home?.price|| 0) + 800}
+                 ₹{(Number(dashboardHomeDetails?.home?.price || 0) + 800 ).toLocaleString("en-IN") }
                </strong>
+
+            
              </div>
            <button
              className="book-btn"

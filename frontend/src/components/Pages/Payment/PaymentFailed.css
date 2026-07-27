@@ -1,208 +1,164 @@
-.payment-failed {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-bg);
-  padding: 40px 20px;
+.payment-failed-page{
+    min-height:100vh;
+    background:#f7f7f7;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px 20px;
 }
 
-/* ── container ── */
+.payment-failed-card{
 
-.pf-container {
-  background: var(--color-surface);
-  border-radius: var(--radius-2xl);
-  padding: 56px 48px;
-  max-width: 460px;
-  width: 100%;
-  text-align: center;
-  box-shadow: var(--shadow-xl);
-  animation: pfSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    width:100%;
+    max-width:560px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.08);
 }
 
-@keyframes pfSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.payment-failed-icon{
+
+    width:90px;
+    height:90px;
+
+    margin:0 auto 24px;
+
+    border-radius:50%;
+
+    background:#FDECEC;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* ── icon ── */
+.payment-failed-icon svg{
 
-.pf-icon {
-  width: 88px;
-  height: 88px;
-  margin: 0 auto 28px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #fde8e2, #f9d4cb);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pfPop 0.5s 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    font-size:58px;
+    color:#DC2626;
 }
 
-.pf-cross {
-  font-size: 2.8rem;
-  font-weight: 300;
-  color: var(--color-error);
-  line-height: 1;
+.payment-failed-card h1{
+
+    font-size:34px;
+    margin-bottom:16px;
+    color:#222;
 }
 
-@keyframes pfPop {
-  from {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.payment-failed-text{
+
+    color:#666;
+    line-height:1.7;
+    font-size:16px;
+
+    margin-bottom:35px;
 }
 
-/* ── text ── */
+.payment-failed-info{
 
-.pf-heading {
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: var(--color-text-primary);
-  margin-bottom: 10px;
-  letter-spacing: -0.5px;
+    background:#fafafa;
+
+    border:1px solid #ececec;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    margin-bottom:35px;
 }
 
-.pf-message {
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin-bottom: 32px;
+.failed-info-row{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 0;
 }
 
-/* ── card ── */
+.failed-info-row:not(:last-child){
 
-.pf-card {
-  background: var(--color-bg);
-  border-radius: var(--radius-xl);
-  padding: 24px 28px;
-  margin-bottom: 36px;
-  border: 1px solid var(--color-border-light);
+    border-bottom:1px solid #ececec;
 }
 
-.pf-card-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 0;
+.failed-status{
+
+    color:#DC2626;
+    font-weight:700;
 }
 
-.pf-card-label {
-  font-size: 0.88rem;
-  color: var(--color-text-tertiary);
-  font-weight: 600;
+.payment-failed-buttons{
+
+    display:flex;
+    gap:15px;
 }
 
-.pf-card-value {
-  font-size: 0.88rem;
-  font-weight: 700;
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
+.retry-btn,
+.home-btn{
+
+    flex:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
 }
 
-.pf-status-cancelled {
-  background: #fde8e2;
-  color: var(--color-error);
+.retry-btn{
+
+    background:#111;
+    color:#fff;
 }
 
-.pf-status-unconfirmed {
-  background: #fdf0e0;
-  color: #b8863a;
+.retry-btn:hover{
+
+    background:#000;
 }
 
-.pf-card-divider {
-  height: 1px;
-  background: var(--color-border-light);
-  margin: 14px 0;
+.home-btn{
+
+    border:1px solid #ddd;
+    color:#333;
 }
 
-/* ── buttons ── */
+.home-btn:hover{
 
-.pf-actions {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
+    background:#f5f5f5;
 }
 
-.pf-btn {
-  display: inline-block;
-  padding: 14px 32px;
-  border-radius: var(--radius-full);
-  font-size: 0.95rem;
-  font-weight: 700;
-  transition: all var(--transition-base);
-  text-decoration: none;
-}
+@media(max-width:600px){
 
-.pf-btn-home {
-  background: var(--color-bg-alt);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-}
+    .payment-failed-card{
 
-.pf-btn-home:hover {
-  background: var(--color-border);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
+        padding:30px 22px;
+    }
 
-.pf-btn-retry {
-  background: var(--color-gradient);
-  color: var(--color-text-inverse);
-  box-shadow: 0 4px 14px rgba(212, 119, 91, 0.3);
-}
+    .payment-failed-card h1{
 
-.pf-btn-retry:hover {
-  background: var(--color-gradient-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 119, 91, 0.4);
-}
+        font-size:28px;
+    }
 
-.pf-btn:active {
-  transform: translateY(0);
-}
+    .payment-failed-buttons{
 
-/* ── responsive ── */
-
-@media (max-width: 540px) {
-  .pf-container {
-    padding: 40px 24px;
-  }
-
-  .pf-heading {
-    font-size: 1.4rem;
-  }
-
-  .pf-icon {
-    width: 72px;
-    height: 72px;
-  }
-
-  .pf-cross {
-    font-size: 2.2rem;
-  }
-
-  .pf-card {
-    padding: 20px;
-  }
-
-  .pf-actions {
-    flex-direction: column;
-  }
-
-  .pf-btn {
-    width: 100%;
-    text-align: center;
-  }
+        flex-direction:column;
+    }
 }

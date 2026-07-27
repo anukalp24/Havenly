@@ -105,7 +105,7 @@ return (
           <div className="dashboard-all-card-footer">
 
             <span className="dashboard-all-card-price">
-              ₹{val.price}
+            ₹{Number(val.price).toLocaleString("en-IN")}
             </span>
 
             <span className="dashboard-all-card-rating">

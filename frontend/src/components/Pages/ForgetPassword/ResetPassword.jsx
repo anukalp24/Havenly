@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import "./ResetPassword.css"
+import Navbar from '../../Navbar/Navbar'
+import Footer from '../../Footer/Footer'
 const ResetPassword = () => {
     const { token } = useParams()    
     const navigate = useNavigate()
@@ -8,17 +10,28 @@ const ResetPassword = () => {
         password: ""
     })
 
+    const [loader, setloader] = useState()
+    const [message, setmessage] = useState()
+const [error, seterror] = useState()
+
+
+
+
     const handlechange = (e) => {
+        setmessage("")
+        seterror("")
         setform({ ...form, [e.target.name]: e.target.value })
     }
-    const [message, setmessage] = useState()
-
       
     const resetPassword = async () => {
 
+        if(form.password === ""){
+            return seterror("Enter your new password")
+        }
         const strongPassword =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
+
   if(!strongPassword.test(form.password)){
-              return setmessage("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
+              return seterror("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
   }
 
         const request = await fetch(`http://localhost:4090/reset-password/${token}`, {
@@ -34,31 +47,79 @@ const ResetPassword = () => {
             localStorage.removeItem("accessToken")
             navigate("/")
         } else {
-            setmessage(result.message)
+            seterror(result.message)
         }
     }
 
     return (
-        <div className="reset-container">
-  <div className="reset-card">
-    <h2>Reset Password</h2>
+<>
+        <Navbar/>
+       <div className="reset-container">
 
-    <input
-      id="reset-input"
-      value={form.password}
-      name="password"
-      onChange={handlechange}
-      placeholder="Enter new password"
-      type="password"
-    />
+  <div className="reset-box">
 
-    <button id="reset-btn" onClick={resetPassword}>
-      Reset Password
+    <div className="reset-header">
+      <h2 className="reset-title">Reset your Password</h2>
+
+      <p className="reset-subtitle">
+        Create a strong new password for your Havenly account.
+      </p>
+    </div>
+
+    <div className="reset-input-group">
+
+    
+
+      <input
+        className="reset-input"
+        value={form.password}
+        name="password"
+        onChange={handlechange}
+        placeholder="Enter your new password"
+        type="password"
+      />
+{error && (
+      <p className="reset-error">
+        {error}
+      </p>
+    )}
+
+    {message &&(
+         <p className="reset-message">
+        {message}
+      </p>
+    )}
+      
+    </div>
+
+   
+<button
+      className="reset-btn"   disabled={loader}
+      onClick={resetPassword}
+    >
+        {loader ? (
+            <>
+            <div className="loader-2"></div>
+            </>
+        ) : (
+<>
+  Reset Password
+</>
+        )}
     </button>
 
-    {message && <p>{message}</p>}
+
+
+
+
+
+    
+
   </div>
+
 </div>
+<Footer/>
+</>
     )
 }
 

@@ -12,6 +12,7 @@ import {
   HiOutlineLogout,
   HiOutlineClipboardList,
   HiOutlinePlusCircle,
+   HiOutlineGlobeAlt
 } from "react-icons/hi";
 import { MdPerson } from "react-icons/md";
 const Navbar = () => {
@@ -87,14 +88,12 @@ setscrolled(window.scrollY > 100)
         <Link to="/stays">Explore</Link>
       </div>
 
-      <div className="navbar-right">
-        <Link className={navbarLinkClass} to="/Host">
-          List your property
-        </Link>
+        <div className="navbar-right">
+       
 
 
-        <Link className="signin" to="/auth">
-        <MdPerson/>
+        <Link className={navbarLinkClass} id="signin" to="/auth">
+         <MdPerson/> 
         </Link>
 
         <div className="profile-wrapper" ref={menuRef}>
@@ -119,6 +118,7 @@ setscrolled(window.scrollY > 100)
     </Link>
       </div>
 
+  <Link className="dropdown-item" to="/stays"><HiOutlineGlobeAlt />Explore</Link>
             
             <Link
               to="/wishlist"

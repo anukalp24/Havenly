@@ -151,7 +151,7 @@ const categories = [
                         <div>
 
                             <h4 className="home-price">
-                                ₹{val.price}
+                                ₹{Number(val.price).toLocaleString("en-IN")}
                             </h4>
 
                             <span className="home-night">
