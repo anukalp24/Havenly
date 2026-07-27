@@ -34,7 +34,7 @@ const [error, seterror] = useState()
               return seterror("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
   }
 
-        const request = await fetch(`http://localhost:4090/reset-password/${token}`, {
+        const request = await fetch(`${import.meta.env.VITE_API_URL}/reset-password/${token}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form)

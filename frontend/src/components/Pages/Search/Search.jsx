@@ -13,7 +13,7 @@ const Search = () => {
   useEffect(() => {
   async function  searchfunc (){
     console.log(localStorage.getItem("search"))
-    const request = await fetch(`http://localhost:4090/search` , {
+    const request = await fetch(`${import.meta.env.VITE_API_URL}/search` , {
       headers:  {"Content-Type": "application/json"},
       method: "POST",
       body: JSON.stringify({search: localStorage.getItem("search")})

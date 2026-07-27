@@ -23,7 +23,7 @@ const Bookings = () => {
     const bookingFunc = async () => {
       try {
         const bookedHomes = await fetchWithRefresh(
-          `http://localhost:4090/bookings`,
+          `${import.meta.env.VITE_API_URL}/bookings`,
           {
             method: "GET",
             headers: {

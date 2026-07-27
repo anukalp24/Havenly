@@ -106,7 +106,7 @@ formData.append(
 
 
 
-  let updateRequest = await fetchWithRefresh(`http://localhost:4090/edithome/${form._id}`,{
+  let updateRequest = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/edithome/${form._id}`,{
     method: "PUT",
     headers: {
     authorization: localStorage.getItem("accessToken")
@@ -147,7 +147,7 @@ formData.append(
   form.desc
 )
 
-  let request2 = await fetchWithRefresh("http://localhost:4090/addhome" , {
+  let request2 = await fetchWithRefresh("${import.meta.env.VITE_API_URL}/addhome" , {
     method: "post",
     headers: {
       authorization: localStorage.getItem("accessToken")

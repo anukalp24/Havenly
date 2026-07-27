@@ -21,7 +21,7 @@ console.log("update controler jsut hitted")
         req.files = []
       }
     const files  = req.files.map(file=>(
-        `http://localhost:4090/uploads/${file.filename}`
+        `${import.meta.env.VITE_API_URL}/uploads/${file.filename}`
     ))
 
 

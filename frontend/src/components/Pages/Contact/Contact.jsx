@@ -59,7 +59,7 @@ if(first.message === ""){
   }
   
 
-    const request = await fetch("http://localhost:4090/contact", {
+    const request = await fetch("${import.meta.env.VITE_API_URL}/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

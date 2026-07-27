@@ -49,7 +49,7 @@ const handleClick  = ()=>{
 useEffect(() => {
 const FetchHomes = async ()=>{
   setloader(true)
-    const api =   await fetch(`http://localhost:4090/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
+    const api =   await fetch(`${import.meta.env.VITE_API_URL}/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
     const result  = await api.json()
     setallHomes(result)
     setloader(false)
@@ -61,7 +61,7 @@ FetchHomes()
 
 
 const handleFilter =  async ()=>{
- const api =   await fetch(`http://localhost:4090/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
+ const api =   await fetch(`${import.meta.env.VITE_API_URL}/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
     const result  = await api.json()
     setallHomes(result)
 }

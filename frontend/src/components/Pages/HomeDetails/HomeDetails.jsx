@@ -28,7 +28,7 @@ const [checker, setchecker] = useState("")
 
   useEffect(() => {
     const homefunc = async () => {
-      const request = await fetch(`http://localhost:4090/home/${id}`, {
+      const request = await fetch(`${import.meta.env.VITE_API_URL}/home/${id}`, {
         method: "GET",
         headers:{
           authorization: localStorage.getItem("accessToken")
@@ -57,7 +57,7 @@ setIsSuccess(null);
 
      
       const createCheckoutSession = await fetchWithRefresh(
-        `http://localhost:4090/create-checkout-session/${id}`,
+        `${import.meta.env.VITE_API_URL}/create-checkout-session/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

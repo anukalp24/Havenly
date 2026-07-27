@@ -7,7 +7,7 @@ const addhome = async(req , res)=>{
     try {
 console.log("hitted baby")
    const files = req.files.map(file =>(
-`http://localhost:4090/uploads/${file.filename}`
+`${import.meta.env.VITE_API_URL}/uploads/${file.filename}`
    ))
    
 

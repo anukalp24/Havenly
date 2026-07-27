@@ -11,7 +11,7 @@ const [loader, setloader] = useState(true)
 useEffect(() => {
 const wishlist = async ()=>{
 
-  const wishlist  = await fetchWithRefresh("http://localhost:4090/wishlist" , {
+  const wishlist  = await fetchWithRefresh("${import.meta.env.VITE_API_URL}/wishlist" , {
 method: "GET",
       headers: {
         authorization: localStorage.getItem("accessToken")
@@ -27,7 +27,7 @@ method: "GET",
 }, [])
 
     const handleremove = async (id) => {
-      let remove = await fetchWithRefresh(`http://localhost:4090/Removewishlist/${id}`, {
+      let remove = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/Removewishlist/${id}`, {
         headers:{
            authorization: localStorage.getItem("accessToken")
         } ,

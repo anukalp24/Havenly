@@ -37,7 +37,7 @@ const [featuredHomes, setfeaturedHomes] = useState([])
 
 useEffect(() => {
 const FetchHomes = async ()=>{
-    const api =   await fetch(`http://localhost:4090/`)
+    const api =   await fetch(`${import.meta.env.VITE_API_URL}/`)
     const result  = await api.json()
     setfeaturedHomes(result)
 }

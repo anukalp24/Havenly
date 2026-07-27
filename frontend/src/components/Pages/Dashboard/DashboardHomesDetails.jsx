@@ -32,7 +32,7 @@ const DashboardHomesDetails = () => {
   useEffect(() => {
   
     async function dashbaordDetails() {
-      const req = await fetchWithRefresh(`http://localhost:4090/dashboardHomeDetails/${_id}` , {
+      const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/dashboardHomeDetails/${_id}` , {
 headers: {
   authorization: localStorage.getItem("accessToken"),
 },
@@ -50,7 +50,7 @@ credentials: "include"
   }, []);
 
   const HandleDelete = async (id) => {
-    let api = await  fetchWithRefresh(`http://localhost:4090/deletehome/${id}`, {
+    let api = await  fetchWithRefresh(`${import.meta.env.VITE_API_URL}/deletehome/${id}`, {
       method: "DELETE",
       headers: {
         authorization: localStorage.getItem("accessToken"),

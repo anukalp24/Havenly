@@ -58,7 +58,7 @@ if(!accessToken){
 
 
 
-let WishlistRequest =   await fetchWithRefresh(`http://localhost:4090/wishlist/${id}` , {
+let WishlistRequest =   await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/wishlist/${id}` , {
     method: "PUT",
          headers:{
             "Content-Type":"application/json",

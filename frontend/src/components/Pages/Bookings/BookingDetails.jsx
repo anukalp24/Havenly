@@ -25,7 +25,7 @@ const [error, seterror] = useState("")
   };
 
   const HandleCancel = async (id) => {
-    const req = await fetchWithRefresh(`http://localhost:4090/cancel-booking/${id}`, {
+    const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/cancel-booking/${id}`, {
       method: "put",
       headers: {
         authorization: localStorage.getItem("accessToken"),
@@ -49,7 +49,7 @@ seterror(response.message)
   useEffect(() => {
     const bookingFunction = async () => {
       const request = await fetchWithRefresh(
-        `http://localhost:4090/bookingDetails/${_id}`,
+        `${import.meta.env.VITE_API_URL}/bookingDetails/${_id}`,
         {
           method: "GET",
           headers: {

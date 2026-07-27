@@ -16,7 +16,7 @@ const ReservationDetails = () => {
   useEffect(() => {
     const reservationfunc = async () => {
       const reservationDetails = await fetchWithRefresh(
-        `http://localhost:4090/reservationDetails/${_id}`,
+        `${import.meta.env.VITE_API_URL}/reservationDetails/${_id}`,
         {
           method: "GET",
           headers: {
@@ -35,7 +35,7 @@ const ReservationDetails = () => {
 
   const HandleCancel = async (id) => {
     const req = await fetchWithRefresh(
-      `http://localhost:4090/cancel-reservations/${id}`,
+      `${import.meta.env.VITE_API_URL}/cancel-reservations/${id}`,
       {
         method: "PUT",
         headers: {
