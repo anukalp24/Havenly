@@ -147,7 +147,7 @@ formData.append(
   form.desc
 )
 
-  let request2 = await fetchWithRefresh("${import.meta.env.VITE_API_URL}/addhome" , {
+  let request2 = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/addhome` , {
     method: "post",
     headers: {
       authorization: localStorage.getItem("accessToken")

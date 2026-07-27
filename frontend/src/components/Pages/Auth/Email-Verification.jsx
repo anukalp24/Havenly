@@ -17,7 +17,7 @@ const [otp, setotp] = useState("")
 const handleadd =  async (e)=>{
  e.preventDefault();
     const otpCode  = otp
-  const verify = await fetch("${import.meta.env.VITE_API_URL}/email-verification", {
+  const verify = await fetch(`${import.meta.env.VITE_API_URL}/email-verification`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

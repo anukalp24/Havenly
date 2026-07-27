@@ -59,7 +59,7 @@ setscrolled(window.scrollY > 100)
 
 
   const logout =  async()=>{
-  const logout= await fetch("${import.meta.env.VITE_API_URL}/logout", {
+  const logout= await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
     method: "POST",
     credentials: "include"
   })

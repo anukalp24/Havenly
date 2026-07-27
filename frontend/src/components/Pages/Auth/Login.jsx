@@ -66,7 +66,7 @@ if ( newErrors.name || newErrors.email || newErrors.password) {
 
 
 
-      const response = await fetch("${import.meta.env.VITE_API_URL}/signin", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +112,7 @@ if (newErrors.email || newErrors.password) {
 
 
 
-      const request = await fetch("${import.meta.env.VITE_API_URL}/login", {
+      const request = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
