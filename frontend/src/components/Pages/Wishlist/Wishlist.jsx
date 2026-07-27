@@ -11,7 +11,7 @@ const [loader, setloader] = useState(true)
 useEffect(() => {
 const wishlist = async ()=>{
 
-  const wishlist  = await fetchWithRefresh("${import.meta.env.VITE_API_URL}/wishlist" , {
+  const wishlist  = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/wishlist` , {
 method: "GET",
       headers: {
         authorization: localStorage.getItem("accessToken")
