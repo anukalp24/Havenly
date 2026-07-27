@@ -38,4 +38,10 @@ app.use(Payment)
 
 
 connectDb()
-app.listen(4090)  
+const PORT = process.env.PORT || 4090;
+
+connectDb().then(() => {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+});
