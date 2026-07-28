@@ -18,7 +18,7 @@ const Host = () => {
    }
   }, [])
   
-const [error, seterror] = useState("")
+const [error, seterror] = useState({})
 
   const {response , setresponse , form , setform} = useContext(info)
   const handleImage = (e)=>{

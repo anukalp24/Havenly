@@ -30,13 +30,9 @@ useEffect(() => {
 
     }
 
-
     }
  reservation()
 }, [])
-
-
-
 
   return (
     <>
@@ -91,7 +87,7 @@ useEffect(() => {
   
   <div className="reservation-grid-image">
 
-    <img src={home.files[0]} alt={home.propertyName} />
+    <img src={home?.files[0]} alt={home.propertyName} />
 
     <span
       className={`reservation-status ${
