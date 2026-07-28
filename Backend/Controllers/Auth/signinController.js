@@ -12,7 +12,6 @@ const newUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-console.log("Sending OTP to:", email);
 const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
 
@@ -33,56 +32,78 @@ const existingUser = await User.findOne({
       })
     }
     
-    const otp = crypto.randomInt(100000 , 1000000).toString()
-    console.log("OTP:", otp);
-const otpExpiry = new Date(Date.now() + 10 *60 *1000)
+//     const otp = crypto.randomInt(100000 , 1000000).toString()
+// const otpExpiry = new Date(Date.now() + 10 *60 *1000)
 
-    const hashedPassword = await bcrypt.hash(
-      password,
+   const hashedPassword = await bcrypt.hash(
+     password,
       10 
-    );
+   );
 
     
     const userInfo = await User.create({
       name,
       email,
       password: hashedPassword,
-      emailVerificationOtp: otp,
-emailVerificationExpiry: otpExpiry
+//       emailVerificationOtp: otp,
+// emailVerificationExpiry: otpExpiry
     });
 
 
 
+const accessToken = jwt.sign(
+      {
+        id: userInfo._id,
+      },
+      process.env.JWT_SECRET,
+      {expiresIn: "15m"}
+    );
+
+    
+    const refreshToken = jwt.sign({
+      id: userInfo._id
+    },
+  process.env.JWT_REFRESH_SECRET,
+  {expiresIn: "30d"}
+)
 
 
-const response = await resend.emails.send({
-  from: "onboarding@resend.dev",
-  to: email,
-  subject: "Verify Your Havenly Email Address",
-  html: `
-    <h2>Welcome to Havenly!</h2>
+userInfo.refreshToken = refreshToken
+await userInfo.save()
 
-    <p>Thank you for signing up.</p>
 
-    <p>Your verification code is:</p>
 
-    <h1>${otp}</h1>
 
-    <p>This code is valid for <strong>10 minutes</strong>.</p>
 
-    <p>If you didn't create this account, you can ignore this email.</p>
+// const response = await resend.emails.send({
+//   from: "onboarding@resend.dev",
+//   to: email,
+//   subject: "Verify Your Havenly Email Address",
+//   html: `
+//     <h2>Welcome to Havenly!</h2>
 
-    <p>Regards,<br><strong>Havenly Team</strong></p>
-  `,
-});
+//     <p>Thank you for signing up.</p>
 
-console.log(response)
+//     <p>Your verification code is:</p>
+
+//     <h1>${otp}</h1>
+
+//     <p>This code is valid for <strong>10 minutes</strong>.</p>
+
+//     <p>If you didn't create this account, you can ignore this email.</p>
+
+//     <p>Regards,<br><strong>Havenly Team</strong></p>
+//   `,
+// });
+
+// console.log(response)
 
 
 
 
     return res.status(201).json({
       message: "Account Created and successfully sent the verificationOTP to your email",
+      accessToken,
      
     });
 
