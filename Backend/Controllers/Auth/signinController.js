@@ -69,9 +69,9 @@ await transporter.sendMail({
 
 <p>This code is valid for <strong>10 minutes</strong>.</p>
 
-<p>If you didn't create a StayCasa account, you can safely ignore this email.</p>
+<p>If you didn't create a Havenly account, you can safely ignore this email.</p>
 
-<p>Regards,<br><strong>StayCasa Team</strong></p>`
+<p>Regards,<br><strong> Havenly Team</strong></p>`
 })
 
 
@@ -84,13 +84,13 @@ await transporter.sendMail({
 
 
     return res.status(201).json({
-      message: "Account Created and successfully sent the verification link to your email",
+      message: "Account Created and successfully sent the verificationOTP to your email",
      
     });
 
   } catch (error) { 
   
-
+console.log(error)
     res.status(500).json({
       message: "Something went wrong",
     });
