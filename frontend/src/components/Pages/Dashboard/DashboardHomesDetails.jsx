@@ -8,9 +8,11 @@ import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import "./DashboardHomesDetails.css";
 import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
+import HomeDetailsSkeleton from "../../../Utils/HomeDetailsSkeleton";
 const DashboardHomesDetails = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
+  const [loader, setloader] = useState(true)
   const [dashboardHomeDetails, setdashboardHomeDetails] = useState();
   const { setform, setresponse, response, setdashboard, dashboard } =
     useContext(info);
@@ -30,7 +32,7 @@ const DashboardHomesDetails = () => {
 
 
   useEffect(() => {
-  
+  setloader(true)
     async function dashbaordDetails() {
       const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/dashboardHomeDetails/${_id}` , {
 headers: {
@@ -42,6 +44,7 @@ credentials: "include"
       
       const result = await req.json();
       setdashboardHomeDetails(result);
+      setloader(false)
     }
 
 
@@ -79,6 +82,25 @@ credentials: "include"
   return (
     <>
       <Navbar />
+
+
+
+{loader ? (
+<>
+<HomeDetailsSkeleton/>
+ 
+</>
+) : (
+  <>
+
+
+
+
+
+
+
+
+
       {dashboardHomeDetails ? (
        <div  className="hd-wrapper">
        
@@ -132,7 +154,7 @@ credentials: "include"
              strokeWidth="2.5"
              strokeLinecap="round"
              strokeLinejoin="round"
-           />
+             />
          </svg>
        </div>
            </div>
@@ -262,6 +284,9 @@ credentials: "include"
 </div>
       )}
 
+      
+      </>
+    )}
       <Footer />
     </>
   );

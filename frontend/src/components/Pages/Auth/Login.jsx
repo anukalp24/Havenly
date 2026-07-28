@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import loginImg from "../../../assets/photos/loginpage.png";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import { FaBullseye } from "react-icons/fa6";
 const Login = () => {
   const navigate = useNavigate();
-
+const [loader, setloader] = useState(false)
   const [message, setmessage] = useState({});
 const [backendError, setbackendError] = useState("")
   const [form, setForm] = useState({
@@ -30,8 +31,16 @@ const [backendError, setbackendError] = useState("")
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    
+    
+    
+    
+    
+    
+    
+    try {
+      setloader(true)
+      const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
      
     if (form.islogin === false) {
@@ -58,12 +67,9 @@ setmessage(newErrors);
 
 
 if ( newErrors.name || newErrors.email || newErrors.password) {
+  setloader(false)
   return;
 }
-
-
-
-
 
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/signin`, {
@@ -76,7 +82,7 @@ if ( newErrors.name || newErrors.email || newErrors.password) {
       });
 
       const result = await response.json();
-
+setloader(false)
       if (response.ok) {
         navigate("/email-verification");
 
@@ -88,6 +94,7 @@ if ( newErrors.name || newErrors.email || newErrors.password) {
     
     
     else {
+  
       const newErrors = {}
 
 if (!form.email.trim()) {
@@ -106,10 +113,11 @@ else if (!strongPassword.test(form.password)) {
 setmessage(newErrors);
 
 if (newErrors.email || newErrors.password) {
+  setloader(false)
   return;
 }
 
-// 
+
 
 
       const request = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
@@ -121,7 +129,7 @@ if (newErrors.email || newErrors.password) {
         body: JSON.stringify(form),
       });
       const result = await request.json();
-
+setloader(false)
       if (request.status === 429) {
         setbackendError(result.message);
         return;
@@ -134,7 +142,25 @@ if (newErrors.email || newErrors.password) {
         setbackendError(result.message)
       }
     }
+    } catch (error) {
+      setbackendError(error.message)
+    }
+    finally{
+      setloader(false)
+    }
   };
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <div>
@@ -203,7 +229,15 @@ if (newErrors.email || newErrors.password) {
                     </p>
 
                     <button type="submit" className="login-btn">
-                      Login
+                      {loader ? (
+                        <>
+                        <div className="loader-2"></div>
+                        </>
+                      ): (
+                        <>
+                        Login
+                        </>
+                      )}
                     </button>
 
                   
@@ -211,7 +245,6 @@ if (newErrors.email || newErrors.password) {
 
                   <div className="switch-auth">
                     <span>Don't have an account?</span>
-
                     <button
                       type="button"
                       onClick={() => {
@@ -222,7 +255,12 @@ if (newErrors.email || newErrors.password) {
                         setmessage({}); setbackendError("");
                       }}
                     >
-                      Sign Up
+
+                     
+                        
+                        Sign Up
+                        
+                  
                     </button>
                   </div>
 
@@ -292,7 +330,19 @@ if (newErrors.email || newErrors.password) {
                     
 
                     <button type="submit" className="login-btn">
-                      Create Account
+                      {loader ? (
+                        <>
+                        <div className="loader-2"></div>
+                        
+                        
+                        </>
+                      ):(
+
+                        <>
+                        Create Account
+                        
+                        </>
+                      )}
                     </button>
                   </form>
 

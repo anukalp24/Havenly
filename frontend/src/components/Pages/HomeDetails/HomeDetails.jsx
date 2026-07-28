@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
 import { FiHeart } from "react-icons/fi";
 import { info } from "../..";
+import HomeDetailsSkeleton from "../../../Utils/HomeDetailsSkeleton";
 
 const Home = () => {
 
@@ -20,7 +21,7 @@ const {handlewishlist} = useContext(info)
   const [message, setmessage] = useState("");
   const [IsSuccess, setIsSuccess] = useState(null)
 const [loader, setloader] = useState(false)
-
+const [IsSkeleton, setIsSkeleton] = useState(true)
 const [checker, setchecker] = useState("")
 
 
@@ -28,6 +29,9 @@ const [checker, setchecker] = useState("")
 
   useEffect(() => {
     const homefunc = async () => {
+
+      try {
+          setIsSkeleton(true)
       const request = await fetch(`${import.meta.env.VITE_API_URL}/home/${id}`, {
         method: "GET",
         headers:{
@@ -38,6 +42,15 @@ const [checker, setchecker] = useState("")
       });
       const result = await request.json();
       sethome(result);
+      }
+      
+      catch (error) {
+        console.log(error)
+      }
+      finally{
+      setIsSkeleton(false)
+
+    }
     };
     homefunc();
   }, []);
@@ -55,7 +68,6 @@ setIsSuccess(null);
         return setchecker("Please select check-in and check-out dates.");
       }
 
-     
       const createCheckoutSession = await fetchWithRefresh(
         `${import.meta.env.VITE_API_URL}/create-checkout-session/${id}`,
         {
@@ -120,6 +132,20 @@ setIsSuccess(null);
   return (
     <>
       <Navbar/>
+{IsSkeleton ? (
+
+  <>
+  <HomeDetailsSkeleton/>
+  
+  </>
+): (
+
+  <>
+
+
+
+
+
 <div className="hd-wrapper">
 
   <div className="hd-gallery-wrapper">
@@ -334,6 +360,9 @@ setIsSuccess(null);
 </div> {/* hd-content */}
 
 </div> {/* hd-wrapper */}
+
+  </>
+)}
 
 <Footer />
 

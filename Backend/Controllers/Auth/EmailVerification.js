@@ -14,6 +14,13 @@ const verification = async (req , res)=>{
         })
        }
 
+
+       if(exist.isVerified === true){
+        return res.status(409).json({
+            message: "User already verified"
+        })
+       }
+
        if(exist.emailVerificationOtp !== otpCode){
         return res.status(400).json({
             message: "Invalid OTP"

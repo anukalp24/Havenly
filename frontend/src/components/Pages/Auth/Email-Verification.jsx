@@ -9,12 +9,16 @@ import OtpInput from "react-otp-input";
 const EmailVerification = () => {
 const navigate = useNavigate()
 const [otp, setotp] = useState("")
-
-
+const [loader, setloader] = useState(false)
+const [message, setmessage] = useState("")
 
 
 
 const handleadd =  async (e)=>{
+
+  try {
+    setmessage("")
+    setloader(true)
  e.preventDefault();
     const otpCode  = otp
   const verify = await fetch(`${import.meta.env.VITE_API_URL}/email-verification`, {
@@ -31,13 +35,30 @@ const handleadd =  async (e)=>{
   if (verify.ok) {
     localStorage.setItem("accessToken" ,  verifyReq.accessToken)
 navigate("/")
+
+
+  }
+
+else{
+  setmessage(verifyReq.message)
+  return
+}
+
+}
+  
+  catch (error) {
+   setmessage(error.message)
+    return
+  }
+
+  finally{
+    setloader(false)
+  }
+
   }
   
-  else {
-    // setmessage(verifyReq.message);
-    return;
-    }
-}
+
+ 
   return (
     <div>
       <Navbar />
@@ -80,8 +101,24 @@ navigate("/")
 
             </div>
 
+{message &&(
+  <p>{message}</p>
+)}
             <button onClick={handleadd} type="button" className="otp-verify-btn">
-              Verify Email
+
+              {loader ? (
+
+                <>
+                
+                <div className="loader-2"></div>
+                
+                </>
+              ):(
+                <>
+                Verify Email
+              
+                </>
+              )}
             </button>
           </form>
 
