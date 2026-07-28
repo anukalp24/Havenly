@@ -13,11 +13,10 @@ const newUser = async (req, res) => {
     const { name, email, password } = req.body;
 
 console.log("Sending OTP to:", email);
-console.log("OTP:", otp);
 const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
 
-    const existingUser = await User.findOne({
+const existingUser = await User.findOne({
       email,
     });
     
@@ -27,14 +26,15 @@ const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
       });
     }
 
-
-        if(!strongPassword.test(password)){
-              return res.status(500).json({
-                message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
-              })
-               }
     
-        const otp = crypto.randomInt(100000 , 1000000).toString()
+    if(!strongPassword.test(password)){
+      return res.status(500).json({
+        message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+      })
+    }
+    
+    const otp = crypto.randomInt(100000 , 1000000).toString()
+    console.log("OTP:", otp);
 const otpExpiry = new Date(Date.now() + 10 *60 *1000)
 
     const hashedPassword = await bcrypt.hash(
