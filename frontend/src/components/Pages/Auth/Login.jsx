@@ -84,9 +84,9 @@ if ( newErrors.name || newErrors.email || newErrors.password) {
       const result = await response.json();
 setloader(false)
       if (response.ok) {
+        localStorage.setItem("email", form.email);
         navigate("/email-verification");
 
-        localStorage.setItem("email", form.email);
       } else {
         setbackendError(result.message)
       }

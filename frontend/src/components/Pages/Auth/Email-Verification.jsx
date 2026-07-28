@@ -124,7 +124,7 @@ else{
 
           
 
-          <p className="otp-back">Back to Login</p>
+          <p  onClick={()=>navigate("/auth")} className="otp-back">Back to Login</p>
         </div>
       </div>
     </div>

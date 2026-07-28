@@ -12,7 +12,8 @@ const newUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-
+console.log("Sending OTP to:", email);
+console.log("OTP:", otp);
 const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
 
@@ -54,7 +55,7 @@ emailVerificationExpiry: otpExpiry
 
 
 
-await resend.emails.send({
+const response = await resend.emails.send({
   from: "onboarding@resend.dev",
   to: email,
   subject: "Verify Your Havenly Email Address",
@@ -75,7 +76,7 @@ await resend.emails.send({
   `,
 });
 
-
+console.log(response)
 
 
 
