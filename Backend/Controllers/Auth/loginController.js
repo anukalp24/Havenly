@@ -49,7 +49,7 @@ const accessToken = jwt.sign({
 existingUser.refreshToken = refreshToken
 await existingUser.save()
 
-// we are also savign it in databse baby
+
  
 res.cookie("refreshToken" , refreshToken , {
   httpOnly: true,

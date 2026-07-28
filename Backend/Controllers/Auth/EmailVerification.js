@@ -62,12 +62,12 @@ await exist.save()
 
 
 
-res.cookie("refreshToken" , refreshToken , {
+res.cookie("refreshToken", refreshToken, {
   httpOnly: true,
-  secure: false,
-  sameSite: "lax",
-  maxAge: 30 * 24* 60 * 60 *1000
-})
+  secure: true,
+  sameSite: "none",
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+});
 
 
 return res.status(200).json({

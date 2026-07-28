@@ -1,9 +1,13 @@
 
 const User = require("../../Models/User");
 const bcrypt = require("bcryptjs");
-const user = require("../../routes/users");
 const crypto = require("crypto")
-const nodemailer  = require("nodemailer")
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+
+
+
 const newUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -46,46 +50,30 @@ const otpExpiry = new Date(Date.now() + 10 *60 *1000)
 emailVerificationExpiry: otpExpiry
     });
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-
-await transporter.verify();
-console.log("SMTP connection successful");
 
 
 
 
-await transporter.sendMail({
-  from: process.env.EMAIL_USER,
+await resend.emails.send({
+  from: "onboarding@resend.dev",
   to: email,
   subject: "Verify Your Havenly Email Address",
-  html: `<h2>Welcome to StayCasa!</h2>
+  html: `
+    <h2>Welcome to Havenly!</h2>
 
-<p>Thank you for signing up.</p>
+    <p>Thank you for signing up.</p>
 
-<p>Your email verification code is:</p>
+    <p>Your verification code is:</p>
 
-<h1>${otp}</h1>
+    <h1>${otp}</h1>
 
-<p>This code is valid for <strong>10 minutes</strong>.</p>
+    <p>This code is valid for <strong>10 minutes</strong>.</p>
 
-<p>If you didn't create a Havenly account, you can safely ignore this email.</p>
+    <p>If you didn't create this account, you can ignore this email.</p>
 
-<p>Regards,<br><strong> Havenly Team</strong></p>`
-})
-
-
-
-
+    <p>Regards,<br><strong>Havenly Team</strong></p>
+  `,
+});
 
 
 

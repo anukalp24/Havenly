@@ -1,54 +1,40 @@
-const nodemailer = require("nodemailer")
-const contact =  async (req , res)=>{
+const { Resend } = require("resend");
 
-    try {
-        const {name , email ,  feedback} = req.body
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                  user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS 
-            }
-        })
-        // returns a transport object
+const contact = async (req, res) => {
+  try {
+    const { name, email, feedback } = req.body;
 
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: process.env.EMAIL_USER,
+      subject: "New Contact Form",
+      html: `
+        <h2>New Contact Form</h2>
 
+        <hr>
 
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: "New Contact Form" , 
+        <p><strong>Name:</strong> ${name}</p>
 
-            html: `
-            
-            <h2>New Contact Form</h2>
+        <p><strong>Email:</strong> ${email}</p>
 
-            <hr>
+        <p><strong>Message:</strong></p>
 
-            <p><strong>Name:</strong> ${name}</p>
+        <p>${feedback}</p>
+      `,
+    });
 
-            <p><strong>Email:</strong> ${email}</p>
+    return res.status(200).json({
+      message: "Message sent successfully",
+    });
+  } catch (error) {
+    console.log(error);
 
-            <p><strong>Message:</strong></p>
+    return res.status(500).json({
+      message: "Failed to send message",
+    });
+  }
+};
 
-            <p>${feedback}</p>
-  `
-        })
-
-// SMTP is the protocol used for sending emails.
-
-      return  res.status(200).json({
-            message: "Message sent Successfully"
-        })
-    } catch (error) {
-        console.log(error)
-       return res.status(500).json({
-            message: "Failed to send message"
-        })
-    }
-}
-
-module.exports = contact
-
-
+module.exports = contact;
