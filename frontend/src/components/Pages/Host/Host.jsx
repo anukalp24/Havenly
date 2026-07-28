@@ -22,7 +22,7 @@ const [error, seterror] = useState("")
 
   const {response , setresponse , form , setform} = useContext(info)
   const handleImage = (e)=>{
-    setfiles(e.target.files)
+    setfiles(prev => [...prev, ...Array.from(e.target.files)]);
   }
 
 const handlechange = (e)=>{

@@ -37,11 +37,22 @@ app.use(dashboard)
 app.use(Payment)
 
 
-connectDb()
-const PORT = process.env.PORT || 4090;
 
-connectDb().then(() => {
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-});
+const startServer = async () => {
+  try {
+    await connectDb();
+
+    const PORT = process.env.PORT || 4090;
+    app.listen(PORT)
+   
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
+
+
+
+    

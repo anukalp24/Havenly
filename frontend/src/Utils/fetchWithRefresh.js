@@ -9,7 +9,7 @@ const fetchWithRefresh = async ( url , options = {})=>{
 // suppose if authentication and jwt not needed then it will be true and will return it to the front-end
     if(req.status === 401){
         console.log("expire ho gaya bhai access token apna and is workign fone now")
-        const refreshReq = await fetch("${import.meta.env.VITE_API_URL}/refresh" ,{
+        const refreshReq = await fetch(`${import.meta.env.VITE_API_URL}/refresh` ,{
             method: "POST",
             credentials: "include"
         })
@@ -30,6 +30,6 @@ const fetchWithRefresh = async ( url , options = {})=>{
     }
     return req
 
-   
+    
 }
 export default fetchWithRefresh
