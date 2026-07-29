@@ -7,7 +7,7 @@ import Navbar from '../../Navbar/Navbar'
 import Footer from '../../Footer/Footer'
 const Search = () => {
   const {  searchResult , setsearchResult  } = useContext(info)
-
+const [loader, setloader] = useState(true)
   
   
   useEffect(() => {
@@ -23,6 +23,7 @@ const Search = () => {
 
     const response = await request.json()
     setsearchResult(response)
+    setloader(false)
   }
 
   searchfunc()
@@ -35,7 +36,13 @@ const Search = () => {
   return (
     <>
       <Navbar/>
-    <div className="search-page">
+
+      {loader ? (
+        <>
+<div className="loader-2"></div>
+        </>
+      ): (        
+        <div className="search-page">
       <div className="search-header">
         <h1>Properties in {localStorage.getItem("search")}</h1>
         <p>{searchResult?.home?.length} properties found</p>
@@ -67,6 +74,7 @@ const Search = () => {
         </div>
       )}
     </div>
+        )}
     <Footer/>
           </>
   )

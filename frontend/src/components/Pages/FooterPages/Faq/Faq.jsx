@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "Are all properties verified?",
     answer:
-      "Yes. Every property listed on UrbanStay is reviewed before being published to ensure quality and authenticity.",
+      "Yes. Every property listed on Havenly is reviewed before being published to ensure quality and authenticity.",
   },
   {
     question: "Is my payment secure?",

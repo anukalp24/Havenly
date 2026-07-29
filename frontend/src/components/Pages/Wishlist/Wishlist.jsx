@@ -7,6 +7,7 @@ import Footer from '../../Footer/Footer'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
 const Wishlist = () => {
     const {wishlist , setwishlist , handleStay} = useContext(info)
+    const [removeLoader, setremoveLoader] = useState(false)
 const [loader, setloader] = useState(true)
 useEffect(() => {
 const wishlist = async ()=>{
@@ -27,6 +28,7 @@ method: "GET",
 }, [])
 
     const handleremove = async (id) => {
+      setremoveLoader(true)
       let remove = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/Removewishlist/${id}`, {
         headers:{
            authorization: localStorage.getItem("accessToken")
@@ -36,13 +38,14 @@ method: "GET",
       })
 
       if (!remove.ok) {
-        return
+        return setloader(false)
       }
 
       const newitem = wishlist.wishlist.filter(val => val._id !== id)
       setwishlist({
         ...wishlist , wishlist: newitem
       })
+      setremoveLoader(false)
     }
       
     return (
@@ -104,7 +107,17 @@ method: "GET",
     handleremove(val._id);
   }}
 >
-  Remove
+
+  {removeLoader ? (
+    <>
+    <div className="loader-2"></div>
+    </>
+  ) : (
+
+    <>
+    Remove
+    </>
+  )}
 </button> 
 
 
