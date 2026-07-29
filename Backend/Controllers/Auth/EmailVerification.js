@@ -2,7 +2,7 @@ const User  = require("../../Models/User")
   const jwt = require("jsonwebtoken");
 const verification = async (req , res)=>{
     try {
-       const { email , otpCode} = req.body
+       const { email , otp} = req.body
 
 
        const exist = await User.findOne({
