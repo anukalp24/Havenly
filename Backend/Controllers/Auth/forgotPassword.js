@@ -1,6 +1,12 @@
 const User = require("../../Models/User");
 const crypto = require("crypto");
+const Brevo = require("sib-api-v3-sdk");
 
+const client = Brevo.ApiClient.instance;
+client.authentications["api-key"].apiKey = process.env.BREVO_API_KEY;
+
+
+const emailApi = new Brevo.TransactionalEmailsApi();
 
 const forgetPassword = async (req, res) => {
   try {
@@ -28,35 +34,44 @@ const forgetPassword = async (req, res) => {
     const resetLink = `https://havenlyy.vercel.app/reset-password/${resetToken}`;
 
 
+await emailApi.sendTransacEmail({
+  sender: {
+    name: "Havenly",
+    email: process.env.SENDER_EMAIL,
+  },
 
-    await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: email,
-      subject: "Havenly Password Reset",
-      html: `
-        <h2>Reset Your Password</h2>
+  to: [
+    {
+      email,
+    },
+  ],
 
-        <p>Click the button below to reset your password.</p>
+  subject: "Havenly Password Reset",
 
-        <a href="${resetLink}" 
-           style="
-             display:inline-block;
-             padding:12px 20px;
-             background:#2563eb;
-             color:#fff;
-             text-decoration:none;
-             border-radius:6px;
-           ">
-           Reset Password
-        </a>
+  htmlContent: `
+    <h2>Reset Your Password</h2>
 
-        <p>This link expires in <strong>15 minutes</strong>.</p>
+    <p>Click the button below to reset your password.</p>
 
-        <p>If you didn't request a password reset, you can safely ignore this email.</p>
+    <a href="${resetLink}"
+       style="
+         display:inline-block;
+         padding:12px 20px;
+         background:#2563eb;
+         color:#fff;
+         text-decoration:none;
+         border-radius:6px;
+       ">
+       Reset Password
+    </a>
 
-        <p>Regards,<br><strong>Havenly Team</strong></p>
-      `,
-    });
+    <p>This link expires in <strong>15 minutes</strong>.</p>
+
+    <p>If you didn't request a password reset, you can safely ignore this email.</p>
+
+    <p>Regards,<br><strong>Havenly Team</strong></p>
+  `,
+});
 
     return res.status(200).json({
       message: "Reset link sent to your email",

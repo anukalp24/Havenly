@@ -28,11 +28,12 @@ const reset =  async (req , res) =>{
             findUser.resetToken = "";
             findUser.resetTokenExpiry = undefined
             findUser.refreshToken =""
-            res.clearCookie("refreshToken", {
+           res.clearCookie("refreshToken", {
   httpOnly: true,
-  secure: false,
-  sameSite: "lax"
+  secure: true,
+  sameSite: "none",
 });
+
           await  findUser.save()
         }
 
@@ -41,8 +42,6 @@ const reset =  async (req , res) =>{
                 message: "Reset link has expired"
             })
         }
-
-
 
      return  res.status(200).json({
         message: "Password reset successfully"

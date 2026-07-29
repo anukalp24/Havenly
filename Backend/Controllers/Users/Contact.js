@@ -1,44 +1,58 @@
-// const { Resend } = require("resend");
+const Brevo = require("sib-api-v3-sdk");
 
-// const resend = new Resend(process.env.RESEND_API_KEY);
+const client = Brevo.ApiClient.instance;
 
-// const contact = async (req, res) => {
-//   try {
-//  const { name, email, message, subject, phoneNumber } = req.body;
+client.authentications["api-key"].apiKey = process.env.BREVO_API_KEY;
 
-//    await resend.emails.send({
-//   from: "onboarding@resend.dev",
-//   to: process.env.EMAIL_USER,
-//   subject: `New Contact Form: ${subject}`,
-//   html: `
-//     <h2>New Contact Form</h2>
+const emailApi = new Brevo.TransactionalEmailsApi();
 
-//     <hr>
+const contact = async (req, res) => {
+  try {
+    const { name, email, message, subject, phoneNumber } = req.body;
 
-//     <p><strong>Name:</strong> ${name}</p>
+    await emailApi.sendTransacEmail({
+      sender: {
+        name: "Havenly",
+        email: process.env.SENDER_EMAIL,
+      },
 
-//     <p><strong>Email:</strong> ${email}</p>
+      to: [
+        {
+          email: process.env.SENDER_EMAIL,
+        },
+      ],
 
-//     <p><strong>Phone Number:</strong> ${phoneNumber}</p>
+      subject: `New Contact Form: ${subject}`,
 
-//     <p><strong>Subject:</strong> ${subject}</p>
+      htmlContent: `
+        <h2>New Contact Form</h2>
 
-//     <p><strong>Message:</strong></p>
+        <hr>
 
-//     <p>${message}</p>
-//   `,
-// });
+        <p><strong>Name:</strong> ${name}</p>
 
-//     return res.status(200).json({
-//       message: "Message sent successfully",
-//     });
-//   } catch (error) {
-//     console.log(error);
+        <p><strong>Email:</strong> ${email}</p>
 
-//     return res.status(500).json({
-//       message: "Failed to send message",
-//     });
-//   }
-// };
+        <p><strong>Phone Number:</strong> ${phoneNumber}</p>
 
-// module.exports = contact;
+        <p><strong>Subject:</strong> ${subject}</p>
+
+        <p><strong>Message:</strong></p>
+
+        <p>${message}</p>
+      `,
+    });
+
+    return res.status(200).json({
+      message: "Message sent successfully",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Failed to send message",
+    });
+  }
+};
+
+module.exports = contact;

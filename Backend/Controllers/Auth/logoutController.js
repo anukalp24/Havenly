@@ -3,14 +3,19 @@ const User = require("../../Models/User")
 const logOut = async (req , res)=>{
 try{
 
-    console.log("controller hited")
     const refreshToken = req.cookies.refreshToken
+if(!refreshToken){
+    return res.status(404).json({
+        message: "No refresh token was found"
+    }
+    )
+}
+    
 const exist = await User.findOne({
  refreshToken: refreshToken
 })
 
-
-if(!refreshToken){
+if(!exist){
     return res.status(404).json({
         message: "User not found"
     })
@@ -21,12 +26,11 @@ if(!refreshToken){
 exist.refreshToken = ""
 await exist.save()
 
-           res.clearCookie("refreshToken", {
+  res.clearCookie("refreshToken", {
   httpOnly: true,
-  secure: false,
-  sameSite: "lax"
+  secure: true,
+  sameSite: "none",
 });
-
 
 
 return res.status(200).json({
