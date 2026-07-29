@@ -12,7 +12,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@getbrevo/brevo": "^6.0.2",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.10.0",
     "cookie-parser": "^1.4.7",
@@ -30,6 +29,7 @@
     "nodemon": "^3.1.14",
     "react-otp-input": "^3.1.1",
     "resend": "^6.18.1",
+    "sib-api-v3-sdk": "^8.5.0",
     "stripe": "^22.3.1"
   }
 }

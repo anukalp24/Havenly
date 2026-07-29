@@ -4,15 +4,20 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto")
 const jwt = require("jsonwebtoken")
 
-const Brevo = require("@getbrevo/brevo");
+const Brevo = require("sib-api-v3-sdk");
+
+const client = Brevo.ApiClient.instance;
+
+client.authentications["api-key"].apiKey = process.env.BREVO_API_KEY;
+
 const emailApi = new Brevo.TransactionalEmailsApi();
 
-emailApi.setApiKey(
-  Brevo.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.BREVO_API_KEY
-);
+
+
 
 const newUser = async (req, res) => {
+
+  
   try {
     const { name, email, password } = req.body;
 
