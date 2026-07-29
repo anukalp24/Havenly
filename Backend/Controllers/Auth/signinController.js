@@ -24,8 +24,7 @@ const existingUser = await User.findOne({
         message: "User already exists",
       });
     }
-
-    
+      
     if(!strongPassword.test(password)){
       return res.status(500).json({
         message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."

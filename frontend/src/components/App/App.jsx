@@ -27,6 +27,7 @@ import NotFound from '../Pages/404/NotFound'
 import { useNavigate } from 'react-router-dom'
 import Terms from '../Pages/FooterPages/termsCondition/Terms'
 import fetchWithRefresh from '../../Utils/fetchWithRefresh'
+import ScrollToTop from '../ScrollToTop'
 import Faq from '../Pages/FooterPages/Faq/Faq'
 import { info } from '..'
 function App() {
@@ -80,6 +81,7 @@ const handleStay = (id)=>{
   return (
     <>
   <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist}}>
+    <ScrollToTop/>
 <Routes>
 <Route path='/' element={<Home/>}></Route>
 <Route path='/About' element={<About/>}></Route>

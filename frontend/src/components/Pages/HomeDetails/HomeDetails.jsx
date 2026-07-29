@@ -26,7 +26,6 @@ const [checker, setchecker] = useState("")
 
 
 
-
   useEffect(() => {
     const homefunc = async () => {
 

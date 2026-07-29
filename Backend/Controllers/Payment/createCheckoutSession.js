@@ -69,8 +69,8 @@ const createCheckoutSession =  async (req, res)=>{
             ] ,
 
             mode: "payment",
-            success_url: "http://localhost:5173/payment-success" ,
-            cancel_url: "http://localhost:5173/payment-cancel"
+        success_url: "https://havenlyy.vercel.app/payment-success",
+cancel_url: "https://havenlyy.vercel.app/payment-cancel"
         })
                            
      
@@ -94,16 +94,6 @@ const createCheckoutSession =  async (req, res)=>{
 
 //     cancel_url: "..."
 // }
-
-
-
-
-
-
-
-
-
-
 
 
 
