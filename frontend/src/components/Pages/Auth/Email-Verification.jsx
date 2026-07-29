@@ -20,14 +20,20 @@ const handleadd =  async (e)=>{
     setmessage("")
     setloader(true)
  e.preventDefault();
-    const otpCode  = otp
+
+const email = localStorage.getItem("email")
+if(!email){
+  return navigate("/auth")
+}
+
+    
   const verify = await fetch(`${import.meta.env.VITE_API_URL}/email-verification`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        otpCode,
+       otp,
         email: localStorage.getItem("email")
     }),
   });

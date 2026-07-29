@@ -33,7 +33,6 @@ if(exist.emailVerificationExpiry < new Date()){
     })
 }
 
-
       exist.isVerified = true
 
 exist.emailVerificationOtp = "";

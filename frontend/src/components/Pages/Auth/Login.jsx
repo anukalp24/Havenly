@@ -34,10 +34,6 @@ const [backendError, setbackendError] = useState("")
     
     
     
-    
-    
-    
-    
     try {
       setloader(true)
       const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
@@ -84,10 +80,9 @@ if ( newErrors.name || newErrors.email || newErrors.password) {
       const result = await response.json();
 setloader(false)
       if (response.ok) {
-        // localStorage.setItem("email", form.email);
-        localStorage.setItem("accessToken" , result.accessToken)
-        // navigate("/email-verification");
-        navigate("/")
+        localStorage.setItem("email", form.email);
+        navigate("/email-verification");
+      
 
       } else {
         setbackendError(result.message)
