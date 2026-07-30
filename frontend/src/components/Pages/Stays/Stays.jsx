@@ -137,7 +137,24 @@ const handleFilter =  async ()=>{
 
       <div className="section-top">
 
-        <h2>Luxury Stays</h2>
+
+
+{allHomes.length === 0 ? (
+
+  <>
+  <div className="empty-properties">
+     <h2>No Stays Found</h2>
+
+    <p>
+      Sorry, we couldn't find any properties in this price range.
+      Try adjusting your filters or browse all available stays.
+    </p>
+  </div>
+  
+  </>
+): (
+  <h2>Luxury Stays</h2>
+)}
 
     
 
@@ -237,7 +254,15 @@ const handleFilter =  async ()=>{
 
       {/* PAGINATION */}
 
-      <div className="pagination">
+{allHomes.length < 5 ? (
+  <>
+  
+  
+  </>
+): (
+
+
+  <div className="pagination">
 
         <button  onClick={()=>setPage(1)} >{"<"}</button>
 
@@ -248,6 +273,7 @@ const handleFilter =  async ()=>{
        <button  onClick={()=>setPage(2)} >{">"}</button>
 
       </div>
+      )}
 
 
   </>

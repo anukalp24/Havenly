@@ -3,12 +3,14 @@ import {  useEffect , useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../Navbar/Navbar'
 import Footer from '../../Footer/Footer'
+import Skeleton from '../../../Utils/Skeleton'
 import "./Categories.css"
 
 const Categories = () => {
   const Navigate = useNavigate()
   const [message, setmessage] = useState("")
   const [categoryResponse, setcategoryResponse] = useState(null)
+
  
 
 useEffect(() => {
@@ -20,7 +22,6 @@ useEffect(() => {
       categories: localStorage.getItem("category")
     })
   })
-
   const result = await request.json()
 setcategoryResponse(result.categories)
 setmessage(result.message)
@@ -31,8 +32,11 @@ setmessage(result.message)
 
   return (
     <>
-    
 <Navbar/>
+
+{categoryResponse ? (
+  <>
+
     <div className="category-page">
       <div className="category-header">
         <h1>Showing Results for {localStorage.getItem("category")} </h1>
@@ -56,8 +60,42 @@ setmessage(result.message)
           ))}
         </div>
     </div>
-    <Footer/>
+          </>
+        ) : (
+        <>
+ <>
+  <div className="category-page">
+    <div className="category-header">
+      <h1>Showing Results for {localStorage.getItem("category")}</h1>
+      <p>Loading properties...</p>
+    </div>
 
+    <div className="category-grid">
+      {[...Array(3)].map((_, index) => (
+        <div className="property-skeleton" key={index}>
+          <div className="skeleton-image"></div>
+
+          <div className="skeleton-body">
+            <div className="skeleton-title"></div>
+
+            <div className="skeleton-location"></div>
+
+            <div className="skeleton-desc short"></div>
+            <div className="skeleton-desc"></div>
+
+            <div className="skeleton-footer">
+              <div className="skeleton-price"></div>
+              <div className="skeleton-heart"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</>
+        </>
+        )}
+    <Footer/>
 
     </>
   )

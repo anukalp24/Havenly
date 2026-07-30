@@ -24,6 +24,9 @@ const [error, seterror] = useState("")
     }
   };
 
+
+
+
   const HandleCancel = async (id) => {
     const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/cancel-booking/${id}`, {
       method: "put",
@@ -42,7 +45,6 @@ seterror(response.message)
 }
 
 }
-
 
 
 

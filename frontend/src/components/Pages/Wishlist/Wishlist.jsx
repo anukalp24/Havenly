@@ -108,7 +108,7 @@ method: "GET",
   }}
 >
 
-  {removeLoader ? (
+  {removeLoader === val._id ? (
     <>
     <div className="loader-2"></div>
     </>

@@ -355,6 +355,10 @@ html {
 }
 
 
+#logout{
+    font-size: 40px;
+}
+
 
 @media (max-width:1200px){
 
@@ -400,6 +404,10 @@ html {
 
 @media (max-width:768px){
 
+
+    #logout{
+        font-size: 30px;
+    }
     .mobile-user{
         display:flex;
         align-items:center;

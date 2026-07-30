@@ -9,8 +9,7 @@ const connectDB  =  async ()=>{
   console.error("MongoDB connection failed:");
   console.error(error);
 }
-  
- 
+
 }
 
 module.exports = connectDB

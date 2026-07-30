@@ -29,6 +29,7 @@ import Terms from '../Pages/FooterPages/termsCondition/Terms'
 import fetchWithRefresh from '../../Utils/fetchWithRefresh'
 import ScrollToTop from '../ScrollToTop'
 import Faq from '../Pages/FooterPages/Faq/Faq'
+import toast from 'react-hot-toast'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
@@ -56,9 +57,6 @@ if(!accessToken){
   return
 }
 
-
-
-
 let WishlistRequest =   await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/wishlist/${id}` , {
     method: "PUT",
          headers:{
@@ -71,6 +69,8 @@ let WishlistRequest =   await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/
   if(!WishlistRequest.ok){
         return
       }
+
+toast.success("Added to wishlist")
 
 }
 const handleStay = (id)=>{

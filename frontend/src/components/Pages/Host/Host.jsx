@@ -5,8 +5,11 @@ import Footer from '../../Footer/Footer'
 import { useState , useContext  ,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { info } from '../..'
+import toast from 'react-hot-toast'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
+
 const Host = () => {
+  const [loader, setloader] = useState(false)
   const [files, setfiles] = useState([])
   const navigate = useNavigate()
 
@@ -20,7 +23,7 @@ const Host = () => {
   
 const [error, seterror] = useState({})
 
-  const {response , setresponse , form , setform} = useContext(info)
+  const { form , setform} = useContext(info)
   const handleImage = (e)=>{
     setfiles(prev => [...prev, ...Array.from(e.target.files)]);
   }
@@ -35,7 +38,7 @@ const handlechange = (e)=>{
 
 const handleadd =  async (e)=>{
     e.preventDefault()
-
+setloader(true)
     const newErrors = {}
     if(form.propertyName  === ""){
       newErrors.propertyName = "Property name field is required" 
@@ -57,10 +60,10 @@ const handleadd =  async (e)=>{
     
     
     
-  //   if(files.length < 3){
-  //  newErrors.url =   "Please upload at least 3 images"
+    if(files.length < 3){
+   newErrors.url =   "Please upload at least 3 images"
 
-  //   }
+    }
     
     if(form.desc === "" ){
        newErrors.desc = "Description is required" 
@@ -69,10 +72,10 @@ const handleadd =  async (e)=>{
     seterror(newErrors)
 
   if(Object.keys(newErrors).length > 0){
-    return
+    return setloader(false)
   }
 if(form._id){
- const formData = new FormData()   // creates an empty container lika a bag 
+ const formData = new FormData()   
 formData.append("files", files[0]);
 formData.append("files", files[1]);
 formData.append("files", files[2]);
@@ -114,7 +117,8 @@ formData.append(
 credentials: "include",
          body: formData
         })
-          navigate("/")
+        setloader(false)
+         toast.success("Property updated successfully!")
         
 
 }
@@ -155,7 +159,15 @@ formData.append(
     credentials: "include",
     body: formData
   })
+
+  setloader(false)
 }
+
+ toast.success("Property added successfully!")
+
+
+
+
 setform({
    propertyName:"",
    category: "",
@@ -164,11 +176,7 @@ setform({
    price:"",
    desc:"",
 })
-navigate("/")
-
-}
-
-
+}                                                                  
   return (
     <>
 <Navbar/> 
@@ -220,7 +228,7 @@ navigate("/")
       </div>
       {error.url && <p className="field-error">{error.url}</p> }
      </div>
-      {error.url && <p className="field-error">{error.url}</p> }
+  
      </div>
 
     <div className="form-group full-width">
@@ -230,7 +238,18 @@ navigate("/")
     </div>
 
     <div className="form-actions">
-     <button onClick={handleadd} type='submit' id='host-submit'>Add Property</button>
+
+     <button onClick={handleadd} type='submit' id='host-submit'>{loader ? (
+      <>
+      
+      <div className="loader-2"></div>
+      </>
+     ) : (
+
+      <>
+      Add Property
+      </>
+     )}</button>
     </div>
 
 </form>

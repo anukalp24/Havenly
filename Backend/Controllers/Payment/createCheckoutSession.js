@@ -1,7 +1,7 @@
 const Home = require("../../Models/Home")
 const Payment = require("../../Models/Payment")
 const stripe = require("../../config/Stripe")
-const { checkout } = require("../../routes/webhook")
+
 
 const createCheckoutSession =  async (req, res)=>{
     try {
@@ -9,7 +9,15 @@ const createCheckoutSession =  async (req, res)=>{
         const home = await Home.findById(req.params.id)
         
 
+const checkInDate = new Date(checkIn)
+const checkOutDate = new Date(checkOut)
 
+
+if(checkInDate >= checkOutDate){
+    return res.status(400).json({
+        message: "Check-out must be after check-in"
+    })
+}
         if(!home){
             return res.status(404).json({
                 message: "Home not found"
@@ -27,15 +35,13 @@ const createCheckoutSession =  async (req, res)=>{
         home: req.params.id, 
         status: "confirmed",
         checkIn: {
-            $lte: checkOut
+            $lte: checkOutDate
         } ,
 
         checkOut: {
-            $gte: checkIn
+            $gte: checkInDate
         }
     })     
-
-
 
     if(existingBooking){
         return res.status(409).json({
@@ -43,8 +49,11 @@ const createCheckoutSession =  async (req, res)=>{
         })
     }
 
-   
 
+   const nights = Math.ceil( (checkOutDate-checkInDate)   /  (1000 *60 * 60 *24)   )
+
+
+const total = home.price * nights + 800
         const session = await stripe.checkout.sessions.create({
 
             metadata: {
@@ -61,7 +70,7 @@ const createCheckoutSession =  async (req, res)=>{
                         product_data:{
                             name: home.propertyName 
                         } ,
-                        unit_amount: home.price *100
+                        unit_amount: total * 100
                     } ,
 
                     quantity: 1

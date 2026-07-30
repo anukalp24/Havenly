@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import darkLogo from "../../assets/logo/dark-logo.png"
 import Mainlogo from "../../assets/logo/logo.png"
+import toast from "react-hot-toast";
 import {
   HiOutlineMenu,
   HiOutlineHome,
@@ -15,6 +16,7 @@ import {
    HiOutlineGlobeAlt
 } from "react-icons/hi";
 import { MdPerson } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 const Navbar = () => {
 
 let navbarClass = "navbar"
@@ -51,8 +53,6 @@ setscrolled(window.scrollY > 100)
  window.addEventListener("scroll" , handleScroll)
 
 
-
-
 }, [])
 
 
@@ -65,6 +65,7 @@ setscrolled(window.scrollY > 100)
   })
 
   if(logout.ok){
+    toast.success("Logged out successfully!")
   localStorage.removeItem("accessToken")
   }
   }
@@ -73,7 +74,7 @@ setscrolled(window.scrollY > 100)
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
- 
+   
 
   return (
     <nav  className={navbarClass}>
@@ -89,12 +90,19 @@ setscrolled(window.scrollY > 100)
       </div>
 
         <div className="navbar-right">
-       
-
-
+          {localStorage.getItem("accessToken") ? (
+            <>
+           {/* <Link className={navbarLinkClass} id="logout" onClick={logout}>
+  <MdLogout />
+</Link> */}
+            </>
+          ): <>
+        
+          
         <Link className={navbarLinkClass} id="signin" to="/auth">
          <MdPerson/> 
         </Link>
+          </>}
 
         <div className="profile-wrapper" ref={menuRef}>
           <button className="profile-pill" onClick={() => setOpen(!open)}>
@@ -109,6 +117,23 @@ setscrolled(window.scrollY > 100)
         <MdPerson />
     </div>
 
+
+{localStorage.getItem("accessToken") ? (
+  <>
+ <Link 
+           
+              className="dropdown-item logout"
+              onClick={logout}
+            >
+              <HiOutlineLogout />
+              Logout
+            </Link>
+
+  </>
+): (
+
+  <>
+  
     <Link
         to="/auth"
         className="mobile-login-btn"
@@ -116,6 +141,9 @@ setscrolled(window.scrollY > 100)
         >
         Login / Sign up
     </Link>
+  
+  </>
+)}
       </div>
 
   <Link className="dropdown-item" to="/stays"><HiOutlineGlobeAlt />Explore</Link>
@@ -164,14 +192,7 @@ setscrolled(window.scrollY > 100)
               Add Property
             </Link>
 
-            <Link 
-           
-              className="dropdown-item logout"
-              onClick={logout}
-            >
-              <HiOutlineLogout />
-              Logout
-            </Link>
+            
           </div>
         </div>
       </div>

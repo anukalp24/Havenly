@@ -22,6 +22,26 @@
 }
 
 
+.empty-properties {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.empty-properties h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.empty-properties p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+
 
 .mobile-wishlist-btn{
      top:12px;

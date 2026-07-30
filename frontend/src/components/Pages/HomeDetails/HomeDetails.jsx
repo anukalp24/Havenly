@@ -60,14 +60,13 @@ const [checker, setchecker] = useState("")
     setloader(true)
   setmessage("")
 setchecker("")
-setIsSuccess(null);
-
+setIsSuccess(null); 
     try {
       if (!checkIn || !checkOut) {
         return setchecker("Please select check-in and check-out dates.");
       }
-
-      const createCheckoutSession = await fetchWithRefresh(
+      const nights = checkIn && checkOut ? Math.ceil((checkOut - checkIn) / (1000 * 60 * 60* 24)) : 0
+                         const createCheckoutSession = await fetchWithRefresh(
         `${import.meta.env.VITE_API_URL}/create-checkout-session/${id}`,
         {
           headers: {
@@ -78,14 +77,14 @@ setIsSuccess(null);
           body: JSON.stringify({
             checkIn: checkIn,
             checkOut: checkOut,
+            nights: nights
           }),
           credentials: "include",
         },
       );
   
-      const data = await createCheckoutSession.json();
-      console.log(createCheckoutSession.status);
-      console.log(data);
+      const data = await createCheckoutSession.json(); 
+   
   
       if (createCheckoutSession.ok) {
         setIsSuccess(true)

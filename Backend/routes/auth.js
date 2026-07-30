@@ -15,4 +15,4 @@ auth.post("/forget-Password" , rateLimiter , forgetPassword )
 auth.post("/reset-password/:token" , ResetPassword )
 auth.post("/email-verification" ,emailVerification )
 auth.post("/logout" , logout )
-module.exports = auth
+module.exports = auth  
