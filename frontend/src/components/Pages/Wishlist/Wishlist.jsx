@@ -5,9 +5,13 @@ import './Wishlist.css'
 import Navbar from '../../Navbar/Navbar'
 import Footer from '../../Footer/Footer'
 import fetchWithRefresh from '../../../Utils/fetchWithRefresh'
+import toast from 'react-hot-toast'
+
+
+
 const Wishlist = () => {
     const {wishlist , setwishlist , handleStay} = useContext(info)
-    const [removeLoader, setremoveLoader] = useState(false)
+    const [removeLoader, setremoveLoader] = useState(null)
 const [loader, setloader] = useState(true)
 useEffect(() => {
 const wishlist = async ()=>{
@@ -28,7 +32,7 @@ method: "GET",
 }, [])
 
     const handleremove = async (id) => {
-      setremoveLoader(true)
+      setremoveLoader(id)
       let remove = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/Removewishlist/${id}`, {
         headers:{
            authorization: localStorage.getItem("accessToken")
@@ -45,7 +49,8 @@ method: "GET",
       setwishlist({
         ...wishlist , wishlist: newitem
       })
-      setremoveLoader(false)
+      toast.success("Deleted from wishlist")
+      setremoveLoader(null)
     }
       
     return (

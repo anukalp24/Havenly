@@ -15,6 +15,7 @@ const Hero = () => {
   const HandleAdd = () => {
     if (!search.trim()) return;
     localStorage.setItem("search", search);
+    setsearch("")
     navigate("/search");
   };
 

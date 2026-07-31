@@ -60,7 +60,7 @@ setloader(true)
     
     
     
-    if(files.length < 3){
+    if(!form._id && files.length < 3){
    newErrors.url =   "Please upload at least 3 images"
 
     }
@@ -161,9 +161,9 @@ formData.append(
   })
 
   setloader(false)
+  toast.success("Property added successfully!")
 }
 
- toast.success("Property added successfully!")
 
 
 

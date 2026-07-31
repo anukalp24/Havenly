@@ -8,11 +8,11 @@ import Footer from '../../Footer/Footer'
 const Search = () => {
   const {  searchResult , setsearchResult  } = useContext(info)
 const [loader, setloader] = useState(true)
-  
+   const navigate = useNavigate()
   
   useEffect(() => {
   async function  searchfunc (){
-    console.log(localStorage.getItem("search"))
+setloader(true)
     const request = await fetch(`${import.meta.env.VITE_API_URL}/search` , {
       headers:  {"Content-Type": "application/json"},
       method: "POST",
@@ -24,14 +24,14 @@ const [loader, setloader] = useState(true)
     const response = await request.json()
     setsearchResult(response)
     setloader(false)
-  }
+   }
 
-  searchfunc()
+   searchfunc()
 }, [])
 
 
 
-  const navigate = useNavigate()
+ 
 
   return (
     <>
@@ -39,7 +39,9 @@ const [loader, setloader] = useState(true)
 
       {loader ? (
         <>
-<div className="loader-2"></div>
+<div className="loader-parent">
+  <div className="loader"></div>
+</div>
         </>
       ): (        
         <div className="search-page">

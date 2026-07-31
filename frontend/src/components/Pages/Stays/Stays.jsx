@@ -32,6 +32,7 @@ const [price, setprice] = useState([0 , 100000]) // slider state
 
 const [page, setPage] = useState(1)
 const [allHomes, setallHomes] = useState([])
+const [filtered, setfiltered] = useState(null)
 const [search, setsearch] = useState("")
 
 
@@ -63,7 +64,8 @@ FetchHomes()
 const handleFilter =  async ()=>{
  const api =   await fetch(`${import.meta.env.VITE_API_URL}/?page=${page}&minPrice=${price[0]}&maxPrice=${price[1]}`)
     const result  = await api.json()
-    setallHomes(result)
+    setfiltered(result)
+    setloader(false)
 }
 
 
@@ -138,32 +140,11 @@ const handleFilter =  async ()=>{
       <div className="section-top">
 
 
-
-{allHomes.length === 0 ? (
-
-  <>
-  <div className="empty-properties">
-     <h2>No Stays Found</h2>
-
-    <p>
-      Sorry, we couldn't find any properties in this price range.
-      Try adjusting your filters or browse all available stays.
-    </p>
-  </div>
-  
-  </>
-): (
   <h2>Luxury Stays</h2>
-)}
-
-    
 
       </div>
 
-
 {loader ? (
-
-
 <>
  <SkeletonCard />
     <SkeletonCard />
@@ -175,7 +156,121 @@ const handleFilter =  async ()=>{
 ) : (
   <>
   
+  {filtered ? (
+
+    <>
+    
+
+{filtered?.length === 0 ? (
+
+<>
+
+<div className="empty-properties">
+     <h2>No Stays Found</h2>
+
+    <p>
+      Sorry, we couldn't find any properties in this price range.
+      Try adjusting your filters or browse all available stays.
+    </p>
+  </div>
+
+
+</>
+) : (
+
+  <>
+
+
+{filtered.map((home , index)=>(
+
+  <>
+<div key={home._id} onClick={()=>handleStay(home._id)} className="property-card">
+
+<>
+<div className="property-image">
+
+  <img src={home.files[0]} alt="" />
+
+
+
+<button
+  className="mobile-wishlist-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    e.currentTarget.classList.remove("burst");
+    void e.currentTarget.offsetWidth; // restart animation
+    e.currentTarget.classList.add("burst");
+
+    handlewishlist(home._id);
+  }}
+>
+  <FiHeart />
+
+</button>
+
+
+</div>
+        <div className="property-content">
+
+          <div className="property-header">
+
+            <div>
+
+              <h2>{home.propertyName}</h2>
+              <p>
+                <FaMapMarkerAlt />
+                {home.cityname} , {home.country}
+              </p>
+            </div>
+          </div>
+          <p className="property-description">{home.desc}</p>
+
+        </div>
+        <div className="price-section">
+
+          <span className="starting">
+            Starting From
+          </span>
+
+          <h2>₹{Number(home.price).toLocaleString("en-IN")}</h2>
+          <p>/ Night</p>
+
+<div className="button-parent">
+
+          <button className='stay-btn'>
+            View Property
+          </button>
+         
+</div>
+
+        </div>
+</>
+
+      </div>
   
+  
+  </>
+
+
+))}
+
+
+
+  </>
+)}
+
+
+    </>
+  ) : (
+
+
+    <>
+    </>
+  )}
+
+
+
 
 {allHomes.map((home , index)=>(
       <div key={home._id} onClick={()=>handleStay(home._id)} className="property-card">
@@ -200,17 +295,11 @@ const handleFilter =  async ()=>{
   }}
 >
   <FiHeart />
-  <span className="particle p1"></span>
-  <span className="particle p2"></span>
-  <span className="particle p3"></span>
-  <span className="particle p4"></span>
-  <span className="particle p5"></span>
-  <span className="particle p6"></span>
+
 </button>
 
 
 </div>
-
         <div className="property-content">
 
           <div className="property-header">
@@ -278,6 +367,7 @@ const handleFilter =  async ()=>{
 
   </>
 )}
+{/* loader one */}
     
 
 
