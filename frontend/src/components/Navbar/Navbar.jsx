@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState , useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import darkLogo from "../../assets/logo/dark-logo.png"
 import Mainlogo from "../../assets/logo/logo.png"
+import fetchWithRefresh from "../../Utils/fetchWithRefresh";
+
 import toast from "react-hot-toast";
+import { info } from "..";
 import {
   HiOutlineMenu,
   HiOutlineHome,
@@ -17,7 +20,29 @@ import {
 } from "react-icons/hi";
 import { MdPerson } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
+
 const Navbar = () => {
+const [user, setuser] = useState({})
+
+ useEffect(() => {
+
+     const profile =  async()=>{
+const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/profile` , {
+    headers: {
+        authorization: localStorage.getItem("accessToken")
+    },
+    credentials: "include"
+})
+
+const response  = await req.json()
+setuser(response)
+
+     }
+
+     profile()
+    }, [])
+    
+
 
 let navbarClass = "navbar"
 let navbarLinkClass = "navbar-center"
@@ -92,9 +117,9 @@ setscrolled(window.scrollY > 100)
         <div className="navbar-right">
           {localStorage.getItem("accessToken") ? (
             <>
-           {/* <Link className={navbarLinkClass} id="logout" onClick={logout}>
-  <MdLogout />
-</Link> */}
+        <div className="desktop-user-icon">
+        {user?.user?.name.charAt(0).toUpperCase()}
+    </div>
             </>
           ): <>
         
@@ -112,10 +137,36 @@ setscrolled(window.scrollY > 100)
           <div className={`dropdown ${open ? "show" : ""}`}>
 
 <div className="mobile-user">
+{localStorage.getItem("accessToken") ? (
 
+  <>
  <div className="mobile-user-icon">
-        <MdPerson />
+       {user?.user?.name.charAt(0).toUpperCase()}
     </div>
+  
+  
+  </>
+):(
+  <>
+
+  </>
+)}
+
+
+{localStorage.getItem("accessToken") ? (
+  <>
+  <div className="mobile-user-text">
+       {user?.user?.name.toUpperCase()}
+    </div>
+
+  </>
+): (
+
+  <>
+  </>
+)}
+
+      </div>
 
 
 {localStorage.getItem("accessToken") ? (
@@ -144,7 +195,7 @@ setscrolled(window.scrollY > 100)
   
   </>
 )}
-      </div>
+
 
   <Link className="dropdown-item" to="/stays"><HiOutlineGlobeAlt />Explore</Link>
             

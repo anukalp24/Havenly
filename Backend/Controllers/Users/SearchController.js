@@ -23,6 +23,35 @@ const Search =  async (req , res)=>{
      })
 
 
+// const home =  await Home.aggregate([
+
+// {
+
+// $match:{
+//     cityname: search
+// }
+// },
+
+// {
+// $sort:{
+//     price:1
+// }
+
+// } ,
+
+
+// {
+//     $limit: 2
+// },
+
+// // its job is to return the first two document
+
+// {
+    
+// }
+
+// ])
+
 
 if(home.length === 0){
         return res.status(404).json({
@@ -45,4 +74,11 @@ if(home.length === 0){
 }
 
 module.exports  = Search
+
+
+
+
+
+
+
 

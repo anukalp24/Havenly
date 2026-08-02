@@ -61,7 +61,7 @@ setloader(true)
                 <p className="search-card-desc" style={{ fontSize: "0.85rem", color: "#717171", margin: "0 0 6px", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{homes.desc}</p>
                 <div className="search-card-divider" />
                 <div className="search-card-footer">
-                  <span className="search-card-price">₹{homes.price}<span> / night</span></span>
+                  <span className="search-card-price">₹{Number(homes.price).toLocaleString("en-IN")}<span> / night</span></span>
                   <span className="search-card-rating"><span className="star">★</span> {homes.rating}</span>
                 </div>
               </div>

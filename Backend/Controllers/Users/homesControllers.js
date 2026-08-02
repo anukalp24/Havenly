@@ -4,7 +4,6 @@ const Home = require("../../Models/Home")
 
  const gethomes =  async (req , res)=>{
   try {
-   console.log("filter hitted")
 
      let page = Number(req.query.page)
      if(page < 1){
@@ -12,7 +11,7 @@ const Home = require("../../Models/Home")
      }
 
      if(!page){
-      const Homes = await Home.find().limit(8)
+      const Homes = await Home.find().limit(10)
     return  res.status(200).json(Homes)
      }
      

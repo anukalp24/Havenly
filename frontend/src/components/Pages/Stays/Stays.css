@@ -43,6 +43,11 @@
 
 
 
+#pagination-btn:disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 .mobile-wishlist-btn{
      top:12px;
      

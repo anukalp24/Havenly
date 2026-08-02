@@ -229,9 +229,21 @@ html {
     display: none;
 }
 
-.mobile-user-icon{
-    display: none;
+.desktop-user-icon{
+         width:45px;
+        height:45px;
+        border-radius:50%;
+        background:#fdfdfd;
+        color:#000000;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:22px;
+        flex-shrink:0;
 }
+
+
+
 .profile-pill{
     border:none;
     cursor:pointer;
@@ -359,6 +371,14 @@ html {
     font-size: 40px;
 }
 
+.mobile-user-icon{
+    display: none;
+}
+
+.mobile-user-text{
+    display: none;
+}
+
 
 @media (max-width:1200px){
 
@@ -405,17 +425,11 @@ html {
 @media (max-width:768px){
 
 
-    #logout{
-        font-size: 30px;
-    }
-    .mobile-user{
-        display:flex;
-        align-items:center;
-        gap:12px;
-        margin-bottom:20px;
-    }
+.desktop-user-icon{
+       display: none;
+}
 
-    .mobile-user-icon{
+ .mobile-user-icon{
         width:48px;
         height:48px;
         border-radius:50%;
@@ -427,6 +441,18 @@ html {
         font-size:22px;
         flex-shrink:0;
     }
+
+    #logout{
+        font-size: 30px;
+    }
+    .mobile-user{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        margin-bottom:20px;
+    }
+
+   
 
     .mobile-login-btn{
         display:inline-block;

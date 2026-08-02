@@ -30,6 +30,7 @@ import fetchWithRefresh from '../../Utils/fetchWithRefresh'
 import ScrollToTop from '../ScrollToTop'
 import Faq from '../Pages/FooterPages/Faq/Faq'
 import toast from 'react-hot-toast'
+import Profile from '../Pages/Profile/Profile'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
@@ -38,6 +39,7 @@ const [response, setresponse] = useState([])
 const [wishlist, setwishlist] = useState([])
 const [search, setsearch] = useState("")
 const [searchResult, setsearchResult] = useState(null)
+
 
 const [form, setform] = useState({
 propertyName: "",
@@ -76,8 +78,6 @@ toast.success("Added to wishlist")
 const handleStay = (id)=>{
   navigate(`/home/${id}`)
 }
-
-
   return (
     <>
   <info.Provider value={{response , setresponse , form , setform , wishlist , setwishlist , search , setsearch , searchResult, setsearchResult , handleStay , dashboard , setdashboard , handlewishlist}}>

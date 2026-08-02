@@ -48,9 +48,6 @@ const HomeSchema = new mongoose.Schema({
        }
        
 })
-
-
-
 HomeSchema.index({
    owner: 1
 })

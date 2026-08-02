@@ -534,6 +534,35 @@ transition: 0.3s ease;
 }
 
 
+/* Selected date */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #1F1F1F !important;
+  color: white !important;
+}
+
+/* Hover on selected date */
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+  background-color: #1F1F1F !important;
+}
+
+/* Month header */
+.react-datepicker__header {
+  background-color: #1F1F1F !important;
+}
+
+/* Month name and weekdays */
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: white !important;
+}
+
+/* Navigation arrows */
+.react-datepicker__navigation-icon::before {
+  border-color: white !important;
+}
+
 .booking-msg-error{
     color: red;
      text-align:center;
