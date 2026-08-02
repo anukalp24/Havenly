@@ -21,7 +21,7 @@ const verification = async (req , res)=>{
         })
        }
 
-       if(exist.emailVerificationOtp !== otpCode){
+       if(exist.emailVerificationOtp !== otp){
         return res.status(400).json({
             message: "Invalid OTP"
         })
