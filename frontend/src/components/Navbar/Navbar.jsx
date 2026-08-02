@@ -26,19 +26,20 @@ const [user, setuser] = useState({})
 
  useEffect(() => {
 
+  if(!localStorage.getItem("accessToken")){
+    return
+  }
      const profile =  async()=>{
-const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/profile` , {
+const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
     headers: {
         authorization: localStorage.getItem("accessToken")
     },
     credentials: "include"
 })
-
 const response  = await req.json()
 setuser(response)
 
      }
-
      profile()
     }, [])
     
