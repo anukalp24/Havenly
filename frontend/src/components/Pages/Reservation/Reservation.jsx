@@ -136,7 +136,7 @@ setloader(false)
     <div className="reservation-bottom">
 
       <span className="reservation-price">
-        ₹{home.totalPrice}
+        ₹{Number(home.totalPrice).toLocaleString("en-IN")}
       </span>
 
       <button

@@ -218,7 +218,7 @@ const [cancelLoader, setcancelLoader] = useState(false)
                     <strong>Total</strong>
 
                     <strong>
-                      ₹{Number(reservationDetails?.home?.totalPrice || 0) + 800}
+                      ₹{(Number(reservationDetails?.home?.totalPrice || 0) + 800).toLocaleString("en-IN")}
                     </strong>
                   </div>
 
