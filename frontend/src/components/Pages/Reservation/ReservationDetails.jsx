@@ -5,15 +5,23 @@ import fetchWithRefresh from "../../../Utils/fetchWithRefresh";
 import Navbar from "../../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Footer/Footer";
+import HomeDetailsSkeleton from "../../../Utils/HomeDetailsSkeleton";
 import "./ReservationDetails.css";
 
 const ReservationDetails = () => {
   const [reservationDetails, setreservationDetails] = useState({});
   const [error, seterror] = useState("")
   const { _id } = useParams();
+  const [loader, setloader] = useState(true)
+const [cancelLoader, setcancelLoader] = useState(false)
 
   const navigate = useNavigate();
+
+
+
   useEffect(() => {
+
+
     const reservationfunc = async () => {
       const reservationDetails = await fetchWithRefresh(
         `${import.meta.env.VITE_API_URL}/reservationDetails/${_id}`,
@@ -28,12 +36,17 @@ const ReservationDetails = () => {
 
       const result = await reservationDetails.json();
       setreservationDetails(result);
+      setloader(false)
     };
     reservationfunc();
   }, []);
 
 
+
+
+
   const HandleCancel = async (id) => {
+    setcancelLoader(true)
     const req = await fetchWithRefresh(
       `${import.meta.env.VITE_API_URL}/cancel-reservations/${id}`,
       {
@@ -49,10 +62,12 @@ const ReservationDetails = () => {
 
     if(req.ok){
       setreservationDetails(result);
+      
     }
     else{
       seterror(result.message)
     }
+    setcancelLoader(false)
   };
 
 
@@ -71,6 +86,26 @@ const ReservationDetails = () => {
   return (
     <>
       <Navbar />
+
+
+
+
+
+
+
+
+{loader ? (
+
+  <>
+  <HomeDetailsSkeleton/>
+  </>
+) : (
+
+
+  <>
+  
+
+
       {reservationDetails ? (
         <div className="hd-wrapper">
           <div className="hd-gallery-wrapper">
@@ -148,11 +183,6 @@ const ReservationDetails = () => {
             {/* RIGHT */}
             <div className="hd-sidebar">
               <div className="booking-card">
-                <div className="booking-price">
-                  <h2>₹{reservationDetails?.home?.totalPrice}</h2>
-
-                  <span>/ Night</span>
-                </div>
                 <p className="guest-name">
                   Booked by{" "}
                   <strong>{reservationDetails?.home?.guest?.name}</strong>
@@ -164,6 +194,14 @@ const ReservationDetails = () => {
                 {/* <p className="booking-msg">{message}</p> */}
 
                 <div className="price-breakdown">
+
+
+                  <div className="price-row">
+                 <span>Accommodation: ₹{Number(reservationDetails?.home?.totalPrice).toLocaleString("en-IN")}</span>
+              
+                  </div>
+
+
                   <div className="price-row">
                     <span>Cleaning Fee</span>
                     <span>₹500</span>
@@ -207,7 +245,17 @@ const ReservationDetails = () => {
                         HandleCancel(reservationDetails?.home?._id)
                       }
                     >
-                      Cancel the reservation
+
+                      {cancelLoader ? (
+
+                        <>
+                        <div className="loader-2"></div>
+                        </>
+                      ) : (
+<>
+                        Cancel the reservation
+</>
+                      )}
                     </button>
                   )}
                 </div>
@@ -232,6 +280,8 @@ const ReservationDetails = () => {
           </div>
         </div>
       )}
+        </>
+)}
       <Footer />
     </>
   );

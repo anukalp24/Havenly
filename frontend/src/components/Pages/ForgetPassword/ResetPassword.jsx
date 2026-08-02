@@ -10,7 +10,7 @@ const ResetPassword = () => {
         password: ""
     })
 
-    const [loader, setloader] = useState()
+    const [loader, setloader] = useState(false)
     const [message, setmessage] = useState()
 const [error, seterror] = useState()
 
@@ -24,7 +24,7 @@ const [error, seterror] = useState()
     }
       
     const resetPassword = async () => {
-
+setloader(true)
         if(form.password === ""){
             return seterror("Enter your new password")
         }
@@ -49,6 +49,7 @@ const [error, seterror] = useState()
         } else {
             seterror(result.message)
         }
+        setloader(false)
     }
 
     return (

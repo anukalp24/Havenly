@@ -141,10 +141,16 @@ setscrolled(window.scrollY > 100)
 {localStorage.getItem("accessToken") ? (
 
   <>
+<div className="info">
+
  <div className="mobile-user-icon">
        {user?.user?.name.charAt(0).toUpperCase()}
     </div>
+  <div className="mobile-user-text">
+       {user?.user?.name.toUpperCase()}
+    </div>
   
+</div>
   
   </>
 ):(
@@ -154,18 +160,7 @@ setscrolled(window.scrollY > 100)
 )}
 
 
-{localStorage.getItem("accessToken") ? (
-  <>
-  <div className="mobile-user-text">
-       {user?.user?.name.toUpperCase()}
-    </div>
 
-  </>
-): (
-
-  <>
-  </>
-)}
 
       </div>
 

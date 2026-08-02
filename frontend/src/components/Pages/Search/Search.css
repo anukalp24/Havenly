@@ -1,34 +1,34 @@
-.search-page {
+ .search-results-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px 80px;
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
-.search-header {
+.search-results-header {
   margin-bottom: 32px;
 }
 
-.search-header h1 {
+.search-results-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
   color: #222;
   margin: 0 0 6px;
 }
 
-.search-header p {
+.search-results-header p {
   font-size: 0.95rem;
   color: #717171;
   margin: 0;
 }
 
-.search-grid {
+.search-results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
-.search-card {
+.search-results-card {
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
@@ -37,23 +37,23 @@
   cursor: pointer;
 }
 
-.search-card:hover {
+.search-results-card:hover {
   box-shadow: 0 8px 28px rgba(0,0,0,0.08);
   transform: translateY(-4px);
 }
 
-.search-card-img {
+.search-results-card-img {
   width: 100%;
   height: 220px;
   object-fit: cover;
   display: block;
 }
 
-.search-card-body {
+.search-results-card-body {
   padding: 16px 18px 20px;
 }
 
-.search-card-title {
+.search-results-card-title {
   font-size: 1.1rem;
   font-weight: 600;
   color: #222;
@@ -63,7 +63,7 @@
   text-overflow: ellipsis;
 }
 
-.search-card-location {
+.search-results-card-location {
   font-size: 0.9rem;
   color: #717171;
   margin: 0 0 10px;
@@ -72,80 +72,80 @@
   gap: 4px;
 }
 
-.search-card-divider {
+.search-results-card-divider {
   height: 1px;
   background: #eee;
   margin: 10px 0;
 }
 
-.search-card-footer {
+.search-results-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.search-card-price {
+.search-results-card-price {
   font-size: 1.15rem;
   font-weight: 700;
   color: #222;
 }
 
-.search-card-price span {
+.search-results-card-price span {
   font-weight: 400;
   font-size: 0.85rem;
   color: #717171;
 }
 
-.search-card-rating {
+.search-results-card-rating {
   font-size: 0.9rem;
   color: #222;
   font-weight: 500;
 }
 
-.search-card-rating .star {
+.search-results-card-rating .star {
   color: #ff385c;
   margin-right: 3px;
 }
 
-.search-empty {
+.search-results-empty {
   text-align: center;
   padding: 80px 20px;
 }
 
-.search-empty-icon {
+.search-results-empty-icon {
   font-size: 3.5rem;
   margin-bottom: 16px;
   opacity: 0.6;
 }
 
-.search-empty h2 {
+.search-results-empty h2 {
   font-size: 1.4rem;
   font-weight: 600;
   color: #222;
   margin: 0 0 8px;
 }
 
-.search-empty p {
+.search-results-empty p {
   font-size: 0.95rem;
   color: #717171;
   margin: 0;
 }
 
 @media (max-width: 700px) {
-  .search-page {
+  .search-results-page {
     padding: 20px 16px 60px;
   }
 
-  .search-grid {
+  .search-results-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .search-header h1 {
+  .search-results-header h1 {
     font-size: 1.4rem;
   }
 
-  .search-card-img {
+  .search-results-card-img {
     height: 180px;
   }
 }

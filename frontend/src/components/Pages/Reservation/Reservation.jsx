@@ -11,6 +11,7 @@ import "./Reservation.css"
 const Reservation = () => {
 const [reservedHomes, setreservedHomes] = useState([])
 const navigate = useNavigate()
+const [loader, setloader] = useState(true)
 
 useEffect(() => {
     const  reservation = async ()=>{
@@ -25,11 +26,13 @@ useEffect(() => {
     })
 
     if(reservationReq.ok){
+
         const reservedHomes = await reservationReq.json()
         setreservedHomes(reservedHomes)
-
+setloader(false)
     }
 
+    setloader(false)
     }
  reservation()
 }, [])
@@ -37,6 +40,24 @@ useEffect(() => {
   return (
     <>
       <Navbar />
+
+
+
+
+
+      {loader ? (
+
+        <>
+        <div className="loader-parent">
+
+        <div className="loader"></div>
+        </div>
+        </>
+      ): (
+
+        <>
+        
+      
 
       <main className="reservation-page">
         <div className="reservation-container">
@@ -135,7 +156,8 @@ useEffect(() => {
 
         </div>
       </main>
-
+  </>
+      )}
       <Footer />
     </>
   )

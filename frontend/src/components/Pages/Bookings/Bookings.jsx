@@ -5,20 +5,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
-import { CalendarDays, MapPin, CreditCard, Loader2 } from "lucide-react";
 
 const Bookings = () => {
 
 
-
-
-
-
-
-
   const navigate = useNavigate();
   const [bookings, setbookings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setloading] = useState(true);
   useEffect(() => {
     const bookingFunc = async () => {
       try {
@@ -37,12 +30,12 @@ const Bookings = () => {
         } else {
           const homes = await bookedHomes.json();
           setbookings(homes);
-          setLoading(false);
+          setloading(false);
         }
       } catch (error) {
         setbookings([]);
       } finally {
-        setLoading(false);
+        setloading(false);
       }
     };
     bookingFunc();
@@ -55,6 +48,20 @@ const Bookings = () => {
   return (
     <>
       <Navbar />
+
+
+      {loading ? (
+
+        <>
+        <div className="loader-parent">
+        <div className="loader"></div>
+        </div>
+        
+        </>
+      ): (
+
+        <>
+       
       <main className="booking-page">
         <div className="booking-container">
           <div className="booking-header">
@@ -127,7 +134,8 @@ const Bookings = () => {
           )}
         </div>
       </main>
-
+   </>
+      )}
       <Footer />
     </>
   );
