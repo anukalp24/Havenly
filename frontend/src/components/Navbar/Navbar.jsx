@@ -31,9 +31,6 @@ const [user, setuser] = useState({})
   }
      const profile =  async()=>{
 const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
-    headers: {
-        authorization: localStorage.getItem("accessToken")
-    },
     credentials: "include"
 })
 const response  = await req.json()

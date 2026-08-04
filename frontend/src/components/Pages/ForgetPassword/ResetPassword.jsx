@@ -36,7 +36,7 @@ setloader(true)
 
         const request = await fetch(`${import.meta.env.VITE_API_URL}/reset-password/${token}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+           headers : { "Content-Type": "application/json" },
             body: JSON.stringify(form)
         })
 
@@ -44,7 +44,6 @@ setloader(true)
 
         if (request.ok) {
             setmessage(result.message)
-            localStorage.removeItem("accessToken")
             navigate("/")
         } else {
             seterror(result.message)

@@ -16,7 +16,7 @@ const Categories = () => {
 useEffect(() => {
  const categoryfunc = async ()=>{
   const request = await fetch(`${import.meta.env.VITE_API_URL}/categories` , {
-    headers:  {"Content-Type": "application/json"},
+   headers :  {"Content-Type": "application/json"},
     method: 'POST',
     body: JSON.stringify({
       categories: localStorage.getItem("category")

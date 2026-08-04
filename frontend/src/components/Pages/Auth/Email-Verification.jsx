@@ -39,10 +39,7 @@ if(!email){
   });
   const verifyReq = await verify.json()
   if (verify.ok) {
-    localStorage.setItem("accessToken" ,  verifyReq.accessToken)
 navigate("/")
-
-
   }
 
 else{

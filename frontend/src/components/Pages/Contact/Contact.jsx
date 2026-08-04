@@ -61,7 +61,7 @@ if(first.message === ""){
 
     const request = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
       method: "POST",
-      headers: {
+     headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(first),

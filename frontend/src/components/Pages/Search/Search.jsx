@@ -14,7 +14,7 @@ const [loader, setloader] = useState(true)
   async function  searchfunc (){
 setloader(true)
     const request = await fetch(`${import.meta.env.VITE_API_URL}/search` , {
-      headers:  {"Content-Type": "application/json"},
+     headers :  {"Content-Type": "application/json"},
       method: "POST",
       body: JSON.stringify({search: localStorage.getItem("search")})
 

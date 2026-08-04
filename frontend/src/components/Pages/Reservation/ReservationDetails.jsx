@@ -27,9 +27,7 @@ const [cancelLoader, setcancelLoader] = useState(false)
         `${import.meta.env.VITE_API_URL}/reservationDetails/${_id}`,
         {
           method: "GET",
-          headers: {
-            authorization: localStorage.getItem("accessToken"),
-          },
+         
           credentials: "include",
         },
       );
@@ -51,9 +49,6 @@ const [cancelLoader, setcancelLoader] = useState(false)
       `${import.meta.env.VITE_API_URL}/cancel-reservations/${id}`,
       {
         method: "PUT",
-        headers: {
-          authorization: localStorage.getItem("accessToken"),
-        },
         credentials: "include",
       },
     );

@@ -23,7 +23,7 @@ const newUser = async (req, res) => {
 
 const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-
+ 
 const existingUser = await User.findOne({
       email,
     });
@@ -48,7 +48,8 @@ const existingUser = await User.findOne({
       10 
    );
 
-    
+
+   
     const userInfo = await User.create({
       name,
       email,

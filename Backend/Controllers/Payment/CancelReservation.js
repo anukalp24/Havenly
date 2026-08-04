@@ -25,7 +25,6 @@ const reservation = async (req, res) => {
     await stripe.refunds.create({
       payment_intent: PaymentDocument.paymentIntentId,
     });
-
     PaymentDocument.status = "cancelled";
     PaymentDocument.paymentStatus = "refunded";
     PaymentDocument.guestMessage =

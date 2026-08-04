@@ -14,17 +14,6 @@ const authMiddleware = require("../Middleware/authMiddleware")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 auth.post("/signin", rateLimiter ,  signin)
 auth.post("/login", rateLimiter ,  login)
 auth.post("/refresh" , refreshToken )

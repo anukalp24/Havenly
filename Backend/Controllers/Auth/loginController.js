@@ -58,9 +58,17 @@ await existingUser.save()
 });
 
 
+res.cookie("accessToken" , accessToken , {
+    httpOnly:true,
+    secure:true,
+    sameSite:none,
+  maxAge: 15 * 60 * 1000
+})
+
+
          return res.status(200).json({
             message: "Login Successfully",
-            accessToken: accessToken
+        
          })
         
 

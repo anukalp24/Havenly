@@ -32,11 +32,7 @@ console.log("update controler jsut hitted")
   files: allFiles
 });
 
-await home.save();
-
-
-
-
+await home.save(); 
 return res.status(200).json({
 home: home,
 message: "Home updated successfully"

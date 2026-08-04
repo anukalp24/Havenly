@@ -19,9 +19,6 @@ const Bookings = () => {
           `${import.meta.env.VITE_API_URL}/bookings`,
           {
             method: "GET",
-            headers: {
-              authorization: localStorage.getItem("accessToken"),
-            },
             credentials: "include",
           },
         );

@@ -119,7 +119,7 @@ if (newErrors.email || newErrors.password) {
 
       const request = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
         method: "POST",
-        headers: {
+       headers : {
           "Content-Type": "application/json",
         },
         credentials: "include",
@@ -132,8 +132,7 @@ setloader(false)
         return;
       }
       if (request.ok) {
-        localStorage.setItem("accessToken", result.accessToken);
-
+      
         navigate("/dashboard");
       } else {
         setbackendError(result.message)

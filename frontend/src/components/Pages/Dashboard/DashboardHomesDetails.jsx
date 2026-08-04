@@ -35,9 +35,7 @@ const DashboardHomesDetails = () => {
   setloader(true)
     async function dashbaordDetails() {
       const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/dashboardHomeDetails/${_id}` , {
-headers: {
-  authorization: localStorage.getItem("accessToken"),
-},
+
 credentials: "include"
       }) 
        
@@ -55,9 +53,7 @@ credentials: "include"
   const HandleDelete = async (id) => {
     let api = await  fetchWithRefresh(`${import.meta.env.VITE_API_URL}/deletehome/${id}`, {
       method: "DELETE",
-      headers: {
-        authorization: localStorage.getItem("accessToken"),
-      },
+    
       credentials: "include"
     });
 

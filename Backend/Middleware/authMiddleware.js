@@ -4,8 +4,9 @@ const jwt = require("jsonwebtoken")
      
      
      try {
-    const token = req.headers.authorization
+    const token = req.cookies.accessToken
     const decoded = jwt.verify(token , process.env.JWT_SECRET)
+    // decoded will return a object
     req.user =  decoded
     next()
 
@@ -17,6 +18,5 @@ const jwt = require("jsonwebtoken")
     })
 }
 
-
-}
+ }
 module.exports = authMiddleware

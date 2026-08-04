@@ -34,9 +34,6 @@ const [cancelLoader, setcancelLoader] = useState(false)
     setcancelLoader(true)
     const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/cancel-booking/${id}`, {
       method: "put",
-      headers: {
-        authorization: localStorage.getItem("accessToken"),
-      },
       credentials: "include",
     });
     const response = await req.json();
@@ -60,9 +57,6 @@ setcancelLoader(false)
         `${import.meta.env.VITE_API_URL}/bookingDetails/${_id}`,
         {
           method: "GET",
-          headers: {
-            authorization: localStorage.getItem("accessToken"),
-          },
           credentials: "include",
         },
       );
@@ -97,13 +91,6 @@ setcancelLoader(false)
 
 
   <>
-  
-  
-  
-
-
-
-
       {bookingDetail ? (
         <div className="hd-wrapper">
           <div className="hd-gallery-wrapper">
@@ -260,7 +247,7 @@ setcancelLoader(false)
             <div className="dashboardhomesdetails-empty-icon">🏠</div>
 
             <h2>Property Not Found</h2>
-
+             
             <p>This booking may have been deleted or is no longer available.</p>
             <button
               className="dashboardhomesdetails-back-btn"

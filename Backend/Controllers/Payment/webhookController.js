@@ -8,7 +8,7 @@ const Home  = require("../../Models/Home")
 const webhook =  async (req , res) =>{
     try {
        
-        const signature = req.headers["stripe-signature"]
+        const signature = req.["stripe-signature"]
         
         const event  = stripe.webhooks.constructEvent(req.body , signature , process.env.STRIPE_WEBHOOK_SECRET)
         // now event wil get all properties of req/body
@@ -29,8 +29,7 @@ const webhook =  async (req , res) =>{
                     
                                 const userId = session.metadata.userId
                                 const homeId = session.metadata.homeId
-
-
+    
                 const home = await Home.findById(homeId)
                 const Paymentdocument = await Payment.create({
                 stripeSessionId: session.id,

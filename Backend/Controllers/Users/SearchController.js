@@ -23,34 +23,52 @@ const Search =  async (req , res)=>{
      })
 
 
-// const home =  await Home.aggregate([
+const home =  await Home.aggregate([
 
-// {
+{
 
-// $match:{
-//     cityname: search
-// }
-// },
+$match:{
+    cityname: search
+}
+},
 
-// {
-// $sort:{
-//     price:1
-// }
+{
+$sort:{
+    price:1
+}
+} ,
 
-// } ,
+
+{
+    $limit: 2
+},
+
+// its job is to return the first two document
+
+{
+    $group:{
+        _id: "$cityname",
+
+        totalHomes:{
+            $sum: "$price"
+        },
+
+        totalPrice:{
+            $sum: "$price"
+        },
+
+        averagePrice:{
+            $avg: "$price"
+        } ,
+        
+        highestPrice:{
+            $max: "$price"
+        }
+    }
+}
 
 
-// {
-//     $limit: 2
-// },
-
-// // its job is to return the first two document
-
-// {
-    
-// }
-
-// ])
+])
 
 
 if(home.length === 0){

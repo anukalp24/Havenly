@@ -34,12 +34,9 @@ setempty("")
         })
 
         const result = await request.json()
-setloader(false)
-        if (request.ok) {
+setloader(false)      
             setmessage(result.message)
-        } else {
-            setmessage(result.message)
-        }
+        
     }
 
     return (

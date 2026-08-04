@@ -24,6 +24,7 @@ if(!exist){
 
 
 exist.refreshToken = ""
+
 await exist.save()
 
   res.clearCookie("refreshToken", {
@@ -32,6 +33,12 @@ await exist.save()
   sameSite: "none",
 });
 
+
+res.clearCookie("accessToken" , {
+      httpOnly: true,
+  secure: true,
+  sameSite: "none",
+})
 
 return res.status(200).json({
     message: "Logout successfull"

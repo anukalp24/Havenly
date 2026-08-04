@@ -26,7 +26,7 @@ const verification = async (req , res)=>{
             message: "Invalid OTP"
         })
        }
-
+ 
 if(exist.emailVerificationExpiry < new Date()){
     return res.status(400).json({
         message: "OTP has expired"
@@ -52,6 +52,7 @@ const accessToken = jwt.sign(
     const refreshToken = jwt.sign({
       id: exist._id
     },
+
   process.env.JWT_REFRESH_SECRET,
   {expiresIn: "30d"}
 )
@@ -70,9 +71,16 @@ res.cookie("refreshToken", refreshToken, {
 });
 
 
+res.cookie("accessToken", accessToken , {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+});
+
+
 return res.status(200).json({
     message: "Email verified successfully",
-    accessToken
 });
     } catch (error) {
         return res.status(500).json({

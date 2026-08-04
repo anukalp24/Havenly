@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs")
 
 const reset =  async (req , res) =>{
     try {
+
+        const {password} = req.body
         const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
         const token = req.params.token 
         const findUser  =  await User.findOne({
@@ -23,17 +25,23 @@ const reset =  async (req , res) =>{
                   }
 
         if(findUser.resetTokenExpiry > new Date()){
-            const hashedPassword = await bcrypt.hash(req.body.password , 10)
+            const hashedPassword = await bcrypt.hash(password , 10)
             findUser.password = hashedPassword
             findUser.resetToken = "";
             findUser.resetTokenExpiry = undefined
             findUser.refreshToken =""
+
+
            res.clearCookie("refreshToken", {
   httpOnly: true,
   secure: true,
   sameSite: "none",
 });
-
+           res.clearCookie("accessToken", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+});
           await  findUser.save()
         }
 

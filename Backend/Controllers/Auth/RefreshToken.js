@@ -32,9 +32,17 @@ const newAccessToken = jwt.sign({
 process.env.JWT_SECRET,
 {expiresIn: "15m"})
 
+
+res.cookie("newAccessToken", newAccessToken , {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+maxAge: 15 * 60 * 1000
+});
+
+
 res.status(200).json({
     message: "new access token generated successfully",
-    newAccessToken
 })
 
 

@@ -32,8 +32,6 @@ const forgetPassword = async (req, res) => {
 
   
     const resetLink = `https://havenlyy.vercel.app/reset-password/${resetToken}`;
-
-
 await emailApi.sendTransacEmail({
   sender: {
     name: "Havenly",

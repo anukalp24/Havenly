@@ -33,9 +33,7 @@ const [checker, setchecker] = useState("")
           setIsSkeleton(true)
       const request = await fetch(`${import.meta.env.VITE_API_URL}/home/${id}`, {
         method: "GET",
-        headers:{
-          authorization: localStorage.getItem("accessToken")
-        } ,
+       
 
         credentials: "include",
       });
@@ -71,7 +69,6 @@ setIsSuccess(null);
         {
           headers: {
             "Content-Type": "application/json",
-            authorization: localStorage.getItem("accessToken"),
           },
           method: "POST",
           body: JSON.stringify({

@@ -14,7 +14,7 @@ const Profile = () => {
     useEffect(() => {
      const profile =  async()=>{
 const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/profile` , {
-    headers: {
+    : {
         authorization: localStorage.getItem("accessToken")
     },
     credentials: "include"

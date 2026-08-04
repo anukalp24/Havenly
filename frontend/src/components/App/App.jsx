@@ -61,12 +61,7 @@ if(!accessToken){
 
 let WishlistRequest =   await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/wishlist/${id}` , {
     method: "PUT",
-         headers:{
-            "Content-Type":"application/json",
-            authorization: localStorage.getItem("accessToken")
-         },
-         credentials: "include",
-
+         credentials: "include"
   })
   if(!WishlistRequest.ok){
         return

@@ -17,10 +17,6 @@ useEffect(() => {
     const  reservation = async ()=>{
 
     const reservationReq = await  fetchWithRefresh(`${import.meta.env.VITE_API_URL}/reservations` , {
-    headers: {
-         "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken")
-    } ,
     method: "GET",
     credentials: "include"
     })
