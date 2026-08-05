@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import darkLogo from "../../assets/logo/dark-logo.png"
 import Mainlogo from "../../assets/logo/logo.png"
-import fetchWithRefresh from "../../Utils/fetchWithRefresh";
 import toast from "react-hot-toast";
 import { info } from "..";
 import {
@@ -27,9 +26,27 @@ const [user, setuser] = useState({})
 
  
      const profile =  async()=>{
-const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/profile` , {
+const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
     credentials: "include"
 })
+if(req.status === 401){
+ let RefreshReq =  await fetch(`${import.meta.env.VITE_API_URL}/refresh` , {
+    method: "GET",
+    credentials: "include"
+  })
+
+
+
+  if(RefreshReq.ok){
+    const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
+    credentials: "include"
+})
+const response  = await req.json()
+ return setuser(response)
+  }
+
+}
+
 const response  = await req.json()
 setuser(response)
      }
