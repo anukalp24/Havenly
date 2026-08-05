@@ -20,6 +20,13 @@ app.use(cors({
 }));
 
  
+
+app.get("/health" , (req , res)=>{
+  res.status(200).json({
+    message: "Havenly API is running",
+    status: "ok"
+  })
+})
 const webhook = require("./routes/webhook");
 app.use(webhook)
 app.use(express.json())
@@ -36,8 +43,7 @@ app.use(wishlist)
 app.use(auth)
 app.use(dashboard)
 app.use(Payment)
-
-
+ 
 
 const startServer = async () => {
   try {
