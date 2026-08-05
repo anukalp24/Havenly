@@ -38,6 +38,7 @@ getdashboardhomes()
   
 return (
   <>
+<Navbar/>
 
 
       {loader === true ? (
@@ -46,12 +47,10 @@ return (
   </div>
 
 ): (
-  
-  
+
   <>
   
   
-  <Navbar/>
 
 
   {dashboard.length > 0 ? (

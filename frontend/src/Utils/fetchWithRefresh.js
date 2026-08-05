@@ -14,9 +14,6 @@ const fetchWithRefresh = async ( url , options = {})=>{
             credentials: "include"
         })
         if(refreshReq.ok){
-           const result = await refreshReq.json()
-
-            // now we will be addign new access token as the old on eis expired thats hwy we are here in this block
             const retry = await fetch(url ,options)
             return retry
         }
@@ -31,4 +28,3 @@ const fetchWithRefresh = async ( url , options = {})=>{
 
 }
 export default fetchWithRefresh
- 

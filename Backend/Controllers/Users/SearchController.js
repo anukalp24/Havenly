@@ -23,53 +23,75 @@ const Search =  async (req , res)=>{
      })
 
 
-// const home =  await Home.aggregate([
+const home =  await Home.aggregate([
 
-// {
+{
 
-// $match:{
-//     cityname: search
-// }
-// },
+$match:{
+    cityname: search
+}
+},
 
-// {
-// $sort:{
-//     price:1
-// }
-// } ,
+{
+$sort:{
+    price:1
+}
+} ,
 
 
-// {
-//     $limit: 2
-// },
+{
+    $limit: 2
+},
 
-// // its job is to return the first two document
+// its job is to return the first two document
 
-// {
-//     $group:{
-//         _id: "$cityname",
+{
+    $group:{
+        _id: "$cityname",
 
-//         totalHomes:{
-//             $sum: "$price"
-//         },
+        totalHomes:{
+            $sum: "1"
+        },
 
-//         totalPrice:{
-//             $sum: "$price"
-//         },
+        totalPrice:{
+            $sum: "$price"
+        },
 
-//         averagePrice:{
-//             $avg: "$price"
-//         } ,
+        averagePrice:{
+            $avg: "$price"
+        } ,
         
-//         highestPrice:{
-//             $max: "$price"
-//         }
-//     }
-// }
+        highestPrice:{
+            $max: "$price"
+        }
+    } 
+
+},
+
+{
+    $lookup:{
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerDetais"
+    }
+}
 
 
-// ])
+])
+// After $group, you'll only get something like:
 
+// [
+//   {
+//     _id: "Mumbai",
+//     totalHomes: 2,
+//     totalPrice: 7000,
+//     averagePrice: 3500,
+//     highestPrice: 4000
+//   }
+// ]
+
+// You do not get the Mumbai homes anymore because $group replaced them with a summary document.
 
 if(home.length === 0){
         return res.status(404).json({

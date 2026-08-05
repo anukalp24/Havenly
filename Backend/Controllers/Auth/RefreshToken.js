@@ -39,14 +39,9 @@ res.cookie("accessToken", newAccessToken , {
   sameSite: "none",
 maxAge: 15 * 60 * 1000
 });
-
-
 res.status(200).json({
     message: "new access token generated successfully",
-})
-
-
-
+});
     } catch (error) {
         console.log(error)
         return res.status(500).json({

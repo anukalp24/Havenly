@@ -26,6 +26,7 @@ const [checker, setchecker] = useState("")
 
 
 
+   const nights = checkIn && checkOut ?  Math.ceil( (checkOut-checkIn)   /  (1000 *60 * 60 *24)   ) : 0;
   useEffect(() => {
     const homefunc = async () => {
 
@@ -51,9 +52,6 @@ const [checker, setchecker] = useState("")
     };
     homefunc();
   }, []);
-
-
-  
   const handleadd = async (id) => {
     setloader(true)
   setmessage("")
@@ -63,7 +61,11 @@ setIsSuccess(null);
       if (!checkIn || !checkOut) {
         return setchecker("Please select check-in and check-out dates.");
       }
+
       const nights = checkIn && checkOut ? Math.ceil((checkOut - checkIn) / (1000 * 60 * 60* 24)) : 0
+
+
+
                          const createCheckoutSession = await fetchWithRefresh(
         `${import.meta.env.VITE_API_URL}/create-checkout-session/${id}`,
         {
@@ -74,7 +76,7 @@ setIsSuccess(null);
           body: JSON.stringify({
             checkIn: checkIn,
             checkOut: checkOut,
-            nights: nights
+            
           }),
           credentials: "include",
         },
@@ -267,7 +269,7 @@ setIsSuccess(null);
   <div className="booking-card">
 
     <div className="booking-price">
-
+  
       <h2>₹{Number(home?.home?.price).toLocaleString("en-IN")}</h2>
       <span>/ Night</span>
 
@@ -325,7 +327,7 @@ setIsSuccess(null);
         <strong>Total</strong>
 
         <strong>
-          ₹{Number(home?.home?.price || 0) + 800}
+          ₹{Number(home?.home?.price * nights) + 800}
         </strong>
       </div>
 

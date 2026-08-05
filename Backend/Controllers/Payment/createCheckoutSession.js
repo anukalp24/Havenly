@@ -51,8 +51,8 @@ if(checkInDate >= checkOutDate){
 
 
    const nights = Math.ceil( (checkOutDate-checkInDate)   /  (1000 *60 * 60 *24)   )
-
-
+   
+   // stripe metadata olny accepts string
 const total = home.price * nights + 800
         const session = await stripe.checkout.sessions.create({
 
