@@ -17,7 +17,6 @@ import {
    HiOutlineGlobeAlt
 } from "react-icons/hi";
 import { MdPerson } from "react-icons/md";
-import { MdLogout } from "react-icons/md";
 
 const Navbar = () => {
 const [user, setuser] = useState({})
@@ -121,7 +120,7 @@ setscrolled(window.scrollY > 100)
       </div>
 
         <div className="navbar-right">
-          {localStorage.getItem("accessToken") ? (
+          {user?.user?.name ? (
             <>
         <div className="desktop-user-icon">
         {user?.user?.name.charAt(0).toUpperCase()}
@@ -143,7 +142,7 @@ setscrolled(window.scrollY > 100)
           <div className={`dropdown ${open ? "show" : ""}`}>
 
 <div className="mobile-user">
-{localStorage.getItem("accessToken") ? (
+{user?.user?.name ? (
 
   <>
 <div className="info">
@@ -170,7 +169,7 @@ setscrolled(window.scrollY > 100)
       </div>
 
 
-{localStorage.getItem("accessToken") ? (
+{user?.user?.name ? (
   <>
  <Link 
            
