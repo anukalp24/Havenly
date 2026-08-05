@@ -74,10 +74,6 @@ setscrolled(window.scrollY > 100)
 
 
 }, [])
-
-
-
-
   const logout =  async()=>{
   const logout= await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
     method: "POST",
@@ -86,7 +82,6 @@ setscrolled(window.scrollY > 100)
 
   if(logout.ok){
     toast.success("Logged out successfully!")
-  localStorage.removeItem("accessToken")
   }
   }
 
