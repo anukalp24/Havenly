@@ -20,11 +20,11 @@ const login =  async (req , res)=>{
         }
 
 
-        // if(existingUser.isVerified === false){
-        //     return res.status(403).json({
-        //         message: "Please verify your email first"
-        //     })
-        // }
+        if(existingUser.isVerified === false){
+            return res.status(403).json({
+                message: "Please verify your email first"
+            })
+        }
 
         const isMatch = await bcrypt.compare(password , existingUser.password)
         if(!isMatch){
@@ -61,7 +61,7 @@ await existingUser.save()
 res.cookie("accessToken" , accessToken , {
     httpOnly:true,
     secure:true,
-    sameSite:none,
+    sameSite:"none",
   maxAge: 15 * 60 * 1000
 })
 
