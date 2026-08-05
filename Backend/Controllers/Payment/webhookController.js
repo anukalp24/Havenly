@@ -8,7 +8,7 @@ const Home  = require("../../Models/Home")
 const webhook =  async (req , res) =>{
     try {
        
-        const signature = req.["stripe-signature"]
+        const signature = req.headers["stripe-signature"]
         
         const event  = stripe.webhooks.constructEvent(req.body , signature , process.env.STRIPE_WEBHOOK_SECRET)
         // now event wil get all properties of req/body
