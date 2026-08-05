@@ -33,7 +33,7 @@ process.env.JWT_SECRET,
 {expiresIn: "15m"})
 
 
-res.cookie("newAccessToken", newAccessToken , {
+res.cookie("accessToken", newAccessToken , {
   httpOnly: true,
   secure: true,
   sameSite: "none",
