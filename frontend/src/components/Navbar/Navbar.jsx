@@ -30,12 +30,11 @@ const [user, setuser] = useState({})
     return
   }
      const profile =  async()=>{
-const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
+const req = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/profile` , {
     credentials: "include"
 })
 const response  = await req.json()
 setuser(response)
-
      }
      profile()
     }, [])
