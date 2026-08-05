@@ -30,7 +30,6 @@ import fetchWithRefresh from '../../Utils/fetchWithRefresh'
 import ScrollToTop from '../ScrollToTop'
 import Faq from '../Pages/FooterPages/Faq/Faq'
 import toast from 'react-hot-toast'
-import Profile from '../Pages/Profile/Profile'
 import { info } from '..'
 function App() {
   const navigate = useNavigate()
