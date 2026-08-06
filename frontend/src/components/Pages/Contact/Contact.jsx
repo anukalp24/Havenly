@@ -33,7 +33,7 @@ const [error, seterror] = useState({})
 
     setMessage("")
     setloader(true)
-    e.preventDefault();
+    e.preventDefault();   
 const errors = {}
 
 if(first.name === ""){

@@ -30,7 +30,7 @@ const req = await fetch(`${import.meta.env.VITE_API_URL}/profile` , {
 })
 if(req.status === 401){
  let RefreshReq =  await fetch(`${import.meta.env.VITE_API_URL}/refresh` , {
-    method: "GET",
+    method: "post",
     credentials: "include"
   })
 
@@ -127,7 +127,6 @@ setscrolled(window.scrollY > 100)
     </div>
             </>
           ): <>
-        
           
         <Link className={navbarLinkClass} id="signin" to="/auth">
          <MdPerson/> 
@@ -159,7 +158,7 @@ setscrolled(window.scrollY > 100)
   </>
 ):(
   <>
-
+  
   </>
 )}
 

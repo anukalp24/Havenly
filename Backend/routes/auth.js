@@ -23,3 +23,5 @@ auth.post("/email-verification" ,emailVerification )
 auth.post("/logout" , logout )
 auth.get("/profile" , authMiddleware , profile )
 module.exports = auth
+
+ 

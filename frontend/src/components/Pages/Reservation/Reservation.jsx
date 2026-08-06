@@ -22,7 +22,6 @@ useEffect(() => {
     })
 
     if(reservationReq.ok){
-
         const reservedHomes = await reservationReq.json()
         setreservedHomes(reservedHomes)
 setloader(false)
@@ -108,31 +107,31 @@ setloader(false)
 
     <span
       className={`reservation-status ${
-        home.paymentStatus === "Paid"
+         home?.paymentStatus === "Paid"
           ? "status-paid"
           : "status-refund"
       }`}
     >
-      {home.status}
+      {home?.status}
     </span>
   </div>
 
   <div className="reservation-grid-content">
 
-    <h2>{home.propertyName}</h2>
+    <h2>{home?.propertyName}</h2>
 
     <p className="reservation-city">
-      📍 {home.cityname}
+      📍 {home?.cityname}
     </p>
 
     <p className="reservation-guest">
-      Booked by <strong>{home.guest.name}</strong>
+      Booked by <strong>{home?.guest?.name}</strong>
     </p>
 
     <div className="reservation-bottom">
 
       <span className="reservation-price">
-        ₹{Number(home.totalPrice).toLocaleString("en-IN")}
+        ₹{Number(home?.totalPrice).toLocaleString("en-IN")}
       </span>
 
       <button
