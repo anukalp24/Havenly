@@ -36,6 +36,7 @@ if(!email){
        otp,
         email: localStorage.getItem("email")
     }),
+    credentials: "include"
   });
   const verifyReq = await verify.json()
   if (verify.ok) {
