@@ -92,15 +92,15 @@ const Bookings = () => {
                   <div className="booking-grid-image">
                     <img src={booking.files[0]} alt={booking.propertyName} />
 
-                    <span
-                      className={
-                        booking.paymentStatus === "Paid"
-                          ? "booking-status-paid"
-                          : "booking-status-refund"
-                      }
-                    >
+
+{booking.status === "confirmed" && (
+
+  <span
+  className="booking-status"
+  >
                       {booking.status}
                     </span>
+                    )}
                   </div>
 
                   <div className="booking-grid-content">

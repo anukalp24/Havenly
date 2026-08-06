@@ -69,6 +69,7 @@
 
 /* BADGE */
 
+
 .reservation-status{
     position:absolute;
     top:16px;
@@ -82,15 +83,10 @@
     font-size:.8rem;
     font-weight:600;
     text-transform:capitalize;
-}
-
-.status-paid{
     background:#16a34a;
 }
 
-.status-refund{
-    background:#ff8a00;
-}
+
 
 /* BODY */
 

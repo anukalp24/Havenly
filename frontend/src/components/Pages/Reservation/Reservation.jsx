@@ -105,15 +105,15 @@ setloader(false)
 
     <img src={home?.files[0]} alt={home.propertyName} />
 
-    <span
-      className={
-         home?.paymentStatus === "Paid"
-          ? "status-paid"
-          : "status-refund"
-      }
-    >
+{home?.status === "confirmed" &&(
+
+  <span
+  className="reservation-status"
+  
+  >
       {home?.status}
     </span>
+    )}
   </div>
 
   <div className="reservation-grid-content">
