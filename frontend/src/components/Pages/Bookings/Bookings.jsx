@@ -93,11 +93,11 @@ const Bookings = () => {
                     <img src={booking.files[0]} alt={booking.propertyName} />
 
                     <span
-                      className={`booking-status ${
+                      className={
                         booking.paymentStatus === "Paid"
                           ? "booking-status-paid"
                           : "booking-status-refund"
-                      }`}
+                      }
                     >
                       {booking.status}
                     </span>

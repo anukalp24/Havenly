@@ -106,11 +106,11 @@ setloader(false)
     <img src={home?.files[0]} alt={home.propertyName} />
 
     <span
-      className={`reservation-status ${
+      className={
          home?.paymentStatus === "Paid"
           ? "status-paid"
           : "status-refund"
-      }`}
+      }
     >
       {home?.status}
     </span>
