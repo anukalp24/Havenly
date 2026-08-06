@@ -18,12 +18,12 @@ console.log(bookingDetail)
             })
         }
 
-        console.log("home sent sccessfully")
-return res.status(200).json({
-    home: bookingDetail,
-})
-
-
+        return res.status(200).json({
+            home: bookingDetail, 
+        })
+        
+        
+        console.log("home sent sccessfully seriously ?????????")
 
 
     } catch (error) {

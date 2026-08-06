@@ -327,7 +327,17 @@ setIsSuccess(null);
         <strong>Total</strong>
 
         <strong>
-          ₹{Number(home?.home?.price * nights) + 800}
+          {nights > 0 ? (
+            <>
+            
+            ₹{Number(home?.home?.price * nights) + 800}
+            </>
+          ) : (
+
+            <>
+             ₹{Number(home?.home?.price) + 800}
+            </>
+          )}
         </strong>
       </div>
 

@@ -63,6 +63,7 @@ setcancelLoader(false)
 
       let result = await request.json();
       setbookingDetail(result);
+      setloader(false)
     };
 
     bookingFunction();
